@@ -134,11 +134,109 @@ h1{
   color:#888;
 }
 
-.protocol{
-  color:#ddd;
+/* =========================
+   MUSIC SELECT
+========================= */
+
+.music-box{
+  max-width:700px;
+  margin:auto;
+  text-align:center;
 }
 
-/* QUIZ */
+.music-icon{
+  font-size:55px;
+  margin-bottom:15px;
+  filter:grayscale(1);
+}
+
+.music-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(24px,6vw,42px);
+  background:linear-gradient(#fff,#777,#fff);
+  -webkit-background-clip:text;
+  color:transparent;
+  margin-bottom:12px;
+}
+
+.music-subtitle{
+  color:#888;
+  margin-bottom:30px;
+}
+
+.music-list{
+  display:grid;
+  gap:12px;
+}
+
+.music-option{
+  width:100%;
+  padding:20px;
+  background:linear-gradient(145deg,#171717,#0b0b0b);
+  border:1px solid #555;
+  color:#ddd;
+  cursor:pointer;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  transition:.2s;
+}
+
+.music-option:hover{
+  border-color:#aaa;
+  background:linear-gradient(90deg,#222,#444,#222);
+  transform:translateX(3px);
+}
+
+.music-name{
+  font-family:'Orbitron',sans-serif;
+  font-size:14px;
+}
+
+.music-artist{
+  color:#777;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.music-arrow{
+  color:#aaa;
+  font-size:20px;
+}
+
+.now-playing{
+  margin-top:25px;
+  padding:15px;
+  border:1px solid #444;
+  color:#999;
+  font-size:12px;
+  text-align:left;
+}
+
+.music-controls{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.control-button{
+  flex:1;
+  padding:12px;
+  background:#111;
+  color:#ddd;
+  border:1px solid #555;
+  cursor:pointer;
+  font-family:'Share Tech Mono',monospace;
+}
+
+.control-button:hover{
+  background:#292929;
+}
+
+/* =========================
+   QUIZ
+========================= */
 
 .quiz-box{
   max-width:760px;
@@ -230,7 +328,9 @@ h1{
   line-height:1.7;
 }
 
-/* MAZE */
+/* =========================
+   MAZE
+========================= */
 
 .maze-wrapper{
   max-width:600px;
@@ -266,6 +366,7 @@ h1{
   justify-content:center;
   font-size:8px;
   text-align:center;
+  white-space:pre-line;
 }
 
 .wall{
@@ -310,7 +411,9 @@ h1{
   background:#333;
 }
 
-/* DANCE */
+/* =========================
+   REWARD
+========================= */
 
 .reward{
   text-align:center;
@@ -330,8 +433,7 @@ h1{
   height:220px;
   margin:30px auto;
   border:1px solid #444;
-  background:
-    linear-gradient(#151515,#080808);
+  background:linear-gradient(#151515,#080808);
   display:flex;
   justify-content:center;
   align-items:end;
@@ -387,7 +489,9 @@ h1{
   color:#ccc;
 }
 
-/* FINAL CONTENT */
+/* =========================
+   FINAL CONTENT
+========================= */
 
 .section{
   margin-bottom:35px;
@@ -446,6 +550,7 @@ h1{
 }
 
 @media(max-width:600px){
+
   .panel{
     padding:20px;
   }
@@ -466,18 +571,157 @@ h1{
     width:28px;
     height:28px;
   }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     1. QUIZ / INÍCIO
-========================= -->
 
-<section id="quizScreen" class="screen">
+<!-- ==================================================
+     1. ESCOLHA DA MÚSICA
+================================================== -->
+
+<section id="musicScreen" class="screen">
+
   <div class="container">
+
+    <div class="panel music-box">
+
+      <div class="topbar">
+        <span>SYSTEM // AUDIO_PROTOCOL</span>
+        <span>STATUS: WAITING</span>
+      </div>
+
+      <div class="music-icon">♫</div>
+
+      <div class="music-title">
+        ESCOLHA UMA MÚSICA
+      </div>
+
+      <div class="music-subtitle">
+        Escolha uma música para começar.
+      </div>
+
+      <div class="music-list">
+
+        <button
+          class="music-option"
+          onclick="selectMusic('NASA — ENHYPEN','music/nasa.mp3')">
+
+          <div>
+            <div class="music-name">
+              NASA
+            </div>
+
+            <div class="music-artist">
+              ENHYPEN
+            </div>
+          </div>
+
+          <div class="music-arrow">
+            →
+          </div>
+
+        </button>
+
+
+        <button
+          class="music-option"
+          onclick="selectMusic('NO WAY BACK — ENHYPEN','music/no-way-back.mp3')">
+
+          <div>
+            <div class="music-name">
+              NO WAY BACK
+            </div>
+
+            <div class="music-artist">
+              ENHYPEN
+            </div>
+          </div>
+
+          <div class="music-arrow">
+            →
+          </div>
+
+        </button>
+
+
+        <button
+          class="music-option"
+          onclick="selectMusic('ICONIC BY MISTAKE — KATSEYE','music/iconic-by-mistake.mp3')">
+
+          <div>
+            <div class="music-name">
+              ICONIC BY MISTAKE
+            </div>
+
+            <div class="music-artist">
+              KATSEYE
+            </div>
+          </div>
+
+          <div class="music-arrow">
+            →
+          </div>
+
+        </button>
+
+      </div>
+
+
+      <div id="nowPlaying" class="now-playing hidden">
+        ♫ NOW PLAYING:
+        <strong id="songName"></strong>
+
+        <div class="music-controls">
+
+          <button
+            class="control-button"
+            onclick="toggleMusic()"
+            id="playButton">
+            Ⅱ PAUSE
+          </button>
+
+          <button
+            class="control-button"
+            onclick="restartMusic()">
+            ↻ RESTART
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <br>
+
+      <button
+        id="continueButton"
+        class="chrome-button hidden"
+        onclick="startProtocol()">
+
+        INICIAR PROTOCOLO
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     2. QUIZ
+================================================== -->
+
+<section id="quizScreen" class="screen hidden">
+
+  <div class="container">
+
     <div class="panel quiz-box">
 
       <div class="topbar">
@@ -485,9 +729,13 @@ h1{
         <span>STATUS: LOCKED</span>
       </div>
 
-      <div class="label">SECURITY CHECK</div>
+      <div class="label">
+        SECURITY CHECK
+      </div>
 
-      <h1>ACCESS</h1>
+      <h1>
+        ACCESS
+      </h1>
 
       <p class="subtitle">
         Complete todas as verificações para acessar<br>
@@ -495,21 +743,28 @@ h1{
       </p>
 
       <div class="progress">
-        <div id="progressFill" class="progress-fill"></div>
+        <div
+          id="progressFill"
+          class="progress-fill">
+        </div>
       </div>
 
       <div id="quizContent"></div>
 
     </div>
+
   </div>
+
 </section>
 
 
-<!-- =========================
-     2. LABIRINTO
-========================= -->
+
+<!-- ==================================================
+     3. LABIRINTO
+================================================== -->
 
 <section id="mazeScreen" class="screen hidden">
+
   <div class="container">
 
     <div class="panel maze-wrapper">
@@ -519,7 +774,9 @@ h1{
         <span>ACCESS: GRANTED</span>
       </div>
 
-      <div class="maze-title">ENCONTRE SEU PRESENTE</div>
+      <div class="maze-title">
+        ENCONTRE SEU PRESENTE
+      </div>
 
       <div class="maze-subtitle">
         Leve <b>VOCÊ</b> até <b>SEU PRESENTE</b>.
@@ -528,68 +785,100 @@ h1{
       <div id="maze" class="maze"></div>
 
       <div class="controls">
-        <div></div>
-        <button onclick="movePlayer(0,-1)">↑</button>
+
         <div></div>
 
-        <button onclick="movePlayer(-1,0)">←</button>
-        <button onclick="movePlayer(1,0)">↓</button>
-        <button onclick="movePlayer(0,1)">→</button>
+        <button onclick="movePlayer(-1,0)">
+          ↑
+        </button>
+
+        <div></div>
+
+        <button onclick="movePlayer(0,-1)">
+          ←
+        </button>
+
+        <button onclick="movePlayer(1,0)">
+          ↓
+        </button>
+
+        <button onclick="movePlayer(0,1)">
+          →
+        </button>
+
       </div>
 
     </div>
 
   </div>
+
 </section>
 
 
-<!-- =========================
-     3. RECOMPENSA
-========================= -->
+
+<!-- ==================================================
+     4. RECOMPENSA
+================================================== -->
 
 <section id="rewardScreen" class="screen hidden">
+
   <div class="container">
 
     <div class="panel reward">
 
-      <div class="label">SYSTEM MESSAGE</div>
+      <div class="label">
+        SYSTEM MESSAGE
+      </div>
 
       <div class="reward-title">
-        PRESENTE<br>DESBLOQUEADO!
+        PRESENTE<br>
+        DESBLOQUEADO!
       </div>
 
       <div class="dance-stage">
+
         <div class="dancer"></div>
         <div class="dancer"></div>
         <div class="dancer"></div>
         <div class="dancer"></div>
+
       </div>
 
       <div class="unlock">
+
         ✓ MAZE COMPLETE<br>
         ✓ ACCESS GRANTED<br>
         ✓ BIRTHDAY PROTOCOL COMPLETE
+
       </div>
 
       <br>
 
-      <button class="chrome-button" onclick="openGift()">
+      <button
+        class="chrome-button"
+        onclick="openGift()">
+
         ABRIR O PRESENTE
+
       </button>
 
     </div>
 
   </div>
+
 </section>
 
 
-<!-- =========================
-     4. CONTEÚDO DO PRESENTE
-========================= -->
+
+<!-- ==================================================
+     5. PRESENTE FINAL
+================================================== -->
 
 <main id="giftScreen" class="hidden">
 
-  <div class="container" style="padding:40px 0;">
+  <div
+    class="container"
+    style="padding:40px 0;">
 
     <!-- MENSAGEM -->
 
@@ -600,13 +889,17 @@ h1{
         <span>FILE: BIRTHDAY.txt</span>
       </div>
 
-      <div class="label">PERSONAL MESSAGE</div>
+      <div class="label">
+        PERSONAL MESSAGE
+      </div>
 
       <h2 class="section-title">
         FELIZ ANIVERSÁRIOOO! 🩶
       </h2>
 
       <div class="message">
+
+Feliz aniversárioooo! 
 Demorou 2 semanas pra eu conseguir fazer esse site, tem muito código 😭 Mas eu consegui!
 Bom, eu achei que um texto no whatsapp apenas seria muito simples, quis criar algo que fosse mais especial ❤️ Dediquei meu tempo a video aulas no YT e pedi ajuda pro Chat GPT pra fazer ele super bonitinho, então eu espero que tenha dado certo!! Sem mais enrolação, vamos ao presente virtual kdkdkkd
 
@@ -614,9 +907,11 @@ Bom, eu achei que um texto no whatsapp apenas seria muito simples, quis criar al
 Eu quero primeiramente te agradecer por ter sido a pessoa que mais me apoiou por todos esses anos 🫶🏼 crescer com vc foi o melhor presente da minha vida, porque eu pude contar com vc sempre, contar tudo que acontece comigo, pedir ajuda com roupas, cabelo (inclusive vc que me ensinou a fazer o cabelo), aprendi a lidar com pessoas, conheci k-pop por vc também, aprendi a ter gostos próprios e etc... Você, diferente de qualquer outro familiar, foi uma das pessoas mais presentes na minha vida, e eu agradeço muito a Deus por isso... Pensando agora, eu não sei o que seria da minha vida sem vc, acho que eu seria uma feia, lascada, sem saber arrumar o cabelo e sem personalidade própria kskskskksksksk😭🫶🏼
 
 Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor aniversário da sua vida, ganhar seu tablet, o melhor bolo e se melhores fotos!!! Vou te obrigar a se arrumar pra tirar fotos aesthetics ok? Vc agora está no auge da idade, idade de diva, então vc vai conquistsr tudo o que vc sonhava em ter 😌
+
       </div>
 
     </section>
+
 
 
     <!-- DATABASE -->
@@ -628,7 +923,9 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
         <span>FILE: SISTER.dat</span>
       </div>
 
-      <div class="label">PROFILE INFORMATION</div>
+      <div class="label">
+        PROFILE INFORMATION
+      </div>
 
       <h2 class="section-title">
         DADOS DA ANIVERSARIANTE
@@ -637,39 +934,54 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
       <div class="database">
 
         <div class="card">
+
           <div class="card-label">
             MÚSICA QUE ME LEMBRA VOCÊ
           </div>
+
           <div class="card-value">
             Nasa — ATEEZ
           </div>
+
         </div>
 
+
         <div class="card">
+
           <div class="card-label">
             UMA COISA QUE VOCÊ AMA
           </div>
+
           <div class="card-value">
             Eu, claro 😌
           </div>
+
         </div>
 
+
         <div class="card">
+
           <div class="card-label">
             UMA MEMÓRIA NOSSA
           </div>
+
           <div class="card-value">
             A época do BTS que a gente dançava Fire KSKSKSKKDKD
           </div>
+
         </div>
 
+
         <div class="card">
+
           <div class="card-label">
             UMA COISA QUE COMBINA COM VOCÊ
           </div>
+
           <div class="card-value">
             Cyber
           </div>
+
         </div>
 
       </div>
@@ -677,11 +989,14 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
     </section>
 
 
+
     <!-- FINAL -->
 
     <section class="section panel final">
 
-      <div class="label">SYSTEM // COMPLETE</div>
+      <div class="label">
+        SYSTEM // COMPLETE
+      </div>
 
       <h2>
         FELIZ ANIVERSÁRIO,<br>
@@ -699,7 +1014,115 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
 </main>
 
 
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script>
+
+/* =========================
+   MÚSICA
+========================= */
+
+let audio = null;
+let selectedSong = "";
+
+function selectMusic(name, file){
+
+  if(audio){
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  audio = new Audio(file);
+
+  audio.loop = true;
+
+  audio.play()
+    .then(()=>{
+
+      selectedSong = name;
+
+      document
+        .getElementById("songName")
+        .innerText = name;
+
+      document
+        .getElementById("nowPlaying")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("continueButton")
+        .classList.remove("hidden");
+
+    })
+    .catch(()=>{
+
+      alert(
+        "Não foi possível tocar essa música. Confira se o arquivo está na pasta music/ e com o nome correto."
+      );
+
+    });
+
+}
+
+
+function toggleMusic(){
+
+  if(!audio) return;
+
+  const button =
+    document.getElementById("playButton");
+
+  if(audio.paused){
+
+    audio.play();
+
+    button.innerText = "Ⅱ PAUSE";
+
+  }else{
+
+    audio.pause();
+
+    button.innerText = "▶ PLAY";
+
+  }
+
+}
+
+
+function restartMusic(){
+
+  if(!audio) return;
+
+  audio.currentTime = 0;
+
+  audio.play();
+
+  document
+    .getElementById("playButton")
+    .innerText = "Ⅱ PAUSE";
+
+}
+
+
+/* =========================
+   COMEÇAR PROTOCOLO
+========================= */
+
+function startProtocol(){
+
+  document
+    .getElementById("musicScreen")
+    .classList.add("hidden");
+
+  document
+    .getElementById("quizScreen")
+    .classList.remove("hidden");
+
+}
+
 
 /* =========================
    QUIZ
@@ -747,307 +1170,8 @@ const questions = [
 
 ];
 
+
 let currentQuestion = 0;
 
-const quizContent = document.getElementById("quizContent");
-const progressFill = document.getElementById("progressFill");
-
-function showQuestion(){
-
-  const q = questions[currentQuestion];
-
-  progressFill.style.width =
-    ((currentQuestion + 1) / questions.length * 100) + "%";
-
-  quizContent.innerHTML = `
-
-    <div class="question-number">
-      QUESTION ${currentQuestion + 1} / ${questions.length}
-    </div>
-
-    <div class="question">
-      ${q.question}
-    </div>
-
-    <div class="answers">
-
-      ${q.answers.map((answer,index)=>`
-
-        <button
-          class="answer"
-          onclick="answerQuestion(${index})">
-          ${answer}
-        </button>
-
-      `).join("")}
-
-    </div>
-
-    <div id="feedback" class="feedback"></div>
-  `;
-}
-
-function answerQuestion(index){
-
-  const q = questions[currentQuestion];
-  const buttons = document.querySelectorAll(".answer");
-  const feedback = document.getElementById("feedback");
-
-  if(index === q.correct){
-
-    buttons[index].classList.add("correct");
-
-    if(currentQuestion === 2){
-
-      feedback.innerHTML =
-        "✓ ACESSO LIBERADO";
-
-      setTimeout(()=>{
-        document.getElementById("quizScreen")
-          .classList.add("hidden");
-
-        document.getElementById("mazeScreen")
-          .classList.remove("hidden");
-
-        drawMaze();
-
-      },1000);
-
-      return;
-    }
-
-    feedback.innerHTML = "✓ RESPOSTA CORRETA";
-
-    setTimeout(()=>{
-      currentQuestion++;
-      showQuestion();
-    },700);
-
-  }else{
-
-    buttons[index].classList.add("wrong");
-
-    if(currentQuestion === 2){
-
-      quizContent.innerHTML = `
-
-        <div class="error">
-
-          <div class="error-code">
-            ERROR 403
-          </div>
-
-          <div class="error-text">
-            SEU ACESSO FOI NEGADO.<br><br>
-            VOCÊ NÃO É O DESTINATÁRIO DO PRESENTE.<br><br>
-            RETIRE-SE IMEDIATAMENTE.
-          </div>
-
-          <br>
-
-          <button
-            class="chrome-button"
-            onclick="retryQuiz()">
-            TENTAR NOVAMENTE
-          </button>
-
-        </div>
-
-      `;
-
-      return;
-    }
-
-    feedback.innerHTML =
-      "✕ RESPOSTA INCORRETA. TENTE NOVAMENTE.";
-  }
-}
-
-function retryQuiz(){
-
-  currentQuestion = 2;
-  showQuestion();
-
-}
-
-showQuestion();
-
-
-/* =========================
-   LABIRINTO
-========================= */
-
-const mazeMap = [
-
-  "111111111",
-  "100000001",
-  "101111101",
-  "101000101",
-  "101011101",
-  "101010001",
-  "101011101",
-  "100000001",
-  "111111111"
-
-];
-
-let player = {
-  row:1,
-  col:1
-};
-
-const goal = {
-  row:7,
-  col:7
-};
-
-function drawMaze(){
-
-  const maze = document.getElementById("maze");
-
-  maze.innerHTML = "";
-
-  for(let row=0; row<9; row++){
-
-    for(let col=0; col<9; col++){
-
-      const cell =
-        document.createElement("div");
-
-      cell.classList.add("cell");
-
-      if(mazeMap[row][col] === "1"){
-
-        cell.classList.add("wall");
-
-      }else{
-
-        cell.classList.add("path");
-
-      }
-
-      if(
-        row === player.row &&
-        col === player.col
-      ){
-
-        cell.classList.add("player");
-        cell.innerText = "VOCÊ";
-
-      }
-
-      if(
-        row === goal.row &&
-        col === goal.col
-      ){
-
-        cell.classList.add("goal");
-        cell.innerText = "SEU\nPRESENTE";
-
-      }
-
-      maze.appendChild(cell);
-    }
-  }
-}
-
-function movePlayer(rowMove,colMove){
-
-  const newRow =
-    player.row + rowMove;
-
-  const newCol =
-    player.col + colMove;
-
-  if(
-    newRow < 0 ||
-    newRow >= 9 ||
-    newCol < 0 ||
-    newCol >= 9
-  ){
-    return;
-  }
-
-  if(
-    mazeMap[newRow][newCol] === "1"
-  ){
-    return;
-  }
-
-  player.row = newRow;
-  player.col = newCol;
-
-  drawMaze();
-
-  if(
-    player.row === goal.row &&
-    player.col === goal.col
-  ){
-
-    setTimeout(()=>{
-      document.getElementById("mazeScreen")
-        .classList.add("hidden");
-
-      document.getElementById("rewardScreen")
-        .classList.remove("hidden");
-    },500);
-
-  }
-}
-
-
-/* =========================
-   TECLADO
-========================= */
-
-document.addEventListener("keydown",(event)=>{
-
-  if(
-    document.getElementById("mazeScreen")
-      .classList.contains("hidden")
-  ){
-    return;
-  }
-
-  if(event.key === "ArrowUp" || event.key === "w"){
-    movePlayer(-1,0);
-  }
-
-  if(event.key === "ArrowDown" || event.key === "s"){
-    movePlayer(1,0);
-  }
-
-  if(event.key === "ArrowLeft" || event.key === "a"){
-    movePlayer(0,-1);
-  }
-
-  if(event.key === "ArrowRight" || event.key === "d"){
-    movePlayer(0,1);
-  }
-
-});
-
-
-/* =========================
-   ABRIR PRESENTE
-========================= */
-
-function openGift(){
-
-  document.getElementById("rewardScreen")
-    .classList.add("hidden");
-
-  document.getElementById("giftScreen")
-    .classList.remove("hidden");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-</script>
-
-</body>
-</html>
+const quizContent =
+  document.
