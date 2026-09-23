@@ -1,636 +1,608 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>ACCESS // BIRTHDAY</title>
+<title>BIRTHDAY // SYSTEM</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap');
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
+    margin:0;
+    min-height:100vh;
 
-margin:0;
+    background:
+        radial-gradient(circle at 50% -10%, #5b5b5b 0%, #202020 20%, #090909 52%, #020202 100%);
 
-background:
-radial-gradient(circle at 50% 20%,#151515 0%,#050505 45%,#000 100%);
+    color:#e5e5e5;
 
-color:#e8e8e8;
+    font-family:'Share Tech Mono', monospace;
 
-font-family:'Share Tech Mono',monospace;
-
-min-height:100vh;
-
-overflow-x:hidden;
-
+    overflow-x:hidden;
 }
 
-/* SCANLINES */
+
+/* ===== METAL GRID ===== */
 
 body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
 
-content:"";
+    background:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
 
-position:fixed;
+    background-size:35px 35px;
 
-inset:0;
+    opacity:.5;
 
-pointer-events:none;
-
-z-index:100;
-
-background:
-repeating-linear-gradient(
-to bottom,
-rgba(255,255,255,.025) 0px,
-rgba(255,255,255,.025) 1px,
-transparent 1px,
-transparent 4px
-);
-
+    z-index:-2;
 }
 
-/* GRID */
+
+/* ===== METALLIC LIGHT ===== */
 
 body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
 
-content:"";
+    background:
+        linear-gradient(
+            115deg,
+            transparent 15%,
+            rgba(255,255,255,.10) 25%,
+            transparent 35%
+        );
 
-position:fixed;
+    animation:metalLight 8s linear infinite;
 
-inset:0;
+    z-index:-1;
+}
 
-pointer-events:none;
+@keyframes metalLight{
 
-opacity:.12;
+    0%{
+        transform:translateX(-80%);
+    }
 
-background-image:
-linear-gradient(#222 1px,transparent 1px),
-linear-gradient(90deg,#222 1px,transparent 1px);
-
-background-size:40px 40px;
+    100%{
+        transform:translateX(80%);
+    }
 
 }
 
-/* MAIN */
+
+/* ===== CONTAINER ===== */
 
 .container{
-
-width:min(92%,900px);
-
-margin:auto;
-
-padding:50px 0 80px;
-
+    width:min(92%,900px);
+    margin:auto;
+    padding:35px 0 80px;
 }
 
-/* TERMINAL HEADER */
+
+/* ===== SYSTEM ===== */
 
 .system{
-
-font-size:12px;
-
-color:#666;
-
-margin-bottom:25px;
-
-letter-spacing:2px;
-
+    font-size:11px;
+    letter-spacing:2px;
+    color:#777;
+    line-height:1.8;
 }
 
 .system span{
-
-color:#00ff9d;
-
+    color:#dcdcdc;
 }
 
-/* HERO */
+
+/* ===== MAIN HERO ===== */
 
 .hero{
 
-position:relative;
+    position:relative;
 
-padding:55px 30px;
+    padding:55px 30px;
 
-border:1px solid #252525;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.12),
+            rgba(255,255,255,.025) 35%,
+            rgba(0,0,0,.65)
+        );
 
-background:rgba(5,5,5,.9);
+    border:1px solid #777;
 
-box-shadow:
-0 0 30px rgba(0,255,157,.05);
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.3),
+        inset 0 -2px rgba(0,0,0,.9),
+        0 20px 60px rgba(0,0,0,.7);
 
-overflow:hidden;
-
+    overflow:hidden;
 }
+
+
+/* metallic top line */
 
 .hero::before{
 
-content:"";
+    content:"";
 
-position:absolute;
+    position:absolute;
 
-left:0;
-top:0;
+    top:0;
+    left:0;
 
-width:3px;
-height:100%;
+    width:100%;
+    height:3px;
 
-background:#00ff9d;
+    background:
+        linear-gradient(
+            90deg,
+            #222,
+            #fff,
+            #777,
+            #fff,
+            #222
+        );
 
-box-shadow:
-0 0 15px #00ff9d;
-
+    box-shadow:
+        0 0 10px rgba(255,255,255,.5);
 }
+
+
+/* ===== SCREWS ===== */
 
 .hero::after{
 
-content:"";
+    content:"✦                         ✦";
 
-position:absolute;
+    position:absolute;
 
-top:0;
-left:-100%;
+    top:12px;
+    left:18px;
 
-width:50%;
-height:100%;
+    width:calc(100% - 36px);
 
-background:
-linear-gradient(
-90deg,
-transparent,
-rgba(0,255,157,.08),
-transparent
-);
+    color:#777;
 
-animation:scan 4s linear infinite;
+    font-size:12px;
+
+    white-space:pre;
 
 }
 
-@keyframes scan{
 
-to{
-left:150%;
-}
-
-}
-
-/* GLITCH TITLE */
+/* ===== TITLE ===== */
 
 .glitch{
 
-font-family:'Orbitron',sans-serif;
+    position:relative;
 
-font-size:
-clamp(30px,8vw,70px);
+    font-family:'Orbitron',sans-serif;
 
-font-weight:800;
+    font-size:clamp(30px,8vw,67px);
 
-color:#fff;
+    font-weight:900;
 
-letter-spacing:3px;
+    letter-spacing:3px;
 
-position:relative;
+    color:#f1f1f1;
 
-margin:15px 0 25px;
+    margin:30px 0 25px;
 
+    text-shadow:
+        0 1px #fff,
+        0 2px #aaa,
+        0 3px #555,
+        0 7px 15px #000;
 }
 
-.glitch::before,
-.glitch::after{
 
-content:attr(data-text);
-
-position:absolute;
-
-left:0;
-
-top:0;
-
-width:100%;
-
-overflow:hidden;
-
-}
-
-.glitch::before{
-
-color:#ff1744;
-
-transform:translate(2px,0);
-
-clip-path:inset(0 0 55% 0);
-
-animation:glitch1 2s infinite linear alternate-reverse;
-
-}
+/* chrome shine */
 
 .glitch::after{
 
-color:#00e5ff;
+    content:attr(data-text);
 
-transform:translate(-2px,0);
+    position:absolute;
 
-clip-path:inset(55% 0 0 0);
+    left:0;
+    top:0;
 
-animation:glitch2 1.7s infinite linear alternate-reverse;
+    width:100%;
 
-}
+    color:transparent;
 
-@keyframes glitch1{
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #777 22%,
+            #eeeeee 38%,
+            #333 52%,
+            #f5f5f5 68%,
+            #555 85%,
+            #fff 100%
+        );
 
-0%,90%{
-transform:translate(2px,0);
-}
+    -webkit-background-clip:text;
+    background-clip:text;
 
-92%{
-transform:translate(-4px,2px);
-}
-
-95%{
-transform:translate(3px,-2px);
-}
-
-100%{
-transform:translate(2px,0);
-}
-
-}
-
-@keyframes glitch2{
-
-0%,88%{
-transform:translate(-2px,0);
-}
-
-91%{
-transform:translate(5px,-1px);
-}
-
-96%{
-transform:translate(-3px,2px);
-}
-
-100%{
-transform:translate(-2px,0);
-}
+    opacity:.8;
 
 }
 
-/* TEXT */
+
+/* ===== TERMINAL ===== */
+
+.terminal{
+
+    padding:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1b1b,
+            #070707
+        );
+
+    border:1px solid #555;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.12),
+        inset 0 -3px rgba(0,0,0,.8);
+
+    color:#999;
+
+    line-height:1.8;
+
+    font-size:13px;
+}
+
+.terminal .silver{
+    color:#eee;
+}
+
+
+/* ===== INTRO ===== */
 
 .intro{
 
-max-width:700px;
+    max-width:720px;
 
-line-height:1.9;
+    margin-top:25px;
 
-color:#aaa;
+    color:#c1c1c1;
 
-font-size:15px;
+    line-height:2;
 
+    font-size:15px;
 }
 
-.highlight{
 
-color:#00ff9d;
-
-}
-
-/* BUTTON */
+/* ===== BUTTON ===== */
 
 button{
 
-background:#050505;
+    position:relative;
 
-color:#00ff9d;
+    background:
+        linear-gradient(
+            180deg,
+            #eeeeee 0%,
+            #888 45%,
+            #222 50%,
+            #777 100%
+        );
 
-border:1px solid #00ff9d;
+    border:1px solid #aaa;
 
-padding:14px 22px;
+    color:#080808;
 
-font-family:'Share Tech Mono',monospace;
+    padding:14px 25px;
 
-font-size:14px;
+    font-family:'Orbitron',sans-serif;
 
-cursor:pointer;
+    font-size:12px;
 
-margin-top:25px;
+    font-weight:700;
 
-transition:.2s;
+    letter-spacing:1.5px;
 
-letter-spacing:1px;
+    cursor:pointer;
 
+    margin-top:25px;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.8),
+        inset 0 -2px rgba(0,0,0,.7),
+        0 6px 15px rgba(0,0,0,.6);
+
+    transition:.2s;
 }
 
 button:hover{
 
-background:#00ff9d;
+    filter:brightness(1.25);
 
-color:#000;
+    transform:translateY(-2px);
 
-box-shadow:
-0 0 20px rgba(0,255,157,.4);
+    box-shadow:
+        inset 0 1px white,
+        0 0 20px rgba(255,255,255,.25);
+}
+
+button:active{
+
+    transform:translateY(1px);
 
 }
 
 button:disabled{
 
-opacity:.5;
-
-cursor:default;
-
+    opacity:.45;
 }
 
-/* CONTENT */
+
+/* ===== CONTENT ===== */
 
 .content{
 
-margin-top:25px;
+    display:grid;
 
-display:grid;
+    gap:22px;
 
-gap:20px;
-
+    margin-top:25px;
 }
 
 .hidden{
-
-display:none;
-
+    display:none;
 }
 
-/* CARDS */
+
+/* ===== METAL CARDS ===== */
 
 .card{
 
-background:rgba(7,7,7,.95);
+    position:relative;
 
-border:1px solid #292929;
+    padding:28px;
 
-padding:28px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.025) 35%,
+            rgba(0,0,0,.7)
+        );
 
-position:relative;
+    border:1px solid #555;
 
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.18),
+        inset 0 -2px rgba(0,0,0,.8),
+        0 15px 35px rgba(0,0,0,.45);
 }
+
+
+/* metal corner */
 
 .card::before{
 
-content:"";
+    content:"";
 
-position:absolute;
+    position:absolute;
 
-top:0;
-left:0;
+    top:0;
+    left:0;
 
-width:35px;
-height:2px;
+    width:45px;
+    height:2px;
 
-background:#00ff9d;
-
-box-shadow:0 0 10px #00ff9d;
-
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #666,
+            transparent
+        );
 }
+
+
+/* ===== TITLES ===== */
 
 .card h2{
 
-font-family:'Orbitron',sans-serif;
+    font-family:'Orbitron',sans-serif;
 
-font-size:18px;
+    font-size:17px;
 
-color:#00ff9d;
+    letter-spacing:2px;
 
-letter-spacing:2px;
+    color:#eee;
 
-margin-top:0;
+    margin-top:0;
 
+    text-shadow:
+        0 1px #000,
+        0 0 8px rgba(255,255,255,.15);
 }
+
+.card h2::before{
+
+    content:"[ ";
+
+    color:#777;
+}
+
+.card h2::after{
+
+    content:" ]";
+
+    color:#777;
+}
+
+
+/* ===== TEXT ===== */
 
 .card p{
 
-line-height:2;
+    color:#c2c2c2;
 
-color:#bbb;
-
-}
-
-/* TERMINAL */
-
-.terminal{
-
-background:#020202;
-
-border:1px solid #222;
-
-padding:18px;
-
-font-size:13px;
-
-line-height:1.8;
-
-color:#777;
+    line-height:2;
 
 }
-
-.terminal .green{
-
-color:#00ff9d;
-
-}
-
-/* LETTER */
 
 .letter{
 
-font-size:15px;
+    white-space:pre-line;
 
-white-space:pre-line;
-
+    font-size:15px;
 }
 
-/* DATABASE */
+
+/* ===== DATABASE ===== */
 
 .database{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:
-repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
 
-gap:12px;
-
+    gap:13px;
 }
 
 .data{
 
-border:1px solid #252525;
+    padding:20px;
 
-padding:20px;
+    background:
+        linear-gradient(
+            145deg,
+            #242424,
+            #080808
+        );
 
-background:#030303;
+    border:1px solid #4c4c4c;
 
-transition:.2s;
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.1),
+        inset 0 -2px rgba(0,0,0,.9);
 
+    transition:.2s;
 }
 
 .data:hover{
 
-border-color:#00ff9d;
+    border-color:#aaa;
 
-transform:translateY(-2px);
+    transform:translateY(-2px);
 
-box-shadow:
-0 0 15px rgba(0,255,157,.08);
-
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.2),
+        0 8px 20px rgba(0,0,0,.6);
 }
 
 .data small{
 
-display:block;
+    display:block;
 
-color:#555;
+    color:#777;
 
-margin-bottom:10px;
+    font-size:10px;
 
-font-size:11px;
+    letter-spacing:2px;
 
-letter-spacing:1px;
-
+    margin-bottom:10px;
 }
 
 .data strong{
 
-color:#eee;
+    color:#eee;
 
-font-size:15px;
+    font-size:15px;
 
+    line-height:1.6;
 }
 
-/* FINAL */
+
+/* ===== FINAL ===== */
 
 .final{
 
-text-align:center;
+    text-align:center;
 
-padding:50px 25px;
-
-}
-
-.final h2{
-
-font-size:25px;
-
+    padding:55px 25px;
 }
 
 .final .big{
 
-font-family:'Orbitron',sans-serif;
+    font-family:'Orbitron',sans-serif;
 
-font-size:
-clamp(24px,6vw,45px);
+    font-size:clamp(25px,6vw,48px);
 
-color:#fff;
+    font-weight:800;
 
-margin:25px 0;
+    color:#eee;
 
+    text-shadow:
+        0 2px #777,
+        0 4px #222,
+        0 10px 20px #000;
+
+    margin:25px 0;
 }
 
-/* CURSOR */
 
-.cursor{
+/* ===== FINAL MESSAGE ===== */
 
-display:inline-block;
+.final-message{
 
-width:8px;
+    margin-top:25px;
 
-height:18px;
-
-background:#00ff9d;
-
-margin-left:4px;
-
-animation:blink .8s infinite;
-
-vertical-align:middle;
-
+    text-align:left;
 }
 
-@keyframes blink{
 
-50%{
-opacity:0;
-}
-
-}
-
-/* MUSIC */
-
-.musicbox{
-
-border:1px solid #292929;
-
-padding:20px;
-
-background:#020202;
-
-}
-
-.musicbox audio{
-
-width:100%;
-
-margin-top:15px;
-
-filter:invert(1);
-
-}
-
-/* MOBILE */
+/* ===== MOBILE ===== */
 
 @media(max-width:600px){
 
-.container{
+    .container{
+        padding-top:20px;
+    }
 
-padding-top:25px;
+    .hero{
+        padding:45px 20px;
+    }
 
-}
+    .card{
+        padding:22px 18px;
+    }
 
-.hero{
+    .database{
+        grid-template-columns:1fr;
+    }
 
-padding:40px 20px;
-
-}
-
-.database{
-
-grid-template-columns:1fr;
-
-}
-
-.card{
-
-padding:22px 18px;
-
-}
-
-.glitch{
-
-letter-spacing:1px;
-
-}
+    .glitch{
+        letter-spacing:1px;
+    }
 
 }
 
@@ -647,28 +619,22 @@ letter-spacing:1px;
 
 <div class="system">
 
-SYSTEM STATUS:
+SYSTEM // BIRTHDAY PROJECT
 
+<br>
+
+STATUS:
 <span>ONLINE</span>
 
-&nbsp; //
+&nbsp; // &nbsp;
 
-&nbsp; ACCESS GRANTED
+MODE:
+<span>PERSONAL</span>
 
 </div>
 
 
 <section class="hero">
-
-<div class="system">
-
-USER: SISTER
-
-<br>
-
-FILE: BIRTHDAY.exe
-
-</div>
 
 
 <h1
@@ -682,34 +648,39 @@ FELIZ ANIVERSÁRIOOO!
 
 <div class="terminal">
 
-<span class="green">></span>
-
-initializing birthday project...
+<span class="silver">SYSTEM MESSAGE:</span>
 
 <br>
 
-<span class="green">></span>
+>
 
-loading memories...
-
-<br>
-
-<span class="green">></span>
-
-loading message...
+loading birthday project...
 
 <br>
 
-<span class="green">></span>
+>
 
-project completed after 2 weeks
+2 weeks of development detected.
 
 <br>
 
-<span class="green">></span>
+>
 
-<span id="typing"></span>
-<span class="cursor"></span>
+大量 de código detected.
+
+<br>
+
+>
+
+project successfully completed.
+
+<br><br>
+
+>
+
+<span class="silver">
+welcome, sister.
+</span>
 
 </div>
 
@@ -721,12 +692,12 @@ tem muito código 😭 Mas eu consegui!
 
 <br><br>
 
-Bom, eu achei que um texto no WhatsApp apenas seria
+Bom, eu achei que um texto no whatsapp apenas seria
 muito simples, quis criar algo que fosse mais especial ❤️
 
 Dediquei meu tempo a video aulas no YT e pedi ajuda
-pro Chat GPT pra fazer ele super bonitinho, então eu
-espero que tenha dado certo!!
+pro Chat GPT pra fazer ele super bonitinho, então eu espero
+que tenha dado certo!!
 
 <br><br>
 
@@ -738,7 +709,7 @@ kdkdkkd
 
 <button id="access">
 
-[ ACCESS PRESENT ]
+[ ACESSAR PRESENTE ]
 
 </button>
 
@@ -752,7 +723,8 @@ kdkdkkd
 
 <section class="card">
 
-<h2>// MESSAGE.exe</h2>
+
+<h2>MESSAGE.EXE</h2>
 
 
 <p class="letter">
@@ -771,13 +743,15 @@ Vc agora está no auge da idade, idade de diva, então vc vai conquistsr tudo o 
 
 </p>
 
+
 </section>
 
 
 
 <section class="card">
 
-<h2>// PERSONAL DATABASE</h2>
+
+<h2>PERSONAL DATABASE</h2>
 
 
 <div class="database">
@@ -785,7 +759,7 @@ Vc agora está no auge da idade, idade de diva, então vc vai conquistsr tudo o 
 
 <div class="data">
 
-<small>MUSIC.exe</small>
+<small>MÚSICA QUE ME LEMBRA VOCÊ</small>
 
 <strong>
 Nasa — ATEEZ
@@ -796,7 +770,7 @@ Nasa — ATEEZ
 
 <div class="data">
 
-<small>THING_SHE_LOVES</small>
+<small>UMA COISA QUE VOCÊ AMA</small>
 
 <strong>
 Eu, claro 😌
@@ -807,10 +781,10 @@ Eu, claro 😌
 
 <div class="data">
 
-<small>MEMORY_001</small>
+<small>UMA MEMÓRIA NOSSA</small>
 
 <strong>
-A época do BTS em que a gente dançava Fire KSKSKSKKDKD
+A época do BTS que a gente dançava Fire KSKSKSKKDKD
 </strong>
 
 </div>
@@ -818,10 +792,10 @@ A época do BTS em que a gente dançava Fire KSKSKSKKDKD
 
 <div class="data">
 
-<small>AESTHETIC_PROFILE</small>
+<small>UMA COISA QUE COMBINA COM VOCÊ</small>
 
 <strong>
-CYBER
+Cyber
 </strong>
 
 </div>
@@ -829,54 +803,6 @@ CYBER
 
 </div>
 
-</section>
-
-
-
-<section class="card">
-
-<h2>// AUDIO TRANSMISSION</h2>
-
-
-<div class="musicbox">
-
-<p>
-
-TRACK DETECTED:
-
-<br>
-
-<span style="color:#00ff9d">
-
-ENHYPEN — Way Back
-
-</span>
-
-</p>
-
-
-<audio
-id="music"
-controls
-loop>
-
-<source
-src="way-back.mp3"
-type="audio/mpeg">
-
-Seu navegador não suporta áudio.
-
-</audio>
-
-
-</div>
-
-
-<p style="font-size:12px;color:#555">
-
-// pressione PLAY para iniciar a transmissão
-
-</p>
 
 </section>
 
@@ -887,7 +813,7 @@ Seu navegador não suporta áudio.
 
 <div class="system">
 
-FINAL FILE
+FINAL FILE // 001
 
 </div>
 
@@ -900,33 +826,32 @@ MISSION COMPLETE.
 
 <p>
 
-Você desbloqueou o presente inteiro.
+Você chegou até o final.
 
 </p>
 
 
-<p style="color:#00ff9d">
+<p>
 
-Happy Birthday, diva.
+Feliz aniversário, diva.
 
 </p>
 
 
 <button id="final">
 
-[ EXECUTE FINAL MESSAGE ]
+[ EXECUTAR MENSAGEM FINAL ]
 
 </button>
 
 
 <div
 id="finalMessage"
-class="terminal hidden"
-style="margin-top:25px">
+class="terminal final-message hidden">
 
-<span class="green">
+<span class="silver">
 
-> birthday.exe completed successfully
+> FINAL MESSAGE
 
 </span>
 
@@ -934,18 +859,18 @@ style="margin-top:25px">
 
 Obrigada por existir.
 
-<br>
+<br><br>
 
 Obrigada por ser minha irmã.
 
-<br>
+<br><br>
 
 E obrigada por ter feito parte
 de quem eu sou hoje. 🫶🏼
 
 <br><br>
 
-<span class="green">
+<span class="silver">
 
 > END OF FILE_
 
@@ -978,7 +903,8 @@ access.addEventListener("click",()=>{
 
 content.classList.remove("hidden");
 
-access.textContent="[ PRESENT ACCESSED ]";
+access.textContent=
+"[ PRESENTE ACESSADO ]";
 
 access.disabled=true;
 
@@ -992,55 +918,3 @@ behavior:"smooth"
 
 const finalButton =
 document.getElementById("final");
-
-const finalMessage =
-document.getElementById("finalMessage");
-
-
-finalButton.addEventListener("click",()=>{
-
-finalMessage.classList.remove("hidden");
-
-finalButton.textContent=
-"[ MESSAGE EXECUTED ]";
-
-finalButton.disabled=true;
-
-});
-
-
-
-const text =
-"welcome, sister...";
-
-const typing =
-document.getElementById("typing");
-
-let index=0;
-
-
-function type(){
-
-if(index < text.length){
-
-typing.textContent +=
-text.charAt(index);
-
-index++;
-
-setTimeout(type,70);
-
-}
-
-}
-
-
-type();
-
-
-</script>
-
-
-</body>
-
-</html>
