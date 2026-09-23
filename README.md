@@ -3,33 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BIRTHDAY_PROTOCOL</title>
+<title>Birthday Protocol</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap');
-
 * {
     box-sizing: border-box;
 }
 
 html, body {
     margin: 0;
+    padding: 0;
     width: 100%;
     min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: #eee;
 }
 
 body {
-    background: #030303;
-    color: #eee;
-    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
     overflow-x: hidden;
 }
 
-/* =========================
-   FUNDO CYBER EM MOVIMENTO
-========================= */
-
+/* FUNDO CYBER ANIMADO */
 body::before {
     content: "";
     position: fixed;
@@ -37,12 +33,15 @@ body::before {
     z-index: -3;
 
     background:
-        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
 
     background-size: 55px 55px;
 
-    transform: perspective(500px) rotateX(55deg) scale(1.5);
+    transform:
+        perspective(500px)
+        rotateX(55deg)
+        scale(1.5);
 
     animation: gridMove 8s linear infinite;
 }
@@ -57,8 +56,7 @@ body::before {
     }
 }
 
-/* linhas luminosas passando */
-
+/* SCANLINES */
 body::after {
     content: "";
     position: fixed;
@@ -76,7 +74,6 @@ body::after {
         );
 
     background-size: 100% 180px;
-
     animation: scan 5s linear infinite;
     opacity: .35;
 }
@@ -87,871 +84,278 @@ body::after {
     }
 
     to {
-        background-position: 0 100vh;
+        background-position: 0 180px;
     }
 }
 
-/* =========================
-   PÁGINAS
-========================= */
+/* PÁGINAS */
 
 .page {
     display: none;
     min-height: 100vh;
-    padding: 35px 18px;
-    justify-content: center;
+    width: 100%;
+    padding: 35px 20px;
+
     align-items: center;
+    justify-content: center;
 }
 
 .page.active {
     display: flex;
 }
 
-.container {
-    position: relative;
-    width: 100%;
-    max-width: 850px;
+.panel {
+    width: min(900px, 100%);
+    padding: 35px 25px;
 
-    padding: 35px;
+    border: 1px solid #aaa;
 
     background:
         linear-gradient(
             145deg,
-            rgba(30,30,30,.96),
-            rgba(5,5,5,.97)
+            rgba(255,255,255,.12),
+            rgba(20,20,20,.92)
         );
 
-    border: 1px solid #777;
-
     box-shadow:
-        0 0 0 1px #171717,
-        0 0 25px rgba(255,255,255,.07),
-        inset 0 0 35px rgba(255,255,255,.025);
+        0 0 25px rgba(255,255,255,.08),
+        inset 0 0 30px rgba(255,255,255,.04);
 
-    overflow: hidden;
-}
-
-/* decoração dentro do painel */
-
-.container::before {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-
-    right: -100px;
-    top: -100px;
-
-    border: 1px solid #555;
-    transform: rotate(45deg);
-
-    animation: rotateDecor 12s linear infinite;
-}
-
-@keyframes rotateDecor {
-    to {
-        transform: rotate(405deg);
-    }
-}
-
-.system {
-    color: #777;
-    font-size: 11px;
-    letter-spacing: 3px;
-    margin-bottom: 18px;
-}
-
-h1,
-h2 {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 3px;
+    text-align: center;
 }
 
 h1 {
-    font-size: clamp(27px, 7vw, 52px);
+    font-size: clamp(28px, 7vw, 60px);
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+
+    background: linear-gradient(
+        90deg,
+        #777,
+        #fff,
+        #888,
+        #fff,
+        #666
+    );
+
+    -webkit-background-clip: text;
+    color: transparent;
+
+    background-size: 300%;
+    animation: chrome 4s linear infinite;
 }
 
-h2 {
-    font-size: clamp(21px, 5vw, 34px);
+@keyframes chrome {
+    from {
+        background-position: 0%;
+    }
+
+    to {
+        background-position: 300%;
+    }
 }
 
-.subtitle {
-    color: #999;
-    line-height: 1.8;
+p {
+    font-size: 17px;
+    line-height: 1.7;
 }
-
-.divider {
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #aaa,
-            transparent
-        );
-
-    margin: 28px 0;
-}
-
-/* =========================
-   BOTÕES
-========================= */
 
 .cyber-btn {
-    margin-top: 25px;
-    padding: 13px 20px;
+    margin: 10px;
+    padding: 15px 25px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f1f1f1,
-            #777,
-            #d5d5d5
-        );
+    background: #111;
+    color: #eee;
 
-    border: 1px solid white;
+    border: 1px solid #aaa;
 
-    color: #050505;
-
-    font-family: 'Orbitron', sans-serif;
     font-weight: bold;
+    letter-spacing: 1px;
 
-    letter-spacing: 2px;
+    cursor: pointer;
 
     box-shadow:
-        5px 5px 0 #222,
-        0 0 15px rgba(255,255,255,.12);
+        0 0 10px rgba(255,255,255,.08),
+        inset 0 0 10px rgba(255,255,255,.04);
 
     transition: .2s;
 }
 
 .cyber-btn:hover {
-    transform: translate(3px,3px);
-    box-shadow: 2px 2px 0 #222;
+    background: #ddd;
+    color: #000;
+    transform: translateY(-2px);
 }
 
-.small-btn {
-    margin-top: 25px;
+.cyber-btn:active {
+    transform: scale(.96);
+}
 
-    padding: 9px 14px;
+.message {
+    margin: 20px auto;
+    min-height: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-    background: rgba(0,0,0,.5);
+/* QUIZ */
 
-    color: #aaa;
+.question {
+    margin: 30px 0;
+    padding: 20px;
 
     border: 1px solid #555;
-
-    font-family: 'Share Tech Mono', monospace;
-
-    letter-spacing: 1px;
-
-    transition: .2s;
+    background: rgba(0,0,0,.45);
 }
 
-.small-btn:hover {
-    color: white;
-    border-color: #aaa;
+.question h2 {
+    font-size: 20px;
 }
 
-/* =========================
-   PÁGINA 1
-========================= */
-
-.music-warning {
-    position: relative;
-
-    padding: 25px;
-
-    margin: 25px 0;
-
-    border: 1px solid #777;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.05),
-            rgba(0,0,0,.6)
-        );
-
-    box-shadow:
-        inset 0 0 20px rgba(255,255,255,.025);
-}
-
-.music-warning::before {
-    content: "!";
-    position: absolute;
-
-    right: 18px;
-    top: 10px;
-
-    font-family: 'Orbitron';
-    font-size: 35px;
-
-    color: #555;
-}
-
-.warning {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(15px, 4vw, 23px);
-    line-height: 1.6;
-}
-
-.choice {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    margin-top: 25px;
-}
-
-.choice button {
-    padding: 16px;
-
-    text-align: left;
-
-    background:
-        linear-gradient(
-            90deg,
-            #111,
-            #191919,
-            #0a0a0a
-        );
-
-    color: #bbb;
-
-    border: 1px solid #444;
-
-    font-family: 'Orbitron', sans-serif;
-
-    letter-spacing: 1px;
-
-    transition: .2s;
-}
-
-.choice button:hover {
-    background: linear-gradient(90deg,#ddd,#777);
-    color: #050505;
-    border-color: white;
-    transform: translateX(5px);
-}
-
-.message-box {
-    margin-top: 18px;
-
-    padding: 15px;
-
-    border-left: 2px solid #aaa;
-
-    color: #aaa;
-
-    line-height: 1.7;
-
-    display: none;
-}
-
-.message-box.show {
+.answer {
     display: block;
-}
-
-/* =========================
-   TEXTO
-========================= */
-
-.letter {
-    color: #ccc;
-
-    line-height: 1.9;
-
-    font-size: 15px;
-
-    white-space: pre-line;
-}
-
-/* =========================
-   QUIZ
-========================= */
-
-.quiz-question {
-    padding: 23px;
-
-    margin: 18px 0;
-
-    background: rgba(5,5,5,.7);
-
-    border: 1px solid #444;
-
-    box-shadow: inset 0 0 20px rgba(255,255,255,.015);
-}
-
-.quiz-question p {
-    color: #ccc;
-    line-height: 1.7;
-}
-
-.quiz-options {
-    display: grid;
-    gap: 9px;
-}
-
-.quiz-options button {
-    padding: 13px;
-
-    text-align: left;
-
-    background: #111;
-
-    color: #aaa;
-
-    border: 1px solid #444;
-
-    transition: .2s;
-}
-
-.quiz-options button:hover {
-    color: white;
-    border-color: #aaa;
-    transform: translateX(3px);
-}
-
-.quiz-result {
-    min-height: 25px;
-    margin-top: 13px;
-}
-
-/* =========================
-   LABIRINTO
-========================= */
-
-.maze-wrapper {
     width: 100%;
-    overflow: auto;
-
-    margin-top: 20px;
-
-    padding: 12px;
-
-    border: 1px solid #333;
-
-    background: #050505;
+    margin: 10px 0;
 }
+
+/* MAZE */
 
 #maze {
     display: grid;
 
-    grid-template-columns: repeat(21, 23px);
-    grid-template-rows: repeat(21, 23px);
+    width: min(90vw, 600px);
+    aspect-ratio: 1 / 1;
 
-    gap: 2px;
+    margin: 25px auto;
 
-    width: max-content;
-
-    margin: auto;
-
-    padding: 8px;
+    border: 2px solid #aaa;
 }
 
 .cell {
-    width: 23px;
-    height: 23px;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    font-size: 6px;
+    background: #050505;
+    border: 1px solid #181818;
 }
 
 .wall {
     background:
         linear-gradient(
             135deg,
+            #333,
             #777,
             #222
         );
 
-    border: 1px solid #888;
-
-    box-shadow:
-        inset 0 0 4px #000;
-}
-
-.path {
-    background: #090909;
-
-    border: 1px solid #151515;
+    border: 1px solid #aaa;
 }
 
 .player {
-    background:
-        linear-gradient(
-            135deg,
-            white,
-            #666
-        );
-
-    color: #000;
-
-    font-weight: bold;
-
-    box-shadow:
-        0 0 12px rgba(255,255,255,.5);
+    background: #fff !important;
+    box-shadow: 0 0 15px #fff;
 }
 
 .goal {
-    background:
-        linear-gradient(
-            135deg,
-            #aaa,
-            #333
-        );
-
-    color: white;
-
-    font-weight: bold;
-
-    box-shadow:
-        0 0 15px rgba(255,255,255,.25);
+    background: #888 !important;
+    box-shadow: 0 0 15px #aaa;
 }
 
-.controls {
-    display: grid;
+/* PRESENTE */
 
-    grid-template-columns: repeat(3, 55px);
-
-    justify-content: center;
-
-    gap: 6px;
-
-    margin-top: 20px;
+.gift {
+    font-size: 90px;
+    margin: 20px;
+    animation: giftFloat 2s ease-in-out infinite;
 }
 
-.controls button {
-    height: 45px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #222,
-            #080808
-        );
-
-    color: #ddd;
-
-    border: 1px solid #555;
-
-    font-size: 18px;
-}
-
-.controls button:hover {
-    background: #ddd;
-    color: #000;
-}
-
-.maze-status {
-    text-align: center;
-
-    color: #777;
-
-    margin-top: 15px;
-
-    font-size: 12px;
-}
-
-/* =========================
-   PRESENTE
-========================= */
-
-.present {
-    text-align: center;
-}
-
-.present-box {
-    position: relative;
-
-    width: 180px;
-    height: 130px;
-
-    margin: 40px auto;
-
-    background:
-        linear-gradient(
-            145deg,
-            #eee,
-            #777,
-            #222
-        );
-
-    border: 2px solid #aaa;
-
-    box-shadow:
-        0 0 30px rgba(255,255,255,.15);
-
-    animation: floating 2.5s ease-in-out infinite;
-}
-
-.present-box::before {
-    content: "";
-
-    position: absolute;
-
-    left: 77px;
-    top: 0;
-
-    width: 23px;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #222,
-            #aaa,
-            #333
-        );
-}
-
-.present-box::after {
-    content: "";
-
-    position: absolute;
-
-    left: -8px;
-    top: -18px;
-
-    width: 192px;
-    height: 27px;
-
-    background:
-        linear-gradient(
-            #eee,
-            #777
-        );
-
-    border: 2px solid #aaa;
-}
-
-@keyframes floating {
+@keyframes giftFloat {
     0%,100% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(-2deg);
     }
 
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-12px) rotate(2deg);
     }
 }
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS */
 
 .cards {
     display: grid;
-
-    grid-template-columns: repeat(2,1fr);
-
-    gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 30px;
 }
 
 .card {
-    min-height: 135px;
+    padding: 25px;
 
-    padding: 20px;
+    border: 1px solid #777;
 
     background:
         linear-gradient(
             145deg,
-            #171717,
+            #222,
             #080808
         );
 
-    border: 1px solid #444;
-
-    position: relative;
-
-    overflow: hidden;
+    transition: .3s;
 }
 
-.card::after {
-    content: "";
-
-    position: absolute;
-
-    width: 100%;
-    height: 1px;
-
-    background: #777;
-
-    left: -100%;
-
-    bottom: 0;
-
-    animation: cardScan 3s linear infinite;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(255,255,255,.15);
 }
 
-@keyframes cardScan {
-    to {
-        left: 100%;
-    }
-}
-
-.card-title {
-    color: #777;
-
-    font-size: 10px;
-
+.card h3 {
+    font-size: 15px;
     letter-spacing: 2px;
-
-    margin-bottom: 15px;
 }
 
-.card-content {
-    font-family: 'Orbitron', sans-serif;
-
-    color: #ddd;
-
-    line-height: 1.5;
-}
-
-/* =========================
-   FINAL
-========================= */
-
-.final-screen {
-    text-align: center;
-}
+/* FINAL */
 
 .final-title {
-    font-size: clamp(28px,8vw,60px);
+    animation: finalPulse 2s infinite;
 }
 
-.final-sub {
-    color: #777;
-
-    line-height: 1.8;
-
-    letter-spacing: 2px;
-}
-
-/* PISTA FINAL */
-
-.dance-floor {
-    position: relative;
-
-    width: 100%;
-    height: 270px;
-
-    margin: 35px auto;
-
-    overflow: hidden;
-
-    border: 1px solid #444;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent 49%,
-            #333 50%,
-            transparent 51%
-        ),
-        linear-gradient(
-            #111 50%,
-            #050505 50%
-        );
-
-    background-size:
-        70px 100%,
-        100% 100%;
-}
-
-.dance-floor::before {
-    content: "";
-
-    position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(255,255,255,.12),
-            transparent
-        );
-
-    animation: floorLight 2s linear infinite;
-}
-
-@keyframes floorLight {
-    from {
-        transform: translateY(-100%);
+@keyframes finalPulse {
+    0%,100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px #fff;
     }
 
-    to {
-        transform: translateY(100%);
+    50% {
+        transform: scale(1.05);
+        text-shadow:
+            0 0 10px #fff,
+            0 0 30px #aaa;
     }
 }
 
-.dancers {
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 28px;
-
-    z-index: 2;
-}
-
-.dancer {
-    position: relative;
-
-    width: 35px;
-    height: 100px;
-
-    animation: dance .7s infinite alternate ease-in-out;
-}
-
-.dancer:nth-child(2) {
-    animation-delay: .15s;
-}
-
-.dancer:nth-child(3) {
-    animation-delay: .3s;
-}
-
-.dancer:nth-child(4) {
-    animation-delay: .45s;
-}
-
-.head {
-    width: 27px;
-    height: 27px;
-
-    margin: auto;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            white,
-            #555
-        );
-}
-
-.body {
-    width: 30px;
-    height: 55px;
-
-    margin: 4px auto;
-
-    background:
-        linear-gradient(
-            90deg,
-            #aaa,
-            #222,
-            #ddd
-        );
-
-    border-radius: 10px 10px 5px 5px;
-}
-
-.arm,
-.leg {
-    position: absolute;
-
-    background: #999;
-}
-
-.arm {
-    width: 7px;
-    height: 42px;
-
-    top: 30px;
-}
-
-.arm.left {
-    left: 0;
-    transform: rotate(35deg);
-}
-
-.arm.right {
-    right: 0;
-    transform: rotate(-35deg);
-}
-
-.leg {
-    width: 8px;
-    height: 38px;
-
-    bottom: 0;
-}
-
-.leg.left {
-    left: 8px;
-    transform: rotate(10deg);
-}
-
-.leg.right {
-    right: 8px;
-    transform: rotate(-10deg);
-}
-
-@keyframes dance {
-    from {
-        transform:
-            translateY(8px)
-            rotate(-5deg);
-    }
-
-    to {
-        transform:
-            translateY(-10px)
-            rotate(7deg);
-    }
-}
-
-.final-message {
-    font-family: 'Orbitron', sans-serif;
-
-    font-size: clamp(16px,4vw,25px);
-
-    line-height: 1.7;
-
+.final-box {
     margin-top: 25px;
-}
+    padding: 25px;
 
-/* =========================
-   MOBILE
-========================= */
+    border: 1px solid #aaa;
+
+    background: rgba(255,255,255,.04);
+}
 
 @media (max-width: 600px) {
 
-    .container {
-        padding: 22px;
+    .page {
+        padding: 20px 12px;
+    }
+
+    .panel {
+        padding: 25px 15px;
     }
 
     .cards {
         grid-template-columns: 1fr;
     }
 
-    #maze {
-        grid-template-columns: repeat(21,20px);
-        grid-template-rows: repeat(21,20px);
-    }
-
-    .cell {
-        width: 20px;
-        height: 20px;
-    }
-
-    .dancers {
-        gap: 12px;
+    .cyber-btn {
+        width: 90%;
     }
 }
 </style>
@@ -959,285 +363,67 @@ h2 {
 
 <body>
 
-<!-- =================================================
-PÁGINA 1
-================================================= -->
+
+<!-- PÁGINA 1 -->
 
 <section class="page active" id="page1">
 
-<div class="container">
+<div class="panel">
 
-<div class="system">
-SYSTEM // BIRTHDAY_PROTOCOL // 001
-</div>
+<h1>BIRTHDAY PROTOCOL</h1>
 
-<h1>ACESSO NECESSÁRIO</h1>
-
-<div class="music-warning">
-
-<div class="warning">
+<p>
 ANTES DE CONTINUAR, É OBRIGATÓRIO COLOCAR UMA MÚSICA BEM CYBERPUNK PRA COMBINAR 😡
-</div>
-
-</div>
-
-<p class="subtitle">
-O sistema exige uma trilha sonora compatível com a atmosfera.
-<br><br>
-Depois de colocar a música, confirme abaixo.
 </p>
-
-<div class="choice">
-
-<button onclick="musicChoice(true)">
-COLOQUEI
-</button>
-
-<button onclick="musicChoice(false)">
-AINDA NÃO COLOQUEI
-</button>
-
-</div>
-
-<div class="message-box" id="musicMessage"></div>
 
 <button
 class="cyber-btn"
-id="musicContinue"
-onclick="nextPage(2)"
-style="display:none;"
->
-PRÓXIMA PÁGINA →
+onclick="musicChoice(true)">
+COLOQUEI
 </button>
+
+<button
+class="cyber-btn"
+onclick="musicChoice(false)">
+AINDA NÃO COLOQUEI
+</button>
+
+<div id="musicMessage" class="message"></div>
 
 </div>
 
 </section>
 
 
-<!-- =================================================
-PÁGINA 2
-================================================= -->
+
+<!-- PÁGINA 2 -->
 
 <section class="page" id="page2">
 
-<div class="container">
+<div class="panel">
 
-<div class="system">
-SYSTEM // BIRTHDAY_PROTOCOL // 002
-</div>
-
-<h2>MESSAGE.INIT</h2>
-
-<div class="divider"></div>
-
-<div class="letter">
-Feliz aniversárioooo! 
-Demorou 2 semanas pra eu conseguir fazer esse site, tem muito código 😭 Mas eu consegui!
-Bom, eu achei que um texto no whatsapp apenas seria muito simples, quis criar algo que fosse mais especial ❤️ Dediquei meu tempo a video aulas no YT e pedi ajuda pro Chat GPT pra fazer ele super bonitinho, então eu espero que tenha dado certo!! Sem mais enrolação, vamos ao presente virtual kdkdkkd
-</div>
-
-<button class="small-btn" onclick="nextPage(3)">
-PRÓXIMA PÁGINA →
-</button>
-
-</div>
-
-</section>
-
-
-<!-- =================================================
-PÁGINA 3
-================================================= -->
-
-<section class="page" id="page3">
-
-<div class="container">
-
-<div class="system">
-SYSTEM // BIRTHDAY_PROTOCOL // 003
-</div>
-
-<h2>IDENTITY_CHECK.EXE</h2>
-
-<p class="subtitle">
-Algumas informações precisam ser verificadas antes de liberar o próximo arquivo.
-</p>
-
-
-<div class="quiz-question">
+<h1>ACCESS GRANTED</h1>
 
 <p>
-<strong>01 //</strong><br>
-Qual música a gente ficava dançando na TV da sala e a mãe aparecia do lado e a gente fingia que nada tava acontecendo?
+Feliz aniversárioooo!
+<br><br>
+
+Demorou 2 semanas pra eu conseguir fazer esse site, tem muito código 😭
+Mas eu consegui!
+<br><br>
+
+Bom, eu achei que um texto no whatsapp apenas seria muito simples,
+quis criar algo que fosse mais especial ❤️
+Dediquei meu tempo a video aulas no YT e pedi ajuda pro Chat GPT
+pra fazer ele super bonitinho, então eu espero que tenha dado certo!!
+<br><br>
+
+Sem mais enrolação, vamos ao presente virtual kdkdkkd
 </p>
 
-<div class="quiz-options">
-
-<button onclick="answer(this,true)">
-Fire — BTS
-</button>
-
-<button onclick="answer(this,false)">
-Nasa — ATEEZ
-</button>
-
-<button onclick="answer(this,false)">
-Way Back — ENHYPEN
-</button>
-
-</div>
-
-<div class="quiz-result"></div>
-
-</div>
-
-
-<div class="quiz-question">
-
-<p>
-<strong>02 //</strong><br>
-Qual destas vibes combina mais com vc?
-</p>
-
-<div class="quiz-options">
-
-<button onclick="answer(this,false)">
-Rosa pastel
-</button>
-
-<button onclick="answer(this,false)">
-Cottagecore
-</button>
-
-<button onclick="answer(this,true)">
-Cyber
-</button>
-
-</div>
-
-<div class="quiz-result"></div>
-
-</div>
-
-
-<div class="quiz-question">
-
-<p>
-<strong>03 //</strong><br>
-Quem é a pessoa que está desbloqueando este sistema?
-</p>
-
-<div class="quiz-options">
-
-<button onclick="finalQuiz(this,true)">
-A aniversariante
-</button>
-
-<button onclick="finalQuiz(this,false)">
-Não sou a aniversariante
-</button>
-
-</div>
-
-<div class="quiz-result"></div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =================================================
-PÁGINA 4
-================================================= -->
-
-<section class="page" id="page4">
-
-<div class="container">
-
-<div class="system">
-SYSTEM // BIRTHDAY_PROTOCOL // 004
-</div>
-
-<h2>MAZE_PROTOCOL</h2>
-
-<p class="subtitle">
-O acesso foi liberado.
-<br>
-Encontre o caminho até o seu presente.
-</p>
-
-<div class="maze-wrapper">
-<div id="maze"></div>
-</div>
-
-<div class="maze-status" id="mazeStatus">
-LOCALIZAÇÃO: ENTRADA
-</div>
-
-<div class="controls">
-
-<div></div>
-
-<button onclick="move(0,-1)">
-▲
-</button>
-
-<div></div>
-
-<button onclick="move(-1,0)">
-◀
-</button>
-
-<button onclick="move(0,1)">
-▼
-</button>
-
-<button onclick="move(1,0)">
-▶
-</button>
-
-</div>
-
-<p
-class="subtitle"
-style="text-align:center;font-size:12px;"
->
-Use as setas acima ou as setas do teclado.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- =================================================
-PÁGINA 5
-================================================= -->
-
-<section class="page" id="page5">
-
-<div class="container">
-
-<div class="system">
-SYSTEM // BIRTHDAY_PROTOCOL // 005
-</div>
-
-<h2>PRESENT.EXE</h2>
-
-<div class="present-box"></div>
-
-<div class="letter">
-
-Eu quero primeiramente te agradecer por ter sido a pessoa que mais me apoiou por todos esses anos 🫶🏼 crescer com vc foi o melhor presente da minha vida, porque eu pude contar com vc sempre, contar tudo que acontece comigo, pedir ajuda com roupas, cabelo (inclusive vc que me ensinou a fazer o cabelo), aprendi a lidar com pessoas, conheci k-pop por vc também, aprendi a ter gostos próprios e etc... Você, diferente de qualquer outro familiar, foi uma das pessoas mais presentes na minha vida, e eu agradeço muito a Deus por isso... Pensando agora, eu não sei o que seria da minha vida sem vc, acho que eu seria uma feia, lascada, sem saber arrumar o cabelo e sem personalidade própria kskskskksksksk😭🫶🏼
-
-Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor aniversário da sua vida, ganhar seu tablet, o melhor bolo e se melhores fotos!!! Vou te obrigar a se arrumar pra tirar fotos aesthetics ok? Vc agora está no auge da idade, idade de diva, então vc vai conquistsr tudo o que vc sonhava em ter 😌
-
-</div>
-
-<button class="small-btn" onclick="nextPage(6)">
+<button
+class="cyber-btn"
+onclick="nextPage(3)">
 CONTINUAR →
 </button>
 
@@ -1246,69 +432,476 @@ CONTINUAR →
 </section>
 
 
-<!-- =================================================
-PÁGINA 6
-================================================= -->
+
+<!-- PÁGINA 3 -->
+
+<section class="page" id="page3">
+
+<div class="panel">
+
+<h1>SYSTEM QUIZ</h1>
+
+
+<div class="question">
+
+<h2>
+Qual música a gente ficava dançando na TV da sala e a mãe aparecia do lado e a gente fingia que nada tava acontecendo?
+</h2>
+
+<button class="cyber-btn answer">
+Fire — BTS
+</button>
+
+<button class="cyber-btn answer">
+Nasa — ATEEZ
+</button>
+
+<button class="cyber-btn answer">
+Way Back — ENHYPEN
+</button>
+
+</div>
+
+
+<div class="question">
+
+<h2>
+Qual destas vibes combina mais com vc?
+</h2>
+
+<button class="cyber-btn answer">
+Cyber
+</button>
+
+<button class="cyber-btn answer">
+Rosa pastel
+</button>
+
+<button class="cyber-btn answer">
+Cottagecore
+</button>
+
+</div>
+
+
+<div class="question">
+
+<h2>
+Quem é a pessoa que está desbloqueando este sistema?
+</h2>
+
+<button
+class="cyber-btn"
+onclick="unlockSystem()">
+A aniversariante
+</button>
+
+<button
+class="cyber-btn"
+onclick="wrongPerson()">
+Não sou a aniversariante
+</button>
+
+<div id="quizMessage" class="message"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- PÁGINA 4 -->
+
+<section class="page" id="page4">
+
+<div class="panel">
+
+<h1>CYBER MAZE</h1>
+
+<p>
+ENCONTRE O PRESENTE.
+<br>
+Use as setas do teclado ou os botões abaixo.
+</p>
+
+<div id="maze"></div>
+
+<div>
+
+<button class="cyber-btn" onclick="movePlayer(0,-1)">↑</button>
+
+<br>
+
+<button class="cyber-btn" onclick="movePlayer(-1,0)">←</button>
+
+<button class="cyber-btn" onclick="movePlayer(0,1)">↓</button>
+
+<button class="cyber-btn" onclick="movePlayer(1,0)">→</button>
+
+</div>
+
+<div id="mazeMessage" class="message"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- PÁGINA 5 -->
+
+<section class="page" id="page5">
+
+<div class="panel">
+
+<div class="gift">🎁</div>
+
+<h1>PRESENTE DESBLOQUEADO</h1>
+
+<p>
+Eu quero primeiramente te agradecer por ter sido a pessoa que mais me apoiou por todos esses anos 🫶🏼
+crescer com vc foi o melhor presente da minha vida, porque eu pude contar com vc sempre,
+contar tudo que acontece comigo, pedir ajuda com roupas, cabelo
+(inclusive vc que me ensinou a fazer o cabelo), aprendi a lidar com pessoas,
+conheci k-pop por vc também, aprendi a ter gostos próprios e etc...
+<br><br>
+
+Você, diferente de qualquer outro familiar, foi uma das pessoas mais presentes na minha vida,
+e eu agradeço muito a Deus por isso...
+<br><br>
+
+Pensando agora, eu não sei o que seria da minha vida sem vc,
+acho que eu seria uma feia, lascada, sem saber arrumar o cabelo
+e sem personalidade própria kskskskksksksk😭🫶🏼
+<br><br>
+
+Também quero te desejar um ótimo aniversário 🎂,
+que vc possa ter o melhor aniversário da sua vida,
+ganhar seu tablet, o melhor bolo e se melhores fotos!!!
+<br><br>
+
+Vou te obrigar a se arrumar pra tirar fotos aesthetics ok?
+Vc agora está no auge da idade, idade de diva,
+então vc vai conquistsr tudo o que vc sonhava em ter 😌
+</p>
+
+<button
+class="cyber-btn"
+onclick="nextPage(6)">
+CONTINUAR →
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- PÁGINA 6 -->
 
 <section class="page" id="page6">
 
-<div class="container">
+<div class="panel">
 
-<div class="system">
-SYSTEM // BIRTHDAY_PROTOCOL // 006
-</div>
-
-<h2>PERSONAL_DATABASE</h2>
-
-<p class="subtitle">
-Arquivos encontrados no sistema.
-</p>
+<h1>FILES ABOUT YOU</h1>
 
 <div class="cards">
 
 <div class="card">
-
-<div class="card-title">
-MÚSICA QUE ME LEMBRA VOCÊ
+<h3>MÚSICA QUE ME LEMBRA VOCÊ</h3>
+<p>Nasa — ATEEZ</p>
 </div>
-
-<div class="card-content">
-Nasa — ATEEZ
-</div>
-
-</div>
-
 
 <div class="card">
-
-<div class="card-title">
-UMA COISA QUE VOCÊ AMA
+<h3>UMA COISA QUE VOCÊ AMA</h3>
+<p>Eu, claro 😌</p>
 </div>
-
-<div class="card-content">
-Eu, claro 😌
-</div>
-
-</div>
-
 
 <div class="card">
-
-<div class="card-title">
-UMA MEMÓRIA NOSSA
+<h3>UMA MEMÓRIA NOSSA</h3>
+<p>A época do BTS que a gente dançava Fire KSKSKSKKDKD</p>
 </div>
-
-<div class="card-content">
-A época do BTS que a gente dançava Fire KSKSKSKKDKD
-</div>
-
-</div>
-
 
 <div class="card">
-
-<div class="card-title">
-UMA COISA QUE COMBINA COM VOCÊ
+<h3>UMA COISA QUE COMBINA COM VOCÊ</h3>
+<p>Cyber</p>
 </div>
 
-<div class="card-c
+</div>
+
+<br>
+
+<button
+class="cyber-btn"
+onclick="nextPage(7)">
+FINALIZAR PROTOCOLO →
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- PÁGINA 7 -->
+
+<section class="page" id="page7">
+
+<div class="panel">
+
+<h1 class="final-title">
+VOCÊ CHEGOU AO FINAL.
+</h1>
+
+<div class="final-box">
+
+<p>✓ ALL FILES UNLOCKED</p>
+<p>✓ ACCESS GRANTED</p>
+<p>✓ BIRTHDAY PROTOCOL COMPLETE</p>
+
+<h1>FELIZ ANIVERSÁRIO, DIVA. 🩶</h1>
+
+<p>
+birthday_protocol.exe foi concluído com sucesso.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+/* =========================
+   TROCA DE PÁGINA
+========================= */
+
+function nextPage(number) {
+
+    document.querySelectorAll(".page").forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    const target = document.getElementById("page" + number);
+
+    if (target) {
+        target.classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+}
+
+
+/* =========================
+   BOTÃO DA MÚSICA
+========================= */
+
+function musicChoice(placed) {
+
+    const message = document.getElementById("musicMessage");
+
+    if (placed === true) {
+
+        message.textContent =
+        "✓ MÚSICA DETECTADA. ATMOSFERA CYBERPUNK ATIVADA.";
+
+        message.style.display = "block";
+
+        /*
+        COLOQUEI = VAI DIRETO PARA A PÁGINA 2
+        */
+
+        setTimeout(function() {
+            nextPage(2);
+        }, 450);
+
+    } else {
+
+        message.textContent =
+        "É ORA COLOCAAAAAR !!! 😡😡😡";
+
+        message.style.display = "block";
+    }
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+function unlockSystem() {
+
+    const message = document.getElementById("quizMessage");
+
+    message.textContent =
+    "✓ ACESSO LIBERADO. PREPARE-SE.";
+
+    setTimeout(function() {
+        nextPage(4);
+        createMaze();
+    }, 700);
+}
+
+
+function wrongPerson() {
+
+    const message = document.getElementById("quizMessage");
+
+    message.textContent =
+    "error - seu acesso foi negado, vc não é o destinatário do presente, retire-se imediatamente";
+}
+
+
+/* =========================
+   MAZE
+========================= */
+
+const mazeMap = [
+"111111111111111111111",
+"100000000000000000001",
+"101111111111111111101",
+"101000000000000000101",
+"101011111011111110101",
+"101010001010000010101",
+"101010101010111010101",
+"101010101010101010101",
+"101000101000101000101",
+"101110101111101111101",
+"100010100000100000001",
+"111010111110111111101",
+"100010000010000000101",
+"101111111011111110101",
+"101000001000000010101",
+"101011101111111010101",
+"101000100000001000101",
+"101111101111101111101",
+"100000001000001000001",
+"101111111011111111101",
+"100000000000000000001"
+];
+
+let playerX = 1;
+let playerY = 1;
+
+const goalX = 19;
+const goalY = 19;
+
+
+function createMaze() {
+
+    const maze = document.getElementById("maze");
+
+    maze.innerHTML = "";
+
+    maze.style.gridTemplateColumns =
+        "repeat(" + mazeMap[0].length + ", 1fr)";
+
+    for (let y = 0; y < mazeMap.length; y++) {
+
+        for (let x = 0; x < mazeMap[y].length; x++) {
+
+            const cell = document.createElement("div");
+
+            cell.classList.add("cell");
+
+            if (mazeMap[y][x] === "1") {
+                cell.classList.add("wall");
+            }
+
+            if (x === playerX && y === playerY) {
+                cell.classList.add("player");
+                cell.title = "VOCÊ";
+            }
+
+            if (x === goalX && y === goalY) {
+                cell.classList.add("goal");
+                cell.title = "PRESENTE";
+            }
+
+            maze.appendChild(cell);
+        }
+    }
+}
+
+
+function movePlayer(dx, dy) {
+
+    const newX = playerX + dx;
+    const newY = playerY + dy;
+
+    if (
+        newY < 0 ||
+        newY >= mazeMap.length ||
+        newX < 0 ||
+        newX >= mazeMap[0].length
+    ) {
+        return;
+    }
+
+    if (mazeMap[newY][newX] === "1") {
+        return;
+    }
+
+    playerX = newX;
+    playerY = newY;
+
+    createMaze();
+
+    if (playerX === goalX && playerY === goalY) {
+
+        document.getElementById("mazeMessage").textContent =
+        "✓ PRESENTE ENCONTRADO!";
+
+        setTimeout(function() {
+            nextPage(5);
+        }, 800);
+    }
+}
+
+
+/* =========================
+   TECLADO
+========================= */
+
+document.addEventListener("keydown", function(event) {
+
+    if (
+        event.key === "ArrowUp" ||
+        event.key === "ArrowDown" ||
+        event.key === "ArrowLeft" ||
+        event.key === "ArrowRight"
+    ) {
+
+        event.preventDefault();
+
+        if (event.key === "ArrowUp") {
+            movePlayer(0,-1);
+        }
+
+        if (event.key === "ArrowDown") {
+            movePlayer(0,1);
+        }
+
+        if (event.key === "ArrowLeft") {
+            movePlayer(-1,0);
+        }
+
+        if (event.key === "ArrowRight") {
+            movePlayer(1,0);
+        }
+    }
+
+});
+
+</script>
+
+</body>
+</html>
