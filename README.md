@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,43 +11,64 @@
 
 <style>
 
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
+
   background:
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px),
     #050505;
+
   background-size: 30px 30px;
+
   color: #ddd;
+
   font-family: "Share Tech Mono", monospace;
-  min-height: 100vh;
+
   overflow-x: hidden;
 }
+
+/* efeito de tela */
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
+
   pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(255,255,255,0.025) 4px
-  );
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255,255,255,0.025) 4px
+    );
 }
 
 .hidden {
   display: none !important;
 }
 
+
+/* =========================
+   TELAS
+========================= */
+
 .screen {
   min-height: 100vh;
+
   padding: 35px 20px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,168 +77,305 @@ body::before {
 .panel {
   width: 100%;
   max-width: 700px;
-  border: 1px solid #777;
-  padding: 28px;
-  background: linear-gradient(145deg, #151515, #050505);
+
+  padding: 30px;
+
+  border: 1px solid #666;
+
+  background:
+    linear-gradient(
+      145deg,
+      #171717,
+      #050505
+    );
+
   box-shadow:
-    0 0 25px rgba(255,255,255,0.05),
-    inset 0 0 30px rgba(255,255,255,0.025);
+    0 0 30px rgba(255,255,255,0.05),
+    inset 0 0 35px rgba(255,255,255,0.025);
 }
 
+
+/* =========================
+   TEXTOS
+========================= */
+
 .system {
-  font-size: 11px;
-  color: #888;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+
+  color: #777;
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
 }
 
 h1 {
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(25px, 7vw, 48px);
-  letter-spacing: 3px;
   margin: 0 0 15px;
-  background: linear-gradient(#fff, #777);
+
+  font-family: "Orbitron", sans-serif;
+
+  font-size: clamp(28px, 8vw, 52px);
+
+  letter-spacing: 3px;
+
+  background:
+    linear-gradient(
+      #ffffff,
+      #777777
+    );
+
   -webkit-background-clip: text;
+
   color: transparent;
 }
 
 h2 {
   font-family: "Orbitron", sans-serif;
-  font-size: 20px;
+
+  font-size: 18px;
+
   letter-spacing: 2px;
 }
 
 p {
+  color: #aaa;
+
   line-height: 1.7;
-  color: #bbb;
 }
+
+
+/* =========================
+   BOTÕES
+========================= */
 
 button {
   font-family: "Share Tech Mono", monospace;
-  border: 1px solid #999;
-  background: linear-gradient(145deg, #eee, #777);
-  color: #050505;
-  padding: 12px 18px;
+
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+
   transition: 0.2s;
 }
 
 button:hover {
-  filter: brightness(1.25);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+
+  filter: brightness(1.2);
 }
 
+
+/* =========================
+   MÚSICA
+========================= */
+
 .music-option {
-  display: block;
+
   width: 100%;
+
+  display: block;
+
   margin: 10px 0;
+
+  padding: 15px;
+
   text-align: left;
-  background: linear-gradient(145deg, #202020, #090909);
-  color: #ddd;
-  border: 1px solid #555;
+
+  color: #ccc;
+
+  background:
+    linear-gradient(
+      145deg,
+      #191919,
+      #080808
+    );
+
+  border: 1px solid #444;
+
+  font-size: 13px;
+
+  letter-spacing: 1px;
+}
+
+.music-option:hover {
+  border-color: #aaa;
 }
 
 .music-option.selected {
-  border-color: #fff;
-  box-shadow: 0 0 15px rgba(255,255,255,0.15);
+
+  border-color: white;
+
+  background:
+    linear-gradient(
+      145deg,
+      #303030,
+      #101010
+    );
+
+  box-shadow:
+    0 0 18px rgba(255,255,255,0.08);
 }
 
+
+/* música selecionada */
+
 .now-playing {
+
   margin-top: 20px;
-  padding: 15px;
-  border: 1px solid #555;
+
+  padding: 13px 15px;
+
+  border-left: 2px solid #aaa;
+
   background: #0b0b0b;
+
+  color: #777;
+
+  font-size: 10px;
+
+  letter-spacing: 1px;
 }
 
 .now-playing span {
   color: white;
 }
 
-.controls {
-  margin-top: 12px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 
-.controls button {
-  font-size: 10px;
-  padding: 7px 10px;
-}
-
-/* BOTÃO PEQUENININHO */
+/* BOTÃO PEQUENO */
 
 .tiny-next {
+
   display: block;
-  margin: 15px auto 0;
+
+  margin: 16px auto 0;
+
   padding: 5px 10px;
+
+  border: 1px solid #555;
+
+  background: #111;
+
+  color: #999;
+
+  font-family: "Share Tech Mono", monospace;
+
   font-size: 9px;
+
   letter-spacing: 1px;
-  background: linear-gradient(145deg, #ddd, #777);
-  color: #050505;
-  border: 1px solid #888;
+
+  text-transform: uppercase;
 }
 
-/* QUIZ */
+.tiny-next:hover {
+
+  color: white;
+
+  border-color: #aaa;
+
+  background: #181818;
+}
+
+
+/* =========================
+   QUIZ
+========================= */
 
 .question {
-  margin: 25px 0;
+
+  margin-top: 28px;
+
+  padding-top: 10px;
+
 }
 
 .answer {
+
   display: block;
+
   width: 100%;
+
   margin: 8px 0;
-  background: #111;
-  color: #ccc;
-  border: 1px solid #555;
+
+  padding: 13px;
+
   text-align: left;
+
+  color: #ccc;
+
+  background: #0b0b0b;
+
+  border: 1px solid #444;
 }
 
 .answer:hover {
   border-color: #aaa;
 }
 
-.error {
-  margin-top: 15px;
-  padding: 15px;
-  border: 1px solid #777;
-  color: #ddd;
-  background: #111;
-}
-
 .success {
+
   margin-top: 15px;
-  padding: 15px;
-  border: 1px solid #aaa;
-  background: #111;
+
+  padding: 13px;
+
+  border-left: 2px solid #aaa;
+
+  background: #0b0b0b;
+
+  color: #ccc;
 }
 
-/* MAZE */
+.error {
+
+  margin-top: 15px;
+
+  padding: 13px;
+
+  border-left: 2px solid #777;
+
+  background: #0b0b0b;
+
+  color: #aaa;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   MAZE
+========================= */
 
 .maze-wrapper {
   text-align: center;
 }
 
 .maze {
+
   display: grid;
-  grid-template-columns: repeat(9, 28px);
-  grid-template-rows: repeat(9, 28px);
+
+  grid-template-columns:
+    repeat(9, 28px);
+
+  grid-template-rows:
+    repeat(9, 28px);
+
   gap: 2px;
+
   justify-content: center;
+
   margin: 25px auto;
 }
 
 .cell {
+
   width: 28px;
   height: 28px;
-  border: 1px solid #333;
+
   display: flex;
+
   justify-content: center;
   align-items: center;
-  font-size: 8px;
+
+  border: 1px solid #333;
+
+  font-size: 7px;
 }
 
 .wall {
@@ -228,29 +387,62 @@ button:hover {
 }
 
 .player {
-  background: #aaa;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #888
+    );
+
   color: #000;
-  font-size: 8px;
+
   font-weight: bold;
 }
 
 .goal {
-  background: linear-gradient(145deg, #fff, #777);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #777
+    );
+
   color: #000;
-  font-size: 7px;
+
   font-weight: bold;
+
+  font-size: 6px;
 }
 
+
+/* CONTROLES DO LABIRINTO */
+
 .controls-maze {
+
   display: grid;
-  grid-template-columns: repeat(3, 45px);
+
+  grid-template-columns:
+    repeat(3, 45px);
+
   justify-content: center;
+
   gap: 5px;
-  margin-top: 15px;
+
+  margin-top: 20px;
 }
 
 .controls-maze button {
+
   padding: 10px;
+
+  border: 1px solid #555;
+
+  background: #111;
+
+  color: #ccc;
+
   font-size: 15px;
 }
 
@@ -270,109 +462,192 @@ button:hover {
   grid-column: 3;
 }
 
-/* REWARD */
+
+/* =========================
+   PRESENTE
+========================= */
 
 .reward {
   text-align: center;
 }
 
 .dancers {
+
+  height: 170px;
+
   display: flex;
+
   justify-content: center;
+
   align-items: end;
+
   gap: 25px;
-  height: 180px;
-  margin: 25px 0;
+
+  margin: 30px 0;
 }
 
 .dancer {
+
   width: 35px;
+
   height: 100px;
-  background: linear-gradient(90deg, #555, #eee, #666);
-  border-radius: 20px 20px 5px 5px;
+
   position: relative;
-  animation: dance 0.8s infinite alternate ease-in-out;
+
+  border-radius: 20px 20px 5px 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #555,
+      #eee,
+      #666
+    );
+
+  animation:
+    dance 0.8s
+    infinite alternate
+    ease-in-out;
 }
 
 .dancer:nth-child(2) {
-  animation-delay: 0.15s;
+  animation-delay: .15s;
 }
 
 .dancer:nth-child(3) {
-  animation-delay: 0.3s;
+  animation-delay: .3s;
 }
 
 .dancer:nth-child(4) {
-  animation-delay: 0.45s;
+  animation-delay: .45s;
 }
 
 .dancer::before {
+
   content: "";
+
   position: absolute;
+
   width: 35px;
   height: 35px;
-  border-radius: 50%;
-  background: #ddd;
+
   top: -30px;
   left: 0;
+
+  border-radius: 50%;
+
+  background: #ddd;
 }
 
 @keyframes dance {
+
   from {
-    transform: rotate(-8deg) translateY(5px);
+    transform:
+      rotate(-8deg)
+      translateY(5px);
   }
 
   to {
-    transform: rotate(8deg) translateY(-10px);
+    transform:
+      rotate(8deg)
+      translateY(-10px);
   }
+
 }
 
 .access {
+
   margin: 20px 0;
+
+  color: #999;
+
   line-height: 2;
-  color: #aaa;
 }
 
-/* MENSAGEM */
+
+/* =========================
+   MENSAGEM
+========================= */
 
 .message {
-  white-space: pre-line;
-  border-left: 2px solid #777;
+
+  margin-top: 25px;
+
   padding-left: 18px;
-  margin-top: 20px;
+
+  border-left: 2px solid #666;
+
+  white-space: pre-line;
+
+  line-height: 1.8;
+
+  color: #bbb;
 }
 
-/* DATABASE */
+
+/* =========================
+   DATABASE
+========================= */
 
 .database {
-  margin-top: 30px;
+
+  margin-top: 40px;
 }
 
 .card {
-  border: 1px solid #555;
-  padding: 18px;
+
   margin: 12px 0;
-  background: linear-gradient(145deg, #111, #070707);
+
+  padding: 18px;
+
+  border: 1px solid #444;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121212,
+      #070707
+    );
 }
 
 .card-title {
-  font-size: 10px;
-  color: #888;
-  letter-spacing: 2px;
+
   margin-bottom: 8px;
+
+  color: #777;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
 }
 
 .card-content {
+
   color: #eee;
-  font-size: 16px;
+
+  font-size: 15px;
 }
 
+
+/* =========================
+   FINAL
+========================= */
+
 .final {
-  text-align: center;
+
   margin-top: 45px;
+
   padding-top: 30px;
+
   border-top: 1px solid #444;
+
+  text-align: center;
 }
+
+
+/* =========================
+   CELULAR
+========================= */
 
 @media (max-width: 500px) {
 
@@ -381,13 +656,20 @@ button:hover {
   }
 
   .maze {
-    grid-template-columns: repeat(9, 25px);
-    grid-template-rows: repeat(9, 25px);
+
+    grid-template-columns:
+      repeat(9, 25px);
+
+    grid-template-rows:
+      repeat(9, 25px);
+
   }
 
   .cell {
+
     width: 25px;
     height: 25px;
+
   }
 
   .dancers {
@@ -399,14 +681,18 @@ button:hover {
 </style>
 </head>
 
+
 <body>
 
 
-<!-- ========================= -->
-<!-- PÁGINA 1 - MÚSICA -->
-<!-- ========================= -->
+<!-- ==================================================
+     PÁGINA 1 — ESCOLHA DA MÚSICA
+================================================== -->
 
-<section id="musicScreen" class="screen">
+<section
+  id="musicScreen"
+  class="screen"
+>
 
   <div class="panel">
 
@@ -420,56 +706,68 @@ button:hover {
       escolha uma música para começar
     </p>
 
+
     <button
       class="music-option"
-      onclick="selectMusic('NASA — ENHYPEN', 'music/nasa.mp3', this)">
+      onclick="
+        selectMusic(
+          'NASA — ENHYPEN',
+          'nasa.mp3',
+          this
+        )
+      "
+    >
       NASA — ENHYPEN
     </button>
 
-    <button
-      class="music-option"
-      onclick="selectMusic('NO WAY BACK — ENHYPEN', 'music/no-way-back.mp3', this)">
-      NO WAY BACK — ENHYPEN
-    </button>
 
     <button
       class="music-option"
-      onclick="selectMusic('ICONIC BY MISTAKE — KATSEYE', 'music/iconic-by-mistake.mp3', this)">
+      onclick="
+        selectMusic(
+          'NO WAY BACK — ENHYPEN',
+          'no-way-back.mp3',
+          this
+        )
+      "
+    >
+      NO WAY BACK — ENHYPEN
+    </button>
+
+
+    <button
+      class="music-option"
+      onclick="
+        selectMusic(
+          'ICONIC BY MISTAKE — KATSEYE',
+          'iconic-by-mistake.mp3',
+          this
+        )
+      "
+    >
       ICONIC BY MISTAKE — KATSEYE
     </button>
 
 
-    <div id="nowPlaying" class="now-playing hidden">
+    <div
+      id="nowPlaying"
+      class="now-playing hidden"
+    >
 
-      <div>
-        NOW PLAYING:
-        <span id="songName"></span>
-      </div>
+      NOW PLAYING:
 
-      <div class="controls">
-
-        <button onclick="toggleMusic()">
-          PLAY / PAUSE
-        </button>
-
-        <button onclick="restartMusic()">
-          RESTART
-        </button>
-
-      </div>
+      <span id="songName"></span>
 
     </div>
 
 
-    <!-- BOTÃO NOVO -->
-
     <button
       id="continueButton"
       class="tiny-next hidden"
-      onclick="nextPage()">
+      onclick="nextPage()"
+    >
       próxima página →
     </button>
-
 
   </div>
 
@@ -477,11 +775,14 @@ button:hover {
 
 
 
-<!-- ========================= -->
-<!-- PÁGINA 2 - QUIZ -->
-<!-- ========================= -->
+<!-- ==================================================
+     PÁGINA 2 — QUIZ
+================================================== -->
 
-<section id="quizScreen" class="screen hidden">
+<section
+  id="quizScreen"
+  class="screen hidden"
+>
 
   <div class="panel">
 
@@ -492,23 +793,39 @@ button:hover {
     <h1>QUIZ</h1>
 
 
+    <!-- QUESTÃO 1 -->
+
     <div class="question">
 
-      <h2>01 // MEMÓRIA</h2>
+      <h2>
+        01 // MEMÓRIA
+      </h2>
 
       <p>
         Qual música a gente ficava dançando na TV da sala e a mãe aparecia do lado e a gente fingia que nada tava acontecendo?
       </p>
 
-      <button class="answer" onclick="answerQ1(false)">
+
+      <button
+        class="answer"
+        onclick="answerQ1(false)"
+      >
         Nasa — ATEEZ
       </button>
 
-      <button class="answer" onclick="answerQ1(true)">
+
+      <button
+        class="answer"
+        onclick="answerQ1(true)"
+      >
         Fire — BTS
       </button>
 
-      <button class="answer" onclick="answerQ1(false)">
+
+      <button
+        class="answer"
+        onclick="answerQ1(false)"
+      >
         Way Back — ENHYPEN
       </button>
 
@@ -518,23 +835,42 @@ button:hover {
     <div id="q1Result"></div>
 
 
-    <div id="question2" class="question hidden">
+    <!-- QUESTÃO 2 -->
 
-      <h2>02 // VIBE</h2>
+    <div
+      id="question2"
+      class="question hidden"
+    >
+
+      <h2>
+        02 // VIBE
+      </h2>
 
       <p>
         Qual destas vibes combina mais com vc?
       </p>
 
-      <button class="answer" onclick="answerQ2(false)">
+
+      <button
+        class="answer"
+        onclick="answerQ2(false)"
+      >
         Rosa pastel
       </button>
 
-      <button class="answer" onclick="answerQ2(true)">
+
+      <button
+        class="answer"
+        onclick="answerQ2(true)"
+      >
         Cyber
       </button>
 
-      <button class="answer" onclick="answerQ2(false)">
+
+      <button
+        class="answer"
+        onclick="answerQ2(false)"
+      >
         Cottagecore
       </button>
 
@@ -544,19 +880,34 @@ button:hover {
     <div id="q2Result"></div>
 
 
-    <div id="question3" class="question hidden">
+    <!-- QUESTÃO 3 -->
 
-      <h2>03 // IDENTIDADE</h2>
+    <div
+      id="question3"
+      class="question hidden"
+    >
+
+      <h2>
+        03 // IDENTIDADE
+      </h2>
 
       <p>
         Quem é a pessoa que está desbloqueando este sistema?
       </p>
 
-      <button class="answer" onclick="answerQ3(true)">
+
+      <button
+        class="answer"
+        onclick="answerQ3(true)"
+      >
         A aniversariante
       </button>
 
-      <button class="answer" onclick="answerQ3(false)">
+
+      <button
+        class="answer"
+        onclick="answerQ3(false)"
+      >
         Não sou a aniversariante
       </button>
 
@@ -568,11 +919,11 @@ button:hover {
 
     <button
       id="retryButton"
-      class="hidden"
-      onclick="retryQ3()">
+      class="tiny-next hidden"
+      onclick="retryQ3()"
+    >
       TENTAR NOVAMENTE
     </button>
-
 
   </div>
 
@@ -580,11 +931,14 @@ button:hover {
 
 
 
-<!-- ========================= -->
-<!-- PÁGINA 3 - MAZE -->
-<!-- ========================= -->
+<!-- ==================================================
+     PÁGINA 3 — LABIRINTO
+================================================== -->
 
-<section id="mazeScreen" class="screen hidden">
+<section
+  id="mazeScreen"
+  class="screen hidden"
+>
 
   <div class="panel maze-wrapper">
 
@@ -598,23 +952,40 @@ button:hover {
       encontre o caminho até o seu presente.
     </p>
 
-    <div id="maze" class="maze"></div>
+
+    <div
+      id="maze"
+      class="maze"
+    ></div>
+
 
     <div class="controls-maze">
 
-      <button class="up" onclick="movePlayer(-1,0)">
+      <button
+        class="up"
+        onclick="movePlayer(-1,0)"
+      >
         ↑
       </button>
 
-      <button class="left" onclick="movePlayer(0,-1)">
+      <button
+        class="left"
+        onclick="movePlayer(0,-1)"
+      >
         ←
       </button>
 
-      <button class="down" onclick="movePlayer(1,0)">
+      <button
+        class="down"
+        onclick="movePlayer(1,0)"
+      >
         ↓
       </button>
 
-      <button class="right" onclick="movePlayer(0,1)">
+      <button
+        class="right"
+        onclick="movePlayer(0,1)"
+      >
         →
       </button>
 
@@ -626,17 +997,21 @@ button:hover {
 
 
 
-<!-- ========================= -->
-<!-- PÁGINA 4 - PRESENTE -->
-<!-- ========================= -->
+<!-- ==================================================
+     PÁGINA 4 — PRESENTE
+================================================== -->
 
-<section id="rewardScreen" class="screen hidden">
+<section
+  id="rewardScreen"
+  class="screen hidden"
+>
 
   <div class="panel reward">
 
     <div class="system">
       SYSTEM // ACCESS_GRANTED
     </div>
+
 
     <h1>
       PRESENTE<br>
@@ -663,7 +1038,10 @@ button:hover {
     </div>
 
 
-    <button onclick="openPresent()">
+    <button
+      class="tiny-next"
+      onclick="openPresent()"
+    >
       ABRIR O PRESENTE
     </button>
 
@@ -673,17 +1051,21 @@ button:hover {
 
 
 
-<!-- ========================= -->
-<!-- PÁGINA 5 - FINAL -->
-<!-- ========================= -->
+<!-- ==================================================
+     PÁGINA 5 — MENSAGEM FINAL
+================================================== -->
 
-<section id="finalScreen" class="screen hidden">
+<section
+  id="finalScreen"
+  class="screen hidden"
+>
 
   <div class="panel">
 
     <div class="system">
       MESSAGE.EXE
     </div>
+
 
     <h1>
       FELIZ<br>
@@ -705,6 +1087,7 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
     </div>
 
 
+    <!-- DATABASE -->
 
     <div class="database">
 
@@ -767,6 +1150,7 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
     </div>
 
 
+    <!-- FINAL -->
 
     <div class="final">
 
@@ -780,7 +1164,6 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
 
     </div>
 
-
   </div>
 
 </section>
@@ -789,56 +1172,73 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
 
 <script>
 
-/* ========================= */
-/* MÚSICA */
-/* ========================= */
+/* ==================================================
+   MÚSICA
+================================================== */
 
 let audio = null;
-let selectedSong = "";
 
+
+/* escolher música */
 
 function selectMusic(name, file, button) {
 
+  /* para a música anterior */
+
   if (audio) {
+
     audio.pause();
+
     audio.currentTime = 0;
+
   }
 
+
+  /* cria a nova música */
 
   audio = new Audio(file);
 
   audio.loop = true;
 
 
-  selectedSong = name;
-
+  /* mostra o nome */
 
   document.getElementById("songName").innerText = name;
+
 
   document
     .getElementById("nowPlaying")
     .classList.remove("hidden");
 
 
+  /* mostra o botão próxima página */
+
   document
     .getElementById("continueButton")
-    .classList.remove("hidden");
+    .classList
+    .remove("hidden");
 
+
+  /* marca a música selecionada */
 
   document
     .querySelectorAll(".music-option")
-    .forEach(btn => btn.classList.remove("selected"));
+    .forEach(function(btn) {
+
+      btn.classList.remove("selected");
+
+    });
 
 
-  if (button) {
-    button.classList.add("selected");
-  }
+  button.classList.add("selected");
 
 
-  audio.play().catch(() => {
+  /* tenta começar a música */
+
+  audio.play().catch(function() {
 
     console.log(
-      "A música não conseguiu tocar. Verifique o nome e o formato do arquivo."
+      "Não foi possível tocar o arquivo."
     );
 
   });
@@ -846,62 +1246,37 @@ function selectMusic(name, file, button) {
 }
 
 
-/* PLAY / PAUSE */
-
-function toggleMusic() {
-
-  if (!audio) return;
-
-
-  if (audio.paused) {
-
-    audio.play();
-
-  } else {
-
-    audio.pause();
-
-  }
-
-}
-
-
-/* RESTART */
-
-function restartMusic() {
-
-  if (!audio) return;
-
-  audio.currentTime = 0;
-
-  audio.play();
-
-}
-
-
-/* PRÓXIMA PÁGINA */
+/* ==================================================
+   PRÓXIMA PÁGINA
+================================================== */
 
 function nextPage() {
 
   document
     .getElementById("musicScreen")
-    .classList.add("hidden");
+    .classList
+    .add("hidden");
 
 
   document
     .getElementById("quizScreen")
-    .classList.remove("hidden");
+    .classList
+    .remove("hidden");
+
+
+  window.scrollTo(0, 0);
 
 }
 
 
-/* ========================= */
-/* QUIZ */
-/* ========================= */
+/* ==================================================
+   QUESTÃO 1
+================================================== */
 
 function answerQ1(correct) {
 
-  const result = document.getElementById("q1Result");
+  const result =
+    document.getElementById("q1Result");
 
 
   if (correct) {
@@ -915,14 +1290,16 @@ function answerQ1(correct) {
 
     document
       .getElementById("question2")
-      .classList.remove("hidden");
+      .classList
+      .remove("hidden");
 
-  } else {
+  }
+
+  else {
 
     result.innerHTML = `
       <div class="error">
-        ✕ resposta incorreta.
-        tente novamente.
+        ✕ resposta incorreta. tente novamente.
       </div>
     `;
 
@@ -931,9 +1308,14 @@ function answerQ1(correct) {
 }
 
 
+/* ==================================================
+   QUESTÃO 2
+================================================== */
+
 function answerQ2(correct) {
 
-  const result = document.getElementById("q2Result");
+  const result =
+    document.getElementById("q2Result");
 
 
   if (correct) {
@@ -947,14 +1329,16 @@ function answerQ2(correct) {
 
     document
       .getElementById("question3")
-      .classList.remove("hidden");
+      .classList
+      .remove("hidden");
 
-  } else {
+  }
+
+  else {
 
     result.innerHTML = `
       <div class="error">
-        ✕ resposta incorreta.
-        tente novamente.
+        ✕ resposta incorreta. tente novamente.
       </div>
     `;
 
@@ -963,9 +1347,14 @@ function answerQ2(correct) {
 }
 
 
+/* ==================================================
+   QUESTÃO 3
+================================================== */
+
 function answerQ3(correct) {
 
-  const result = document.getElementById("q3Result");
+  const result =
+    document.getElementById("q3Result");
 
 
   if (correct) {
@@ -979,27 +1368,32 @@ function answerQ3(correct) {
 
     document
       .getElementById("retryButton")
-      .classList.add("hidden");
+      .classList
+      .add("hidden");
 
 
-    setTimeout(() => {
+    setTimeout(function() {
 
       document
         .getElementById("quizScreen")
-        .classList.add("hidden");
+        .classList
+        .add("hidden");
 
 
       document
         .getElementById("mazeScreen")
-        .classList.remove("hidden");
+        .classList
+        .remove("hidden");
 
 
       createMaze();
 
-    }, 800);
 
+    }, 700);
 
-  } else {
+  }
+
+  else {
 
     result.innerHTML = `
       <div class="error">
@@ -1010,12 +1404,15 @@ function answerQ3(correct) {
 
     document
       .getElementById("retryButton")
-      .classList.remove("hidden");
+      .classList
+      .remove("hidden");
 
   }
 
 }
 
+
+/* tentar novamente */
 
 function retryQ3() {
 
@@ -1026,15 +1423,15 @@ function retryQ3() {
 
   document
     .getElementById("retryButton")
-    .classList.add("hidden");
+    .classList
+    .add("hidden");
 
 }
 
 
-
-/* ========================= */
-/* MAZE */
-/* ========================= */
+/* ==================================================
+   LABIRINTO
+================================================== */
 
 const mazeMap = [
 
@@ -1052,207 +1449,18 @@ const mazeMap = [
 
 
 let playerRow = 1;
+
 let playerCol = 1;
 
+
 const goalRow = 7;
+
 const goalCol = 7;
 
 
+/* criar labirinto */
+
 function createMaze() {
 
-  const maze = document.getElementById("maze");
-
-  maze.innerHTML = "";
-
-
-  for (let row = 0; row < 9; row++) {
-
-    for (let col = 0; col < 9; col++) {
-
-      const cell = document.createElement("div");
-
-      cell.classList.add("cell");
-
-
-      if (mazeMap[row][col] === "1") {
-
-        cell.classList.add("wall");
-
-      } else {
-
-        cell.classList.add("path");
-
-      }
-
-
-      if (
-        row === playerRow &&
-        col === playerCol
-      ) {
-
-        cell.classList.add("player");
-        cell.innerText = "VOCÊ";
-
-      }
-
-
-      if (
-        row === goalRow &&
-        col === goalCol
-      ) {
-
-        cell.classList.add("goal");
-        cell.innerText = "PRESENTE";
-
-      }
-
-
-      maze.appendChild(cell);
-
-    }
-
-  }
-
-}
-
-
-function movePlayer(rowChange, colChange) {
-
-  const newRow = playerRow + rowChange;
-  const newCol = playerCol + colChange;
-
-
-  if (
-    newRow < 0 ||
-    newRow >= 9 ||
-    newCol < 0 ||
-    newCol >= 9
-  ) {
-
-    return;
-
-  }
-
-
-  if (mazeMap[newRow][newCol] === "1") {
-
-    return;
-
-  }
-
-
-  playerRow = newRow;
-  playerCol = newCol;
-
-
-  createMaze();
-
-
-  if (
-    playerRow === goalRow &&
-    playerCol === goalCol
-  ) {
-
-    setTimeout(() => {
-
-      document
-        .getElementById("mazeScreen")
-        .classList.add("hidden");
-
-
-      document
-        .getElementById("rewardScreen")
-        .classList.remove("hidden");
-
-    }, 400);
-
-  }
-
-}
-
-
-
-/* TECLADO */
-
-document.addEventListener("keydown", function(event) {
-
-  if (
-    document
-      .getElementById("mazeScreen")
-      .classList.contains("hidden")
-  ) {
-
-    return;
-
-  }
-
-
-  if (
-    event.key === "ArrowUp" ||
-    event.key.toLowerCase() === "w"
-  ) {
-
-    movePlayer(-1, 0);
-
-  }
-
-
-  if (
-    event.key === "ArrowDown" ||
-    event.key.toLowerCase() === "s"
-  ) {
-
-    movePlayer(1, 0);
-
-  }
-
-
-  if (
-    event.key === "ArrowLeft" ||
-    event.key.toLowerCase() === "a"
-  ) {
-
-    movePlayer(0, -1);
-
-  }
-
-
-  if (
-    event.key === "ArrowRight" ||
-    event.key.toLowerCase() === "d"
-  ) {
-
-    movePlayer(0, 1);
-
-  }
-
-});
-
-
-/* ========================= */
-/* PRESENTE */
-/* ========================= */
-
-function openPresent() {
-
-  document
-    .getElementById("rewardScreen")
-    .classList.add("hidden");
-
-
-  document
-    .getElementById("finalScreen")
-    .classList.remove("hidden");
-
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-}
-
-</script>
-
-</body>
-</html>
+  const maze =
+    documen
