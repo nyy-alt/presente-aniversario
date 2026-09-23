@@ -1,513 +1,1046 @@
-# presente-aniversario
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Um presentinho para você 🎀</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>ACCESS // BIRTHDAY</title>
 
 <style>
-* {
-  box-sizing: border-box;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap');
+
+*{
+box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #fff5f8;
-  color: #624653;
-  font-family: Georgia, "Times New Roman", serif;
+html{
+scroll-behavior:smooth;
 }
 
-button {
-  font-family: inherit;
+body{
+
+margin:0;
+
+background:
+radial-gradient(circle at 50% 20%,#151515 0%,#050505 45%,#000 100%);
+
+color:#e8e8e8;
+
+font-family:'Share Tech Mono',monospace;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
 }
 
-.container {
-  width: min(92%, 650px);
-  margin: auto;
-  padding: 35px 0 50px;
+/* SCANLINES */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+z-index:100;
+
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,.025) 0px,
+rgba(255,255,255,.025) 1px,
+transparent 1px,
+transparent 4px
+);
+
 }
 
-.hero {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  padding: 45px 25px;
-  border-radius: 30px;
-  background: linear-gradient(145deg, #fffafd, #ffeef5);
-  border: 1px solid #f1d3df;
-  box-shadow: 0 10px 30px rgba(170, 100, 130, 0.10);
+/* GRID */
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:.12;
+
+background-image:
+linear-gradient(#222 1px,transparent 1px),
+linear-gradient(90deg,#222 1px,transparent 1px);
+
+background-size:40px 40px;
+
 }
 
-.decor {
-  position: absolute;
-  font-size: 24px;
-  animation: float 3s ease-in-out infinite;
+/* MAIN */
+
+.container{
+
+width:min(92%,900px);
+
+margin:auto;
+
+padding:50px 0 80px;
+
 }
 
-.d1 { top: 20px; left: 12%; }
-.d2 { top: 30px; right: 12%; animation-delay: .8s; }
-.d3 { bottom: 25px; left: 18%; animation-delay: 1.4s; }
-.d4 { bottom: 20px; right: 18%; animation-delay: 2s; }
+/* TERMINAL HEADER */
 
-@keyframes float {
-  50% {
-    transform: translateY(-8px) rotate(5deg);
-  }
+.system{
+
+font-size:12px;
+
+color:#666;
+
+margin-bottom:25px;
+
+letter-spacing:2px;
+
 }
 
-.ribbon {
-  font-size: 55px;
+.system span{
+
+color:#00ff9d;
+
 }
 
-h1 {
-  color: #b86f8e;
-  font-size: clamp(32px, 9vw, 55px);
-  margin: 12px 0;
+/* HERO */
+
+.hero{
+
+position:relative;
+
+padding:55px 30px;
+
+border:1px solid #252525;
+
+background:rgba(5,5,5,.9);
+
+box-shadow:
+0 0 30px rgba(0,255,157,.05);
+
+overflow:hidden;
+
 }
 
-.subtitle {
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 500px;
-  margin: auto;
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+top:0;
+
+width:3px;
+height:100%;
+
+background:#00ff9d;
+
+box-shadow:
+0 0 15px #00ff9d;
+
 }
 
-button {
-  border: none;
-  border-radius: 30px;
-  padding: 14px 22px;
-  background: #d88eac;
-  color: white;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 20px;
-  box-shadow: 0 6px 15px rgba(216,142,172,.25);
+.hero::after{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:-100%;
+
+width:50%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(0,255,157,.08),
+transparent
+);
+
+animation:scan 4s linear infinite;
+
 }
 
-button:active {
-  transform: scale(.97);
+@keyframes scan{
+
+to{
+left:150%;
 }
 
-.hidden {
-  display: none;
 }
 
-.content {
-  margin-top: 20px;
-  display: grid;
-  gap: 16px;
+/* GLITCH TITLE */
+
+.glitch{
+
+font-family:'Orbitron',sans-serif;
+
+font-size:
+clamp(30px,8vw,70px);
+
+font-weight:800;
+
+color:#fff;
+
+letter-spacing:3px;
+
+position:relative;
+
+margin:15px 0 25px;
+
 }
 
-.card {
-  background: white;
-  border: 1px solid #f0d8e1;
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 6px 20px rgba(170,100,130,.08);
+.glitch::before,
+.glitch::after{
+
+content:attr(data-text);
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+overflow:hidden;
+
 }
 
-.card h2 {
-  margin-top: 0;
-  color: #b86f8e;
+.glitch::before{
+
+color:#ff1744;
+
+transform:translate(2px,0);
+
+clip-path:inset(0 0 55% 0);
+
+animation:glitch1 2s infinite linear alternate-reverse;
+
 }
 
-.letter {
-  line-height: 1.9;
-  font-size: 16px;
+.glitch::after{
+
+color:#00e5ff;
+
+transform:translate(-2px,0);
+
+clip-path:inset(55% 0 0 0);
+
+animation:glitch2 1.7s infinite linear alternate-reverse;
+
 }
 
-.reveal {
-  width: 100%;
-  background: #fff5f8;
-  color: #ad6382;
-  border: 1px dashed #dda8bd;
-  box-shadow: none;
+@keyframes glitch1{
+
+0%,90%{
+transform:translate(2px,0);
 }
 
-.surprise {
-  background: #fff0f5;
-  border-radius: 18px;
-  padding: 17px;
-  margin-top: 12px;
-  text-align: center;
-  line-height: 1.7;
+92%{
+transform:translate(-4px,2px);
 }
 
-.memories {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+95%{
+transform:translate(3px,-2px);
 }
 
-.memory {
-  min-height: 100px;
-  border-radius: 18px;
-  background: #fff6f9;
-  border: 1px solid #f0d8e1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 15px;
+100%{
+transform:translate(2px,0);
 }
 
-.final {
-  text-align: center;
-  background: linear-gradient(145deg, #fff0f6, #fffafd);
 }
 
-.final-big {
-  font-size: 42px;
+@keyframes glitch2{
+
+0%,88%{
+transform:translate(-2px,0);
 }
 
-.confetti {
-  position: fixed;
-  top: 45%;
-  font-size: 24px;
-  pointer-events: none;
-  z-index: 999;
-  transition: transform 1.2s ease, opacity 1.2s ease;
+91%{
+transform:translate(5px,-1px);
 }
 
-@media (max-width: 450px) {
-  .memories {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding: 38px 18px;
-  }
-
-  .card {
-    padding: 20px;
-  }
+96%{
+transform:translate(-3px,2px);
 }
+
+100%{
+transform:translate(-2px,0);
+}
+
+}
+
+/* TEXT */
+
+.intro{
+
+max-width:700px;
+
+line-height:1.9;
+
+color:#aaa;
+
+font-size:15px;
+
+}
+
+.highlight{
+
+color:#00ff9d;
+
+}
+
+/* BUTTON */
+
+button{
+
+background:#050505;
+
+color:#00ff9d;
+
+border:1px solid #00ff9d;
+
+padding:14px 22px;
+
+font-family:'Share Tech Mono',monospace;
+
+font-size:14px;
+
+cursor:pointer;
+
+margin-top:25px;
+
+transition:.2s;
+
+letter-spacing:1px;
+
+}
+
+button:hover{
+
+background:#00ff9d;
+
+color:#000;
+
+box-shadow:
+0 0 20px rgba(0,255,157,.4);
+
+}
+
+button:disabled{
+
+opacity:.5;
+
+cursor:default;
+
+}
+
+/* CONTENT */
+
+.content{
+
+margin-top:25px;
+
+display:grid;
+
+gap:20px;
+
+}
+
+.hidden{
+
+display:none;
+
+}
+
+/* CARDS */
+
+.card{
+
+background:rgba(7,7,7,.95);
+
+border:1px solid #292929;
+
+padding:28px;
+
+position:relative;
+
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:35px;
+height:2px;
+
+background:#00ff9d;
+
+box-shadow:0 0 10px #00ff9d;
+
+}
+
+.card h2{
+
+font-family:'Orbitron',sans-serif;
+
+font-size:18px;
+
+color:#00ff9d;
+
+letter-spacing:2px;
+
+margin-top:0;
+
+}
+
+.card p{
+
+line-height:2;
+
+color:#bbb;
+
+}
+
+/* TERMINAL */
+
+.terminal{
+
+background:#020202;
+
+border:1px solid #222;
+
+padding:18px;
+
+font-size:13px;
+
+line-height:1.8;
+
+color:#777;
+
+}
+
+.terminal .green{
+
+color:#00ff9d;
+
+}
+
+/* LETTER */
+
+.letter{
+
+font-size:15px;
+
+white-space:pre-line;
+
+}
+
+/* DATABASE */
+
+.database{
+
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:12px;
+
+}
+
+.data{
+
+border:1px solid #252525;
+
+padding:20px;
+
+background:#030303;
+
+transition:.2s;
+
+}
+
+.data:hover{
+
+border-color:#00ff9d;
+
+transform:translateY(-2px);
+
+box-shadow:
+0 0 15px rgba(0,255,157,.08);
+
+}
+
+.data small{
+
+display:block;
+
+color:#555;
+
+margin-bottom:10px;
+
+font-size:11px;
+
+letter-spacing:1px;
+
+}
+
+.data strong{
+
+color:#eee;
+
+font-size:15px;
+
+}
+
+/* FINAL */
+
+.final{
+
+text-align:center;
+
+padding:50px 25px;
+
+}
+
+.final h2{
+
+font-size:25px;
+
+}
+
+.final .big{
+
+font-family:'Orbitron',sans-serif;
+
+font-size:
+clamp(24px,6vw,45px);
+
+color:#fff;
+
+margin:25px 0;
+
+}
+
+/* CURSOR */
+
+.cursor{
+
+display:inline-block;
+
+width:8px;
+
+height:18px;
+
+background:#00ff9d;
+
+margin-left:4px;
+
+animation:blink .8s infinite;
+
+vertical-align:middle;
+
+}
+
+@keyframes blink{
+
+50%{
+opacity:0;
+}
+
+}
+
+/* MUSIC */
+
+.musicbox{
+
+border:1px solid #292929;
+
+padding:20px;
+
+background:#020202;
+
+}
+
+.musicbox audio{
+
+width:100%;
+
+margin-top:15px;
+
+filter:invert(1);
+
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.container{
+
+padding-top:25px;
+
+}
+
+.hero{
+
+padding:40px 20px;
+
+}
+
+.database{
+
+grid-template-columns:1fr;
+
+}
+
+.card{
+
+padding:22px 18px;
+
+}
+
+.glitch{
+
+letter-spacing:1px;
+
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-  <section class="hero">
 
-    <span class="decor d1">♡</span>
-    <span class="decor d2">✦</span>
-    <span class="decor d3">♡</span>
-    <span class="decor d4">✧</span>
+<div class="system">
 
-    <div class="ribbon">🎀</div>
+SYSTEM STATUS:
 
-    <h1>Um presentinho para você</h1>
+<span>ONLINE</span>
 
-    <p class="subtitle">
-      Eu fiz uma coisinha especial para você...
-      tem algumas surpresinhas escondidas aqui. ♡
-    </p>
+&nbsp; //
 
-    <button id="openButton">
-      Abrir meu presente 🎁
-    </button>
-
-  </section>
-
-
-  <main id="content" class="content hidden">
-
-    <section class="card">
-
-      <h2>💌 Uma cartinha</h2>
-
-      <p class="letter">
-
-        Feliz aniversário! 💗
-
-        <br><br>
-
-        Eu espero que seu dia seja cheio de coisas boas,
-        risadas, momentos felizes e pessoas que façam
-        você se sentir muito amada.
-
-        <br><br>
-
-        Você é uma pessoa muito especial para mim
-        e eu queria deixar registrado, de um jeitinho
-        diferente, o quanto eu gosto de ter você na minha vida.
-
-        <br><br>
-
-        Que esse novo ano tenha muitos momentos
-        que façam você sorrir de verdade. 🎀
-
-        <br><br>
-
-        Com muito carinho,
-        <br>
-        alguém que te ama muito. ♡
-
-      </p>
-
-    </section>
-
-
-    <section class="card">
-
-      <h2>🎁 Uma surpresa...</h2>
-
-      <p>
-        Tem uma coisinha escondida aqui.
-        Você precisa clicar para descobrir! 👀
-      </p>
-
-      <button class="reveal" data-target="surprise1">
-        Descobrir ♡
-      </button>
-
-      <div id="surprise1" class="surprise hidden">
-
-        🫂💗
-
-        <br><br>
-
-        Você desbloqueou um abraço virtual
-        gigantesco!
-
-        <br>
-
-        Espero que ele chegue até você mesmo
-        estando longe. 🎀
-
-      </div>
-
-    </section>
-
-
-    <section class="card">
-
-      <h2>🌷 Coisinhas que me lembram você</h2>
-
-      <div class="memories">
-
-        <div class="memory">
-          🎧<br>
-          Uma música que me lembra você
-        </div>
-
-        <div class="memory">
-          🍓<br>
-          Uma coisa que você ama
-        </div>
-
-        <div class="memory">
-          📸<br>
-          Uma memória nossa
-        </div>
-
-        <div class="memory">
-          🧸<br>
-          Uma coisa que combina com você
-        </div>
-
-      </div>
-
-      <p style="font-size:13px;opacity:.65;text-align:center;">
-        Essas partes podem ser personalizadas depois. ♡
-      </p>
-
-    </section>
-
-
-    <section class="card">
-
-      <h2>💗 Mais uma surpresa</h2>
-
-      <p>
-        Prometo que essa é a última...
-        ou talvez não. 👀
-      </p>
-
-      <button class="reveal" data-target="surprise2">
-        Abrir ✨
-      </button>
-
-      <div id="surprise2" class="surprise hidden">
-
-        ✦ ♡ ✧ 💕 ✦ ♡ ✧
-
-        <br><br>
-
-        Você é muito importante para mim.
-
-        <br><br>
-
-        Nunca se esqueça disso, tá? 🎀
-
-      </div>
-
-    </section>
-
-
-    <section class="card final">
-
-      <div class="final-big">
-        🎂💗🎀
-      </div>
-
-      <h2>
-        Feliz aniversário!
-      </h2>
-
-      <p>
-        Que seu dia seja tão especial quanto você.
-      </p>
-
-      <p>
-        Eu te amo muito! ♡
-      </p>
-
-      <button id="finalButton">
-        Uma última surpresa ✨
-      </button>
-
-      <div id="finalSurprise" class="surprise hidden">
-
-        💗 ✦ ♡ ✧ 💕 ✦ ♡ ✧ 💗
-
-        <br><br>
-
-        Feliz aniversário! 🎀
-
-        <br><br>
-
-        Espero que você guarde esse
-        presentinho com carinho.
-
-        <br><br>
-
-        ♡♡♡
-
-      </div>
-
-    </section>
-
-  </main>
+&nbsp; ACCESS GRANTED
 
 </div>
 
 
+<section class="hero">
+
+<div class="system">
+
+USER: SISTER
+
+<br>
+
+FILE: BIRTHDAY.exe
+
+</div>
+
+
+<h1
+class="glitch"
+data-text="FELIZ ANIVERSÁRIOOO!">
+
+FELIZ ANIVERSÁRIOOO!
+
+</h1>
+
+
+<div class="terminal">
+
+<span class="green">></span>
+
+initializing birthday project...
+
+<br>
+
+<span class="green">></span>
+
+loading memories...
+
+<br>
+
+<span class="green">></span>
+
+loading message...
+
+<br>
+
+<span class="green">></span>
+
+project completed after 2 weeks
+
+<br>
+
+<span class="green">></span>
+
+<span id="typing"></span>
+<span class="cursor"></span>
+
+</div>
+
+
+<p class="intro">
+
+Demorou 2 semanas pra eu conseguir fazer esse site,
+tem muito código 😭 Mas eu consegui!
+
+<br><br>
+
+Bom, eu achei que um texto no WhatsApp apenas seria
+muito simples, quis criar algo que fosse mais especial ❤️
+
+Dediquei meu tempo a video aulas no YT e pedi ajuda
+pro Chat GPT pra fazer ele super bonitinho, então eu
+espero que tenha dado certo!!
+
+<br><br>
+
+Sem mais enrolação, vamos ao presente virtual
+kdkdkkd
+
+</p>
+
+
+<button id="access">
+
+[ ACCESS PRESENT ]
+
+</button>
+
+
+</section>
+
+
+
+<main id="content" class="content hidden">
+
+
+<section class="card">
+
+<h2>// MESSAGE.exe</h2>
+
+
+<p class="letter">
+
+Eu quero primeiramente te agradecer por ter sido a pessoa que mais me apoiou por todos esses anos 🫶🏼 crescer com vc foi o melhor presente da minha vida, porque eu pude contar com vc sempre, contar tudo que acontece comigo, pedir ajuda com roupas, cabelo (inclusive vc que me ensinou a fazer o cabelo), aprendi a lidar com pessoas, conheci k-pop por vc também, aprendi a ter gostos próprios e etc...
+
+Você, diferente de qualquer outro familiar, foi uma das pessoas mais presentes na minha vida, e eu agradeço muito a Deus por isso...
+
+Pensando agora, eu não sei o que seria da minha vida sem vc, acho que eu seria uma feia, lascada, sem saber arrumar o cabelo e sem personalidade própria kskskskksksksk😭🫶🏼
+
+Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor aniversário da sua vida, ganhar seu tablet, o melhor bolo e se melhores fotos!!!
+
+Vou te obrigar a se arrumar pra tirar fotos aesthetics ok?
+
+Vc agora está no auge da idade, idade de diva, então vc vai conquistsr tudo o que vc sonhava em ter 😌
+
+</p>
+
+</section>
+
+
+
+<section class="card">
+
+<h2>// PERSONAL DATABASE</h2>
+
+
+<div class="database">
+
+
+<div class="data">
+
+<small>MUSIC.exe</small>
+
+<strong>
+Nasa — ATEEZ
+</strong>
+
+</div>
+
+
+<div class="data">
+
+<small>THING_SHE_LOVES</small>
+
+<strong>
+Eu, claro 😌
+</strong>
+
+</div>
+
+
+<div class="data">
+
+<small>MEMORY_001</small>
+
+<strong>
+A época do BTS em que a gente dançava Fire KSKSKSKKDKD
+</strong>
+
+</div>
+
+
+<div class="data">
+
+<small>AESTHETIC_PROFILE</small>
+
+<strong>
+CYBER
+</strong>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="card">
+
+<h2>// AUDIO TRANSMISSION</h2>
+
+
+<div class="musicbox">
+
+<p>
+
+TRACK DETECTED:
+
+<br>
+
+<span style="color:#00ff9d">
+
+ENHYPEN — Way Back
+
+</span>
+
+</p>
+
+
+<audio
+id="music"
+controls
+loop>
+
+<source
+src="way-back.mp3"
+type="audio/mpeg">
+
+Seu navegador não suporta áudio.
+
+</audio>
+
+
+</div>
+
+
+<p style="font-size:12px;color:#555">
+
+// pressione PLAY para iniciar a transmissão
+
+</p>
+
+</section>
+
+
+
+<section class="card final">
+
+
+<div class="system">
+
+FINAL FILE
+
+</div>
+
+
+<div class="big">
+
+MISSION COMPLETE.
+</div>
+
+
+<p>
+
+Você desbloqueou o presente inteiro.
+
+</p>
+
+
+<p style="color:#00ff9d">
+
+Happy Birthday, diva.
+
+</p>
+
+
+<button id="final">
+
+[ EXECUTE FINAL MESSAGE ]
+
+</button>
+
+
+<div
+id="finalMessage"
+class="terminal hidden"
+style="margin-top:25px">
+
+<span class="green">
+
+> birthday.exe completed successfully
+
+</span>
+
+<br><br>
+
+Obrigada por existir.
+
+<br>
+
+Obrigada por ser minha irmã.
+
+<br>
+
+E obrigada por ter feito parte
+de quem eu sou hoje. 🫶🏼
+
+<br><br>
+
+<span class="green">
+
+> END OF FILE_
+
+</span>
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+</div>
+
+
+
 <script>
 
-const openButton = document.getElementById("openButton");
-const content = document.getElementById("content");
 
-openButton.addEventListener("click", function() {
+const access =
+document.getElementById("access");
 
-  content.classList.remove("hidden");
+const content =
+document.getElementById("content");
 
-  openButton.textContent = "Presente aberto! 💗";
 
-  openButton.disabled = true;
+access.addEventListener("click",()=>{
 
-  content.scrollIntoView({
-    behavior: "smooth"
-  });
+content.classList.remove("hidden");
+
+access.textContent="[ PRESENT ACCESSED ]";
+
+access.disabled=true;
+
+content.scrollIntoView({
+behavior:"smooth"
+});
 
 });
 
-
-const revealButtons =
-document.querySelectorAll(".reveal");
-
-revealButtons.forEach(function(button) {
-
-  button.addEventListener("click", function() {
-
-    const target =
-    document.getElementById(
-      button.dataset.target
-    );
-
-    target.classList.remove("hidden");
-
-    button.textContent =
-    "Surpresa desbloqueada! ✨";
-
-    button.disabled = true;
-
-  });
-
-});
 
 
 const finalButton =
-document.getElementById("finalButton");
+document.getElementById("final");
 
-const finalSurprise =
-document.getElementById("finalSurprise");
-
-finalButton.addEventListener("click", function() {
-
-  finalSurprise.classList.remove("hidden");
-
-  finalButton.textContent =
-  "💗";
-
-  finalButton.disabled = true;
+const finalMessage =
+document.getElementById("finalMessage");
 
 
-  const symbols = [
-    "♡",
-    "✦",
-    "🎀",
-    "💕",
-    "✧"
-  ];
+finalButton.addEventListener("click",()=>{
 
+finalMessage.classList.remove("hidden");
 
-  for (let i = 0; i < 25; i++) {
+finalButton.textContent=
+"[ MESSAGE EXECUTED ]";
 
-    const item =
-    document.createElement("span");
-
-    item.className = "confetti";
-
-    item.textContent =
-    symbols[i % symbols.length];
-
-    item.style.left =
-    (10 + Math.random() * 80) + "%";
-
-    document.body.appendChild(item);
-
-
-    setTimeout(function() {
-
-      item.style.transform =
-      "translateY(" +
-      (150 + Math.random() * 300) +
-      "px) rotate(" +
-      (Math.random() * 180 - 90) +
-      "deg)";
-
-      item.style.opacity = "0";
-
-    }, 50);
-
-
-    setTimeout(function() {
-
-      item.remove();
-
-    }, 1400);
-
-  }
+finalButton.disabled=true;
 
 });
 
+
+
+const text =
+"welcome, sister...";
+
+const typing =
+document.getElementById("typing");
+
+let index=0;
+
+
+function type(){
+
+if(index < text.length){
+
+typing.textContent +=
+text.charAt(index);
+
+index++;
+
+setTimeout(type,70);
+
+}
+
+}
+
+
+type();
+
+
 </script>
 
+
 </body>
+
 </html>
