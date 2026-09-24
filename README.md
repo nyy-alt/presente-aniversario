@@ -21,57 +21,124 @@ html, body {
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: #111;
+    overflow-x: hidden;
 
     background:
-        linear-gradient(
-            rgba(255,255,255,.18),
-            rgba(0,0,0,.30)
-        ),
-        url("chrome.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-
-    overflow-x: hidden;
+        radial-gradient(circle at 50% 20%, #ffffff 0%, #999 25%, #222 70%, #050505 100%);
 }
 
 
 /* =================================
-   EFEITO CHROME MOVENDO
+   FUNDO CYBER ANIMADO
 ================================= */
 
 body::before {
     content: "";
     position: fixed;
+    inset: -100px;
+
+    z-index: -3;
+    pointer-events: none;
+
+    background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+
+    background-size: 55px 55px;
+
+    transform:
+        perspective(500px)
+        rotateX(55deg)
+        scale(1.5);
+
+    animation: gridMove 8s linear infinite;
+}
+
+@keyframes gridMove {
+
+    from {
+        background-position: 0 0, 0 0;
+    }
+
+    to {
+        background-position: 0 55px, 55px 0;
+    }
+
+}
+
+
+/* =================================
+   SCANLINES
+================================= */
+
+body::after {
+    content: "";
+    position: fixed;
     inset: 0;
 
     pointer-events: none;
-    z-index: 999;
+    z-index: 1000;
+
+    background:
+        linear-gradient(
+            transparent 0%,
+            transparent 47%,
+            rgba(255,255,255,.09) 50%,
+            transparent 53%,
+            transparent 100%
+        );
+
+    background-size: 100% 180px;
+
+    animation: scan 5s linear infinite;
+
+    opacity: .35;
+}
+
+@keyframes scan {
+
+    from {
+        background-position: 0 -180px;
+    }
+
+    to {
+        background-position: 0 100vh;
+    }
+
+}
+
+
+/* =================================
+   LUZ CHROME
+================================= */
+
+.chrome-light {
+    position: fixed;
+    inset: -50%;
+
+    pointer-events: none;
+    z-index: -2;
 
     background:
         linear-gradient(
             120deg,
-            transparent 0%,
-            rgba(255,255,255,.35) 45%,
-            transparent 55%
+            transparent 35%,
+            rgba(255,255,255,.20) 48%,
+            rgba(255,255,255,.05) 52%,
+            transparent 65%
         );
 
-    background-size: 250% 250%;
-
-    animation: chromeLight 8s linear infinite;
-
-    mix-blend-mode: screen;
+    animation: chromeMove 7s linear infinite;
 }
 
-@keyframes chromeLight {
+@keyframes chromeMove {
 
-    0% {
-        background-position: 200% 0;
+    from {
+        transform: translateX(-30%);
     }
 
-    100% {
-        background-position: -200% 0;
+    to {
+        transform: translateX(30%);
     }
 
 }
@@ -92,6 +159,7 @@ body::before {
 
     align-items: center;
     justify-content: center;
+
 }
 
 .page.active {
@@ -116,8 +184,8 @@ body::before {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.78),
-            rgba(210,210,220,.55),
+            rgba(255,255,255,.82),
+            rgba(190,190,200,.60),
             rgba(255,255,255,.82)
         );
 
@@ -127,11 +195,11 @@ body::before {
 
         inset 0 0 30px rgba(255,255,255,.8),
 
-        inset 0 0 60px rgba(0,0,0,.15),
+        inset 0 0 60px rgba(0,0,0,.18),
 
-        0 20px 60px rgba(0,0,0,.35);
+        0 20px 60px rgba(0,0,0,.5);
 
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
 
     animation: panelAppear .7s ease;
 
@@ -214,7 +282,6 @@ p {
     border: 2px solid #555;
 
     background:
-
         linear-gradient(
             145deg,
             #ffffff,
@@ -345,7 +412,6 @@ p {
 .wall {
 
     background:
-
         linear-gradient(
             135deg,
             #111,
@@ -364,9 +430,7 @@ p {
     background: #fff !important;
 
     box-shadow:
-
         inset 0 0 10px #000,
-
         0 0 15px white;
 
 }
@@ -406,91 +470,36 @@ p {
 
 
 /* =================================
-   MEMÓRIA
+   FINAL CYBER
 ================================= */
 
-.memory-title {
+.final-screen {
 
-    font-size: 15px;
+    position: relative;
 
-    letter-spacing: 4px;
+    min-height: 400px;
 
-    font-weight: bold;
+    overflow: hidden;
 
-}
-
-.memory-board {
-
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 10px;
-
-    width: min(92vw, 500px);
-
-    margin: 30px auto;
-
-}
-
-.memory-card {
-
-    aspect-ratio: 1 / 1;
-
-    border: 2px solid #444;
-
-    border-radius: 12px;
+    border-radius: 20px;
 
     background:
-
         linear-gradient(
-            135deg,
-            #222,
-            #aaa,
-            #eee,
-            #555
+            180deg,
+            #111,
+            #555,
+            #111
         );
 
-    cursor: pointer;
-
-    font-size: 30px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    border: 2px solid #eee;
 
     box-shadow:
+        inset 0 0 50px rgba(255,255,255,.2),
+        0 0 40px rgba(0,0,0,.5);
 
-        inset 0 0 10px rgba(255,255,255,.6),
-
-        0 5px 10px rgba(0,0,0,.3);
-
-    transition: .25s;
+    padding: 40px 20px;
 
 }
-
-.memory-card.flipped {
-
-    background: #eee;
-
-    transform: rotateY(180deg);
-
-}
-
-.memory-card.matched {
-
-    background: white;
-
-    box-shadow: 0 0 20px rgba(255,255,255,.9);
-
-}
-
-
-/* =================================
-   FINAL
-================================= */
 
 .final-text {
 
@@ -511,9 +520,7 @@ p {
         transform: scale(1);
 
         text-shadow:
-
             0 0 5px white,
-
             0 0 15px #888;
 
     }
@@ -523,12 +530,208 @@ p {
         transform: scale(1.05);
 
         text-shadow:
-
             0 0 15px white,
-
             0 0 35px #555;
 
     }
+
+}
+
+
+/* =================================
+   PISO CYBER
+================================= */
+
+.cyber-floor {
+
+    position: absolute;
+
+    left: -20%;
+    right: -20%;
+    bottom: -70px;
+
+    height: 180px;
+
+    transform:
+        perspective(300px)
+        rotateX(60deg);
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.25) 2px,
+            transparent 2px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.25) 2px,
+            transparent 2px
+        );
+
+    background-size: 45px 45px;
+
+    animation: floorMove 2s linear infinite;
+
+}
+
+@keyframes floorMove {
+
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 45px;
+    }
+
+}
+
+
+/* =================================
+   FIGURAS DANÇANDO
+================================= */
+
+.dancers {
+
+    position: relative;
+
+    height: 180px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 20px;
+
+}
+
+.dancer {
+
+    width: 28px;
+    height: 90px;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111,
+            #eee,
+            #555
+        );
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.5);
+
+    animation: dance 1s ease-in-out infinite alternate;
+
+}
+
+.dancer:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.dancer:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.dancer:nth-child(4) {
+    animation-delay: .45s;
+}
+
+.dancer::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #999,
+            #111
+        );
+
+    top: -45px;
+    left: -5px;
+
+}
+
+.dancer::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 70px;
+    height: 8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #222,
+            #eee,
+            #222,
+            transparent
+        );
+
+    top: 28px;
+    left: -20px;
+
+    transform: rotate(-25deg);
+
+}
+
+@keyframes dance {
+
+    from {
+        transform: rotate(-10deg) translateY(10px);
+    }
+
+    to {
+        transform: rotate(10deg) translateY(-12px);
+    }
+
+}
+
+
+/* =================================
+   FINAL CHECKS
+================================= */
+
+.system-checks {
+
+    margin-top: 25px;
+
+    font-family: monospace;
+
+    font-size: 14px;
+
+    line-height: 2;
+
+    letter-spacing: 2px;
+
+}
+
+.final-subtitle {
+
+    font-family: monospace;
+
+    font-size: 15px;
+
+    margin-top: 15px;
 
 }
 
@@ -547,9 +750,15 @@ p {
 
     }
 
-    .memory-board {
+    p {
 
-        gap: 7px;
+        font-size: 16px;
+
+    }
+
+    .dancers {
+
+        gap: 14px;
 
     }
 
@@ -561,9 +770,11 @@ p {
 
 <body>
 
+<div class="chrome-light"></div>
+
 
 <!-- ==========================================
-     PÁGINA 1
+     PÁGINA 1 — MÚSICA
 ========================================== -->
 
 <section class="page active" id="page1">
@@ -603,7 +814,7 @@ AINDA NÃO COLOQUEI
 
 
 <!-- ==========================================
-     PÁGINA 2
+     PÁGINA 2 — INTRO
 ========================================== -->
 
 <section class="page" id="page2">
@@ -893,7 +1104,7 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
 class="cyber-btn"
 onclick="showPage(8)">
 
-PRÓXIMO JOGO →
+FINALIZAR PROTOCOLO →
 
 </button>
 
@@ -904,124 +1115,57 @@ PRÓXIMO JOGO →
 
 
 <!-- ==========================================
-     PÁGINA 8 — JOGO DA VELHA
+     PÁGINA 8 — FINAL
 ========================================== -->
 
 <section class="page" id="page8">
 
 <div class="panel">
 
-<div class="tic-title">
-SYSTEM VS PLAYER
+<div class="final-screen">
+
+<div class="quiz-number">
+SYSTEM FINAL FILE
 </div>
 
-<h1>Tic Tac Toe</h1>
+<div class="final-text">
+VOCÊ CHEGOU AO FINAL.
+</div>
 
-<p>
+<div class="dancers">
 
-Você é <b>O</b>.
+<div class="dancer"></div>
+<div class="dancer"></div>
+<div class="dancer"></div>
+<div class="dancer"></div>
 
+</div>
+
+<div class="cyber-floor"></div>
+
+<div class="system-checks">
+
+✓ ALL FILES UNLOCKED
 <br>
 
-O robô é <b>X</b>.
+✓ ACCESS GRANTED
+<br>
+
+✓ BIRTHDAY PROTOCOL COMPLETE
+
+</div>
+
+<p class="final-subtitle">
+
+FELIZ ANIVERSÁRIO, DIVA. 🩶
 
 <br><br>
 
-Derrote o sistema para continuar.
+birthday_protocol.exe foi concluído com sucesso.
 
 </p>
 
-<div id="ticBoard" class="tic-board"></div>
-
-<div id="ticMessage" class="message">
-
-SUA VEZ.
-
 </div>
-
-<button
-class="cyber-btn"
-onclick="resetTicTacToe()">
-
-REINICIAR JOGO
-
-</button>
-
-<button
-id="ticContinue"
-class="cyber-btn"
-style="display:none;"
-onclick="showPage(9)">
-
-CONTINUAR →
-
-</button>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================
-     PÁGINA 9 — TEXTO
-========================================== -->
-
-<section class="page" id="page9">
-
-<div class="panel">
-
-<h1>Parabéns!</h1>
-
-<p>
-
-parabéns, mais uma conquista do dia KSKDKDK
-
-</p>
-
-<p>
-
-Quero te parabenizar por mais um ano de vida com todos esses joguinhos legaizinhos pra vce se divertir um pouquinho 🫶🏼 saiba que eu te amo muito viu? E nenhum desses textinhos foram tirados de uma IA, eu fiz a mão todos 😋 a única coisa que eu tive que pedir ajuda pra IA foi como fazer um site interativo KSKSKKSKSKDK então se vc achar falhas de texto, ignore T-T
-
-</p>
-
-<button
-class="cyber-btn"
-onclick="showPage(10)">
-
-ÚLTIMO JOGO →
-
-</button>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================
-     PÁGINA 10 — MEMÓRIA
-========================================== -->
-
-<section class="page" id="page10">
-
-<div class="panel">
-
-<div class="memory-title">
-FINAL FILE
-</div>
-
-<h1>último jogo!! Hehehe</h1>
-
-<p>
-
-Encontre todos os pares 👀
-
-</p>
-
-<div id="memoryBoard" class="memory-board"></div>
-
-<div id="memoryMessage" class="message"></div>
 
 </div>
 
@@ -1075,6 +1219,9 @@ function musicChoice(placed) {
         message.textContent =
             "✓ MÚSICA DETECTADA.";
 
+        message.className =
+            "message correct";
+
         setTimeout(() => {
 
             showPage(2);
@@ -1087,6 +1234,9 @@ function musicChoice(placed) {
 
         message.textContent =
             "É ORA COLOCAAAAAR !!! 😡😡😡";
+
+        message.className =
+            "message wrong";
 
     }
 
@@ -1205,6 +1355,8 @@ let playerY = 1;
 const goalX = 19;
 const goalY = 19;
 
+let mazeFinished = false;
+
 
 function createMaze() {
 
@@ -1243,102 +1395,4 @@ function createMaze() {
 
             if(x === goalX && y === goalY) {
 
-                cell.classList.add("goal");
-
-            }
-
-
-            maze.appendChild(cell);
-
-        }
-
-    }
-
-}
-
-
-function movePlayer(dx,dy) {
-
-    const newX =
-        playerX + dx;
-
-    const newY =
-        playerY + dy;
-
-
-    if(
-        newX < 0 ||
-        newY < 0 ||
-        newY >= mazeMap.length ||
-        newX >= mazeMap[0].length
-    ) {
-
-        return;
-
-    }
-
-
-    if(mazeMap[newY][newX] === "1") {
-
-        return;
-
-    }
-
-
-    playerX = newX;
-    playerY = newY;
-
-    createMaze();
-
-
-    if(
-        playerX === goalX &&
-        playerY === goalY
-    ) {
-
-        document
-            .getElementById("mazeMessage")
-            .textContent =
-            "✓ PRESENTE ENCONTRADO!";
-
-        setTimeout(() => {
-
-            showPage(7);
-
-        }, 800);
-
-    }
-
-}
-
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if(event.key === "ArrowUp") {
-
-            movePlayer(0,-1);
-
-        }
-
-        if(event.key === "ArrowDown") {
-
-            movePlayer(0,1);
-
-        }
-
-        if(event.key === "ArrowLeft") {
-
-            movePlayer(-1,0);
-
-        }
-
-        if(event.key === "ArrowRight") {
-
-            movePlayer(1,0);
-
-        }
-
-    }
-);
+    
