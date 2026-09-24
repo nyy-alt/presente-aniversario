@@ -8,31 +8,24 @@
 
 <style>
 
-/* =====================================================
-   CONFIGURAÇÕES GERAIS
-===================================================== */
-
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
-html {
-    scroll-behavior: smooth;
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-
     font-family: Arial, Helvetica, sans-serif;
-
     color: #111;
 
     background:
         linear-gradient(
-            rgba(255,255,255,.12),
-            rgba(0,0,0,.28)
+            rgba(255,255,255,.18),
+            rgba(0,0,0,.30)
         ),
         url("chrome.jpg");
 
@@ -44,106 +37,58 @@ body {
 }
 
 
-/* =====================================================
-   LUZ CHROME ANIMADA
-===================================================== */
+/* =================================
+   EFEITO CHROME MOVENDO
+================================= */
 
 body::before {
     content: "";
-
-    position: fixed;
-    inset: -100%;
-
-    z-index: -2;
-
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            120deg,
-            transparent 35%,
-            rgba(255,255,255,.5) 48%,
-            transparent 60%
-        );
-
-    background-size: 200% 200%;
-
-    animation: chromeMove 9s linear infinite;
-}
-
-@keyframes chromeMove {
-
-    0% {
-        transform: translateX(-25%) translateY(-10%);
-    }
-
-    50% {
-        transform: translateX(25%) translateY(10%);
-    }
-
-    100% {
-        transform: translateX(-25%) translateY(-10%);
-    }
-
-}
-
-
-/* =====================================================
-   SCANLINE
-===================================================== */
-
-body::after {
-    content: "";
-
     position: fixed;
     inset: 0;
 
     pointer-events: none;
-
     z-index: 999;
 
     background:
         linear-gradient(
+            120deg,
             transparent 0%,
-            transparent 48%,
-            rgba(255,255,255,.16) 50%,
-            transparent 52%,
-            transparent 100%
+            rgba(255,255,255,.35) 45%,
+            transparent 55%
         );
 
-    background-size: 100% 160px;
+    background-size: 250% 250%;
 
-    animation: scanline 5s linear infinite;
+    animation: chromeLight 8s linear infinite;
 
-    opacity: .35;
+    mix-blend-mode: screen;
 }
 
-@keyframes scanline {
+@keyframes chromeLight {
 
-    from {
-        background-position: 0 -160px;
+    0% {
+        background-position: 200% 0;
     }
 
-    to {
-        background-position: 0 160px;
+    100% {
+        background-position: -200% 0;
     }
 
 }
 
 
-/* =====================================================
+/* =================================
    PÁGINAS
-===================================================== */
+================================= */
 
 .page {
 
     display: none;
 
     min-height: 100vh;
-
     width: 100%;
 
-    padding: 25px 15px;
+    padding: 30px 15px;
 
     align-items: center;
     justify-content: center;
@@ -154,85 +99,91 @@ body::after {
 }
 
 
-/* =====================================================
+/* =================================
    PAINEL
-===================================================== */
+================================= */
 
 .panel {
 
     width: min(900px, 100%);
 
-    padding: 32px 22px;
+    padding: 35px 25px;
 
     text-align: center;
 
-    border-radius: 24px;
+    border-radius: 25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.88),
-            rgba(205,205,210,.68),
-            rgba(255,255,255,.86)
+            rgba(255,255,255,.78),
+            rgba(210,210,220,.55),
+            rgba(255,255,255,.82)
         );
 
-    border: 2px solid rgba(255,255,255,.95);
+    border: 2px solid rgba(255,255,255,.9);
 
     box-shadow:
 
-        inset 0 0 25px rgba(255,255,255,.9),
+        inset 0 0 30px rgba(255,255,255,.8),
 
-        inset 0 0 60px rgba(0,0,0,.12),
+        inset 0 0 60px rgba(0,0,0,.15),
 
-        0 20px 60px rgba(0,0,0,.38);
+        0 20px 60px rgba(0,0,0,.35);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
 
-    animation: panelIn .55s ease;
+    animation: panelAppear .7s ease;
+
 }
 
-@keyframes panelIn {
+@keyframes panelAppear {
 
     from {
         opacity: 0;
-        transform: translateY(20px) scale(.96);
+        transform: scale(.94) translateY(15px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: scale(1) translateY(0);
     }
 
 }
 
 
-/* =====================================================
-   TEXTOS
-===================================================== */
+/* =================================
+   TÍTULOS
+================================= */
 
 h1 {
 
-    margin: 10px 0 25px;
-
     font-size: clamp(30px, 8vw, 65px);
+
+    margin: 10px 0 25px;
 
     letter-spacing: 4px;
 
     text-transform: uppercase;
 
-    color: #151515;
+    color: #181818;
 
     text-shadow:
+
         1px 1px 0 #fff,
-        3px 3px 0 #aaa,
-        5px 5px 12px rgba(0,0,0,.28);
+
+        2px 2px 0 #999,
+
+        4px 4px 10px rgba(0,0,0,.35);
+
 }
 
 h2 {
 
-    font-size: clamp(20px, 5vw, 30px);
+    font-size: clamp(21px, 5vw, 32px);
 
-    line-height: 1.4;
+    line-height: 1.35;
+
 }
 
 p {
@@ -240,31 +191,19 @@ p {
     font-size: 17px;
 
     line-height: 1.75;
-}
 
-.small-label {
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-
-    font-weight: bold;
-
-    color: #555;
-
-    margin-bottom: 15px;
 }
 
 
-/* =====================================================
+/* =================================
    BOTÕES
-===================================================== */
+================================= */
 
 .cyber-btn {
 
     display: block;
 
-    width: min(520px, 95%);
+    width: min(500px, 95%);
 
     margin: 12px auto;
 
@@ -275,113 +214,113 @@ p {
     border: 2px solid #555;
 
     background:
+
         linear-gradient(
             145deg,
             #ffffff,
             #c8c8c8,
-            #f5f5f5,
-            #8d8d8d
+            #eeeeee,
+            #999999
         );
 
     color: #111;
 
-    font-size: 15px;
-
     font-weight: bold;
+
+    font-size: 15px;
 
     letter-spacing: 1px;
 
     cursor: pointer;
 
     box-shadow:
-        inset 0 2px 3px rgba(255,255,255,.95),
-        inset 0 -3px 5px rgba(0,0,0,.2),
+
+        inset 0 2px 3px rgba(255,255,255,.9),
+
+        inset 0 -3px 5px rgba(0,0,0,.25),
+
         0 6px 12px rgba(0,0,0,.25);
 
-    transition: transform .15s, box-shadow .15s;
+    transition: .2s;
+
 }
 
 .cyber-btn:hover {
 
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 
     box-shadow:
+
         inset 0 2px 3px white,
-        0 10px 20px rgba(0,0,0,.3);
+
+        0 10px 20px rgba(0,0,0,.35);
+
 }
 
 .cyber-btn:active {
 
     transform: scale(.96);
+
 }
 
 
-/* =====================================================
+/* =================================
    MENSAGENS
-===================================================== */
+================================= */
 
 .message {
 
-    min-height: 28px;
-
-    margin: 18px auto;
-
-    font-size: 17px;
+    margin: 20px auto;
 
     font-weight: bold;
+
+    font-size: 18px;
+
+    min-height: 25px;
+
 }
 
 .correct {
+
     color: #111;
+
+    text-shadow: 0 0 8px white;
+
 }
 
-.error {
+.wrong {
+
     color: #555;
+
 }
 
 
-/* =====================================================
+/* =================================
    QUIZ
-===================================================== */
+================================= */
 
-.quiz-question {
+.quiz-number {
 
-    margin: 20px auto 30px;
+    font-size: 13px;
 
-    max-width: 750px;
+    letter-spacing: 4px;
 
-    line-height: 1.5;
+    font-weight: bold;
+
+    color: #555;
+
+    margin-bottom: 15px;
+
 }
 
 
-/* =====================================================
-   PRESENTE
-===================================================== */
-
-.gift {
-
-    font-size: 90px;
-
-    animation: giftFloat 2s ease-in-out infinite;
-}
-
-@keyframes giftFloat {
-
-    0%,100% {
-        transform: translateY(0) rotate(-3deg);
-    }
-
-    50% {
-        transform: translateY(-13px) rotate(3deg);
-    }
-}
-
-
-/* =====================================================
+/* =================================
    LABIRINTO
-===================================================== */
+================================= */
 
 #maze {
+
+    display: grid;
 
     width: min(88vw, 600px);
 
@@ -389,149 +328,109 @@ p {
 
     margin: 25px auto;
 
-    display: grid;
-
-    border: 3px solid #222;
+    border: 3px solid #333;
 
     background: #111;
+
 }
 
-.maze-cell {
+.cell {
 
-    min-width: 0;
-    min-height: 0;
+    background: rgba(255,255,255,.35);
 
-    background: rgba(255,255,255,.32);
+    border: 1px solid rgba(0,0,0,.1);
 
-    border: 1px solid rgba(0,0,0,.08);
 }
 
-.maze-wall {
+.wall {
 
     background:
+
         linear-gradient(
             135deg,
             #111,
-            #888,
+            #aaa,
             #222,
             #eee,
             #333
         );
 
     border: 1px solid #111;
+
 }
 
-.maze-player {
+.player {
 
     background: #fff !important;
 
     box-shadow:
-        inset 0 0 8px #111,
-        0 0 14px #fff;
+
+        inset 0 0 10px #000,
+
+        0 0 15px white;
+
 }
 
-.maze-goal {
+.goal {
 
     background: #777 !important;
 
-    box-shadow:
-        inset 0 0 8px #fff,
-        0 0 18px #fff;
+    box-shadow: 0 0 20px #fff;
+
 }
 
 
-/* =====================================================
-   JOGO DA VELHA
-===================================================== */
+/* =================================
+   PRESENTE
+================================= */
 
-.tic-board {
+.gift {
 
-    width: min(86vw, 420px);
+    font-size: 90px;
 
-    aspect-ratio: 1 / 1;
+    animation: floatingGift 2s infinite ease-in-out;
 
-    margin: 28px auto;
-
-    display: grid;
-
-    grid-template-columns: repeat(3, 1fr);
-
-    gap: 8px;
 }
 
-.tic-cell {
+@keyframes floatingGift {
 
-    width: 100%;
-    height: 100%;
+    0%,100% {
+        transform: translateY(0) rotate(-3deg);
+    }
 
-    padding: 0;
+    50% {
+        transform: translateY(-15px) rotate(3deg);
+    }
 
-    border: 2px solid #333;
+}
 
-    border-radius: 14px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #f8f8f8,
-            #a7a7a7,
-            #ffffff,
-            #777
-        );
+/* =================================
+   MEMÓRIA
+================================= */
 
-    font-size: clamp(42px, 14vw, 78px);
+.memory-title {
+
+    font-size: 15px;
+
+    letter-spacing: 4px;
 
     font-weight: bold;
 
-    color: #111;
-
-    cursor: pointer;
-
-    box-shadow:
-        inset 0 0 12px rgba(255,255,255,.9),
-        0 5px 10px rgba(0,0,0,.25);
-
-    touch-action: manipulation;
 }
-
-.tic-cell:active {
-    transform: scale(.94);
-}
-
-.tic-cell.o {
-
-    color: #333;
-
-    text-shadow:
-        2px 2px 0 white,
-        3px 3px 5px #777;
-}
-
-.tic-cell.x {
-
-    color: #111;
-
-    text-shadow:
-        2px 2px 0 white,
-        3px 3px 5px #777;
-}
-
-
-/* =====================================================
-   MEMÓRIA
-===================================================== */
 
 .memory-board {
-
-    width: min(94vw, 500px);
-
-    margin: 25px auto;
 
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 9px;
+    gap: 10px;
+
+    width: min(92vw, 500px);
+
+    margin: 30px auto;
+
 }
 
 .memory-card {
@@ -543,6 +442,7 @@ p {
     border-radius: 12px;
 
     background:
+
         linear-gradient(
             135deg,
             #222,
@@ -551,36 +451,46 @@ p {
             #555
         );
 
-    color: #111;
-
-    font-size: clamp(24px, 8vw, 38px);
-
-    font-weight: bold;
-
     cursor: pointer;
 
-    box-shadow:
-        inset 0 0 10px rgba(255,255,255,.6),
-        0 5px 10px rgba(0,0,0,.25);
+    font-size: 30px;
 
-    touch-action: manipulation;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+
+        inset 0 0 10px rgba(255,255,255,.6),
+
+        0 5px 10px rgba(0,0,0,.3);
+
+    transition: .25s;
+
 }
 
-.memory-card.open {
+.memory-card.flipped {
+
     background: #eee;
+
+    transform: rotateY(180deg);
+
 }
 
 .memory-card.matched {
-    background: #fff;
 
-    box-shadow:
-        0 0 20px rgba(255,255,255,.95);
+    background: white;
+
+    box-shadow: 0 0 20px rgba(255,255,255,.9);
+
 }
 
 
-/* =====================================================
+/* =================================
    FINAL
-===================================================== */
+================================= */
 
 .final-text {
 
@@ -591,6 +501,7 @@ p {
     text-transform: uppercase;
 
     animation: finalGlow 2s infinite;
+
 }
 
 @keyframes finalGlow {
@@ -600,8 +511,11 @@ p {
         transform: scale(1);
 
         text-shadow:
-            0 0 5px #fff,
+
+            0 0 5px white,
+
             0 0 15px #888;
+
     }
 
     50% {
@@ -609,34 +523,36 @@ p {
         transform: scale(1.05);
 
         text-shadow:
-            0 0 15px #fff,
+
+            0 0 15px white,
+
             0 0 35px #555;
+
     }
+
 }
 
 
-/* =====================================================
+/* =================================
    MOBILE
-===================================================== */
+================================= */
 
 @media(max-width:600px) {
 
-    .page {
-        padding: 15px 10px;
-    }
-
     .panel {
-        padding: 25px 14px;
+
+        padding: 25px 15px;
+
         border-radius: 20px;
+
     }
 
     .memory-board {
-        gap: 6px;
+
+        gap: 7px;
+
     }
 
-    p {
-        font-size: 16px;
-    }
 }
 
 </style>
@@ -646,40 +562,39 @@ p {
 <body>
 
 
-<!-- =====================================================
-     PÁGINA 1 — MÚSICA
-===================================================== -->
+<!-- ==========================================
+     PÁGINA 1
+========================================== -->
 
 <section class="page active" id="page1">
 
 <div class="panel">
 
-<div class="small-label">
-BIRTHDAY PROTOCOL
-</div>
-
-<h1>WELCOME</h1>
+<h1>Birthday Protocol</h1>
 
 <p>
+
 ANTES DE CONTINUAR, É OBRIGATÓRIO COLOCAR UMA MÚSICA BEM CYBERPUNK PRA COMBINAR 😡
+
 </p>
 
 <button
 class="cyber-btn"
-onclick="chooseMusic(true)">
+onclick="musicChoice(true)">
+
 COLOQUEI
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="chooseMusic(false)">
+onclick="musicChoice(false)">
+
 AINDA NÃO COLOQUEI
+
 </button>
 
-<div
-id="musicMessage"
-class="message">
-</div>
+<div id="musicMessage" class="message"></div>
 
 </div>
 
@@ -687,19 +602,15 @@ class="message">
 
 
 
-<!-- =====================================================
-     PÁGINA 2 — INTRO
-===================================================== -->
+<!-- ==========================================
+     PÁGINA 2
+========================================== -->
 
 <section class="page" id="page2">
 
 <div class="panel">
 
-<div class="small-label">
-FILE 02
-</div>
-
-<h1>ACCESS GRANTED</h1>
+<h1>Access Granted</h1>
 
 <p>
 
@@ -713,9 +624,9 @@ Mas eu consegui!
 <br><br>
 
 Bom, eu achei que um texto no whatsapp apenas seria muito simples,
-quis criar algo que fosse mais especial ❤️ Dediquei meu tempo a video aulas
-no YT e pedi ajuda pro Chat GPT pra fazer ele super bonitinho,
-então eu espero que tenha dado certo!!
+quis criar algo que fosse mais especial ❤️
+Dediquei meu tempo a video aulas no YT e pedi ajuda pro Chat GPT
+pra fazer ele super bonitinho, então eu espero que tenha dado certo!!
 
 <br><br>
 
@@ -725,8 +636,10 @@ Sem mais enrolação, vamos ao presente virtual kdkdkkd
 
 <button
 class="cyber-btn"
-onclick="goToPage(3)">
+onclick="showPage(3)">
+
 CONTINUAR →
+
 </button>
 
 </div>
@@ -735,48 +648,53 @@ CONTINUAR →
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 3 — QUIZ 1
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page3">
 
 <div class="panel">
 
-<div class="small-label">
+<div class="quiz-number">
 QUESTION 01 / 03
 </div>
 
-<h1>QUIZ</h1>
+<h1>Quiz</h1>
 
-<h2 class="quiz-question">
+<h2>
 
-Qual música a gente ficava dançando na TV da sala e a mãe aparecia do lado e a gente fingia que nada tava acontecendo?
+Qual música a gente ficava dançando na TV da sala
+e a mãe aparecia do lado e a gente fingia que nada
+tava acontecendo?
 
 </h2>
 
 <button
 class="cyber-btn"
-onclick="answerQuiz(3, true)">
+onclick="quizAnswer(3,true)">
+
 Fire — BTS
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="answerQuiz(3, false)">
+onclick="quizAnswer(3,false)">
+
 Nasa — ATEEZ
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="answerQuiz(3, false)">
+onclick="quizAnswer(3,false)">
+
 Way Back — ENHYPEN
+
 </button>
 
-<div
-id="quizMessage3"
-class="message">
-</div>
+<div id="quizMessage3" class="message"></div>
 
 </div>
 
@@ -784,21 +702,21 @@ class="message">
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 4 — QUIZ 2
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page4">
 
 <div class="panel">
 
-<div class="small-label">
+<div class="quiz-number">
 QUESTION 02 / 03
 </div>
 
-<h1>QUIZ</h1>
+<h1>Quiz</h1>
 
-<h2 class="quiz-question">
+<h2>
 
 Qual destas vibes combina mais com vc?
 
@@ -806,26 +724,29 @@ Qual destas vibes combina mais com vc?
 
 <button
 class="cyber-btn"
-onclick="answerQuiz(4, false)">
+onclick="quizAnswer(4,false)">
+
 Rosa pastel
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="answerQuiz(4, true)">
+onclick="quizAnswer(4,true)">
+
 Cyber
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="answerQuiz(4, false)">
+onclick="quizAnswer(4,false)">
+
 Cottagecore
+
 </button>
 
-<div
-id="quizMessage4"
-class="message">
-</div>
+<div id="quizMessage4" class="message"></div>
 
 </div>
 
@@ -833,21 +754,21 @@ class="message">
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 5 — QUIZ 3
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page5">
 
 <div class="panel">
 
-<div class="small-label">
+<div class="quiz-number">
 QUESTION 03 / 03
 </div>
 
-<h1>SECURITY</h1>
+<h1>Security</h1>
 
-<h2 class="quiz-question">
+<h2>
 
 Quem é a pessoa que está desbloqueando este sistema?
 
@@ -855,20 +776,21 @@ Quem é a pessoa que está desbloqueando este sistema?
 
 <button
 class="cyber-btn"
-onclick="answerFinalQuiz(true)">
+onclick="unlockSystem()">
+
 A aniversariante
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="answerFinalQuiz(false)">
+onclick="wrongPerson()">
+
 Não sou a aniversariante
+
 </button>
 
-<div
-id="quizMessage5"
-class="message">
-</div>
+<div id="quizMessage5" class="message"></div>
 
 </div>
 
@@ -876,56 +798,66 @@ class="message">
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 6 — LABIRINTO
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page6">
 
 <div class="panel">
 
-<div class="small-label">
+<div class="quiz-number">
 FILE 06 — MAZE
 </div>
 
-<h1>CYBER MAZE</h1>
+<h1>Cyber Maze</h1>
 
 <p>
+
 Encontre o presente.
+
 <br>
-O quadrado branco é você.
+
+Você começa no quadrado branco.
+O presente está no final.
+
 </p>
 
 <div id="maze"></div>
 
 <button
 class="cyber-btn"
-onclick="moveMaze(0,-1)">
+onclick="movePlayer(0,-1)">
+
 ↑
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="moveMaze(-1,0)">
+onclick="movePlayer(-1,0)">
+
 ←
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="moveMaze(0,1)">
+onclick="movePlayer(0,1)">
+
 ↓
+
 </button>
 
 <button
 class="cyber-btn"
-onclick="moveMaze(1,0)">
+onclick="movePlayer(1,0)">
+
 →
+
 </button>
 
-<div
-id="mazeMessage"
-class="message">
-</div>
+<div id="mazeMessage" class="message"></div>
 
 </div>
 
@@ -933,9 +865,9 @@ class="message">
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 7 — PRESENTE
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page7">
 
@@ -945,11 +877,7 @@ class="message">
 🎁
 </div>
 
-<div class="small-label">
-FILE UNLOCKED
-</div>
-
-<h1>PRESENTE</h1>
+<h1>Presente</h1>
 
 <p>
 
@@ -963,8 +891,10 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
 
 <button
 class="cyber-btn"
-onclick="goToPage(8)">
+onclick="showPage(8)">
+
 PRÓXIMO JOGO →
+
 </button>
 
 </div>
@@ -973,54 +903,58 @@ PRÓXIMO JOGO →
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 8 — JOGO DA VELHA
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page8">
 
 <div class="panel">
 
-<div class="small-label">
+<div class="tic-title">
 SYSTEM VS PLAYER
 </div>
 
-<h1>JOGO DA VELHA</h1>
+<h1>Tic Tac Toe</h1>
 
 <p>
 
-Você é <b>O</b>.<br>
+Você é <b>O</b>.
+
+<br>
+
 O robô é <b>X</b>.
 
 <br><br>
 
-Derrote o robô para continuar.
+Derrote o sistema para continuar.
 
 </p>
 
-<div
-id="ticBoard"
-class="tic-board">
-</div>
+<div id="ticBoard" class="tic-board"></div>
 
-<div
-id="ticMessage"
-class="message">
+<div id="ticMessage" class="message">
+
 SUA VEZ.
+
 </div>
 
 <button
 class="cyber-btn"
 onclick="resetTicTacToe()">
-RECOMEÇAR
+
+REINICIAR JOGO
+
 </button>
 
 <button
 id="ticContinue"
 class="cyber-btn"
 style="display:none;"
-onclick="goToPage(9)">
+onclick="showPage(9)">
+
 CONTINUAR →
+
 </button>
 
 </div>
@@ -1029,19 +963,15 @@ CONTINUAR →
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 9 — TEXTO
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page9">
 
 <div class="panel">
 
-<div class="small-label">
-CONGRATULATIONS
-</div>
-
-<h1>PARABÉNS!</h1>
+<h1>Parabéns!</h1>
 
 <p>
 
@@ -1057,8 +987,10 @@ Quero te parabenizar por mais um ano de vida com todos esses joguinhos legaizinh
 
 <button
 class="cyber-btn"
-onclick="goToPage(10)">
+onclick="showPage(10)">
+
 ÚLTIMO JOGO →
+
 </button>
 
 </div>
@@ -1067,73 +999,29 @@ onclick="goToPage(10)">
 
 
 
-<!-- =====================================================
+<!-- ==========================================
      PÁGINA 10 — MEMÓRIA
-===================================================== -->
+========================================== -->
 
 <section class="page" id="page10">
 
 <div class="panel">
 
-<div class="small-label">
-FINAL GAME
+<div class="memory-title">
+FINAL FILE
 </div>
 
 <h1>último jogo!! Hehehe</h1>
 
 <p>
+
 Encontre todos os pares 👀
-</p>
-
-<div
-id="memoryBoard"
-class="memory-board">
-</div>
-
-<div
-id="memoryMessage"
-class="message">
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PÁGINA 11 — FINAL
-===================================================== -->
-
-<section class="page" id="page11">
-
-<div class="panel">
-
-<div class="small-label">
-SYSTEM COMPLETE
-</div>
-
-<div class="final-text">
-fim do web presenteeeee
-</div>
-
-<p>
-
-✓ TODOS OS ARQUIVOS DESBLOQUEADOS
-
-<br>
-
-✓ TODOS OS JOGOS CONCLUÍDOS
-
-<br>
-
-✓ BIRTHDAY PROTOCOL COMPLETE
 
 </p>
 
-<h1>
-FELIZ ANIVERSÁRIO, DIVA. 🩶
-</h1>
+<div id="memoryBoard" class="memory-board"></div>
+
+<div id="memoryMessage" class="message"></div>
 
 </div>
 
@@ -1143,52 +1031,29 @@ FELIZ ANIVERSÁRIO, DIVA. 🩶
 
 <script>
 
-/* =====================================================
+
+/* ==========================================
    NAVEGAÇÃO
-===================================================== */
+========================================== */
 
-function goToPage(number) {
+function showPage(number) {
 
-    const pages =
-        document.querySelectorAll(".page");
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
 
-    pages.forEach(function(page) {
+            page.classList.remove("active");
 
-        page.classList.remove("active");
+        });
 
-    });
-
-    const destination =
+    const page =
         document.getElementById("page" + number);
 
-    if(destination) {
+    if(page) {
 
-        destination.classList.add("active");
+        page.classList.add("active");
 
-        window.scrollTo(0, 0);
-    }
-
-
-    /*
-       Quando entrar no jogo da velha,
-       garante que ele esteja pronto.
-    */
-
-    if(number === 8) {
-
-        resetTicTacToe();
-
-    }
-
-
-    /*
-       Quando entrar na memória,
-       começa um jogo novo.
-    */
-
-    if(number === 10) {
-
-        startMemory();
+        window.scrollTo(0,0);
 
     }
 
@@ -1196,24 +1061,23 @@ function goToPage(number) {
 
 
 
-/* =====================================================
+/* ==========================================
    MÚSICA
-===================================================== */
+========================================== */
 
-function chooseMusic(putMusic) {
+function musicChoice(placed) {
 
     const message =
         document.getElementById("musicMessage");
 
-
-    if(putMusic === true) {
+    if(placed) {
 
         message.textContent =
-            "✓ MÚSICA DETECTADA. ACESSO LIBERADO.";
+            "✓ MÚSICA DETECTADA.";
 
-        setTimeout(function() {
+        setTimeout(() => {
 
-            goToPage(2);
+            showPage(2);
 
         }, 500);
 
@@ -1230,19 +1094,16 @@ function chooseMusic(putMusic) {
 
 
 
-/* =====================================================
+/* ==========================================
    QUIZ
-===================================================== */
+========================================== */
 
-function answerQuiz(pageNumber, correct) {
+function quizAnswer(page, correct) {
 
     const message =
-        document.getElementById(
-            "quizMessage" + pageNumber
-        );
+        document.getElementById("quizMessage" + page);
 
-
-    if(correct === true) {
+    if(correct) {
 
         message.textContent =
             "✓ RESPOSTA CORRETA";
@@ -1250,12 +1111,11 @@ function answerQuiz(pageNumber, correct) {
         message.className =
             "message correct";
 
+        setTimeout(() => {
 
-        setTimeout(function() {
+            showPage(page + 1);
 
-            goToPage(pageNumber + 1);
-
-        }, 850);
+        }, 900);
 
     }
 
@@ -1265,31 +1125,220 @@ function answerQuiz(pageNumber, correct) {
             "✕ RESPOSTA INCORRETA. TENTA DE NOVO.";
 
         message.className =
-            "message error";
+            "message wrong";
 
     }
 
 }
 
 
-
-function answerFinalQuiz(correct) {
+function unlockSystem() {
 
     const message =
-        document.getElementById(
-            "quizMessage5"
-        );
+        document.getElementById("quizMessage5");
+
+    message.textContent =
+        "✓ RESPOSTA CORRETA — ACESSO LIBERADO";
+
+    message.className =
+        "message correct";
+
+    setTimeout(() => {
+
+        showPage(6);
+
+        createMaze();
+
+    }, 900);
+
+}
 
 
-    if(correct === true) {
+function wrongPerson() {
 
-        message.textContent =
-            "✓ RESPOSTA CORRETA — ACESSO LIBERADO";
+    const message =
+        document.getElementById("quizMessage5");
 
-        message.className =
-            "message correct";
+    message.textContent =
+        "error - seu acesso foi negado, vc não é o destinatário do presente, retire-se imediatamente";
+
+    message.className =
+        "message wrong";
+
+}
 
 
-        setTimeout(function() {
 
-            goToPage(6);
+/* ==========================================
+   LABIRINTO
+========================================== */
+
+const mazeMap = [
+
+"111111111111111111111",
+"100000000000000000001",
+"101111111111111111101",
+"101000000000000000101",
+"101011111011111110101",
+"101010001010000010101",
+"101010101010111010101",
+"101010101010101010101",
+"101000101000101000101",
+"101110101111101111101",
+"100010100000100000001",
+"111010111110111111101",
+"100010000010000000101",
+"101111111011111110101",
+"101000001000000010101",
+"101011101111111010101",
+"101000100000001000101",
+"101111101111101111101",
+"100000001000001000001",
+"101111111011111111101",
+"100000000000000000001"
+
+];
+
+let playerX = 1;
+let playerY = 1;
+
+const goalX = 19;
+const goalY = 19;
+
+
+function createMaze() {
+
+    const maze =
+        document.getElementById("maze");
+
+    maze.innerHTML = "";
+
+    maze.style.gridTemplateColumns =
+        `repeat(${mazeMap[0].length}, 1fr)`;
+
+
+    for(let y = 0; y < mazeMap.length; y++) {
+
+        for(let x = 0; x < mazeMap[y].length; x++) {
+
+            const cell =
+                document.createElement("div");
+
+            cell.className = "cell";
+
+
+            if(mazeMap[y][x] === "1") {
+
+                cell.classList.add("wall");
+
+            }
+
+
+            if(x === playerX && y === playerY) {
+
+                cell.classList.add("player");
+
+            }
+
+
+            if(x === goalX && y === goalY) {
+
+                cell.classList.add("goal");
+
+            }
+
+
+            maze.appendChild(cell);
+
+        }
+
+    }
+
+}
+
+
+function movePlayer(dx,dy) {
+
+    const newX =
+        playerX + dx;
+
+    const newY =
+        playerY + dy;
+
+
+    if(
+        newX < 0 ||
+        newY < 0 ||
+        newY >= mazeMap.length ||
+        newX >= mazeMap[0].length
+    ) {
+
+        return;
+
+    }
+
+
+    if(mazeMap[newY][newX] === "1") {
+
+        return;
+
+    }
+
+
+    playerX = newX;
+    playerY = newY;
+
+    createMaze();
+
+
+    if(
+        playerX === goalX &&
+        playerY === goalY
+    ) {
+
+        document
+            .getElementById("mazeMessage")
+            .textContent =
+            "✓ PRESENTE ENCONTRADO!";
+
+        setTimeout(() => {
+
+            showPage(7);
+
+        }, 800);
+
+    }
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if(event.key === "ArrowUp") {
+
+            movePlayer(0,-1);
+
+        }
+
+        if(event.key === "ArrowDown") {
+
+            movePlayer(0,1);
+
+        }
+
+        if(event.key === "ArrowLeft") {
+
+            movePlayer(-1,0);
+
+        }
+
+        if(event.key === "ArrowRight") {
+
+            movePlayer(1,0);
+
+        }
+
+    }
+);
