@@ -405,91 +405,289 @@ p {
 }
 
 
-/* =================================
+/* ==========================================
    JOGO DA VELHA
-================================= */
+========================================== */
 
-.tic-title {
+let ticBoard = [];
+let ticGameOver = false;
 
-    font-size: 14px;
+const PLAYER = "O";
+const ROBOT = "X";
 
-    letter-spacing: 4px;
 
-    font-weight: bold;
+function resetTicTacToe() {
 
-    color: #555;
+    ticBoard = [
+        "", "", "",
+        "", "", "",
+        "", "", ""
+    ];
 
+    ticGameOver = false;
+
+    document.getElementById("ticMessage").textContent =
+        "SUA VEZ.";
+
+    document.getElementById("ticContinue").style.display =
+        "none";
+
+    drawTicTacToe();
 }
 
-.tic-board {
 
-    width: min(85vw, 400px);
+function drawTicTacToe() {
 
-    aspect-ratio: 1 / 1;
+    const board =
+        document.getElementById("ticBoard");
 
-    margin: 30px auto;
+    board.innerHTML = "";
 
-    display: grid;
+    for(let i = 0; i < 9; i++) {
 
-    grid-template-columns: repeat(3, 1fr);
+        const button =
+            document.createElement("button");
 
-    gap: 8px;
+        button.className = "tic-cell";
 
-}
+        button.textContent =
+            ticBoard[i];
 
-.tic-cell {
+        if(ticBoard[i] === "O") {
+            button.classList.add("o");
+        }
 
-    border: 2px solid #333;
+        if(ticBoard[i] === "X") {
+            button.classList.add("x");
+        }
 
-    border-radius: 12px;
-
-    background:
-
-        linear-gradient(
-            145deg,
-            #eee,
-            #999,
-            #fff,
-            #777
+        button.addEventListener(
+            "click",
+            function() {
+                playerMove(i);
+            }
         );
 
-    font-size: clamp(40px, 13vw, 75px);
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    box-shadow:
-
-        inset 0 0 15px rgba(255,255,255,.8),
-
-        0 5px 10px rgba(0,0,0,.3);
-
-}
-
-.tic-cell:hover {
-
-    transform: scale(.97);
-
-}
-
-.tic-cell.x {
-
-    color: #111;
-
-    text-shadow: 2px 2px 4px #fff;
-
-}
-
-.tic-cell.o {
-
-    color: #666;
-
-    text-shadow: 2px 2px 4px #fff;
-
+        board.appendChild(button);
+    }
 }
 
 
+function playerMove(position) {
+
+    if(ticGameOver) {
+        return;
+    }
+
+    if(ticBoard[position] !== "") {
+        return;
+    }
+
+    ticBoard[position] = PLAYER;
+
+    drawTicTacToe();
+
+    if(checkTicWinner(PLAYER)) {
+
+        playerWon();
+
+        return;
+    }
+
+    if(ticBoard.every(cell => cell !== "")) {
+
+        drawTicDraw();
+
+        return;
+    }
+
+    document.getElementById("ticMessage").textContent =
+        "ROBÔ PENSANDO...";
+
+    setTimeout(robotTurn, 600);
+}
+
+
+function robotTurn() {
+
+    if(ticGameOver) {
+        return;
+    }
+
+    const empty =
+        ticBoard
+        .map((cell, index) =>
+            cell === "" ? index : null
+        )
+        .filter(index => index !== null);
+
+
+    if(empty.length === 0) {
+        return;
+    }
+
+
+    /*
+    O ROBÔ TENTA GANHAR
+    */
+
+    for(const position of empty) {
+
+        ticBoard[position] = ROBOT;
+
+        if(checkTicWinner(ROBOT)) {
+
+            drawTicTacToe();
+
+            robotWon();
+
+            return;
+        }
+
+        ticBoard[position] = "";
+    }
+
+
+    /*
+    O ROBÔ TENTA BLOQUEAR VOCÊ
+    */
+
+    for(const position of empty) {
+
+        ticBoard[position] = PLAYER;
+
+        if(checkTicWinner(PLAYER)) {
+
+            ticBoard[position] = ROBOT;
+
+            drawTicTacToe();
+
+            document.getElementById("ticMessage").textContent =
+                "SUA VEZ.";
+
+            return;
+        }
+
+        ticBoard[position] = "";
+    }
+
+
+    /*
+    SE O CENTRO ESTIVER LIVRE,
+    O ROBÔ PEGA
+    */
+
+    if(ticBoard[4] === "") {
+
+        ticBoard[4] = ROBOT;
+
+    }
+
+    else {
+
+        /*
+        CASO CONTRÁRIO,
+        ESCOLHE UMA CASA ALEATÓRIA
+        */
+
+        const randomPosition =
+            empty[
+                Math.floor(
+                    Math.random() * empty.length
+                )
+            ];
+
+        ticBoard[randomPosition] = ROBOT;
+    }
+
+
+    drawTicTacToe();
+
+
+    if(checkTicWinner(ROBOT)) {
+
+        robotWon();
+
+        return;
+    }
+
+
+    if(ticBoard.every(cell => cell !== "")) {
+
+        drawTicDraw();
+
+        return;
+    }
+
+
+    document.getElementById("ticMessage").textContent =
+        "SUA VEZ.";
+}
+
+
+function checkTicWinner(player) {
+
+    const combinations = [
+
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+
+        [0, 4, 8],
+        [2, 4, 6]
+
+    ];
+
+
+    return combinations.some(
+        combination =>
+            combination.every(
+                position =>
+                    ticBoard[position] === player
+            )
+    );
+}
+
+
+function playerWon() {
+
+    ticGameOver = true;
+
+    document.getElementById("ticMessage").textContent =
+        "✓ VOCÊ DERROTOU O ROBÔ!";
+
+
+    document.getElementById("ticContinue").style.display =
+        "block";
+}
+
+
+function robotWon() {
+
+    ticGameOver = true;
+
+    document.getElementById("ticMessage").textContent =
+        "O ROBÔ GANHOU 😭 TENTA DE NOVO!";
+}
+
+
+function drawTicDraw() {
+
+    ticGameOver = true;
+
+    document.getElementById("ticMessage").textContent =
+        "EMPATE! O ROBÔ SOBREVIVEU 😭";
+}
+
+
+/* INICIA O JOGO */
+
+resetTicTacToe();
+    
 /* =================================
    MEMÓRIA
 ================================= */
