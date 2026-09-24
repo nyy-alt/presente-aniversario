@@ -1,48 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Birthday Web Present</title>
+<title>Birthday Protocol</title>
 
 <style>
+
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     min-height: 100%;
 }
 
 body {
+
     font-family: Arial, Helvetica, sans-serif;
+
     color: #111;
+
     overflow-x: hidden;
 
     background:
-        radial-gradient(circle at 50% 20%, #ffffff 0%, #999 25%, #222 70%, #050505 100%);
+        radial-gradient(
+            circle at 50% 15%,
+            #ffffff 0%,
+            #bcbcbc 22%,
+            #555 55%,
+            #080808 100%
+        );
 }
 
 
-/* =================================
-   FUNDO CYBER ANIMADO
-================================= */
+/* =========================================
+   FUNDO CYBER — GRADE ANIMADA
+========================================= */
 
 body::before {
+
     content: "";
+
     position: fixed;
+
     inset: -100px;
 
-    z-index: -3;
+    z-index: 0;
+
     pointer-events: none;
 
     background:
-        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.055) 1px,
+            transparent 1px
+        );
 
     background-size: 55px 55px;
 
@@ -52,6 +79,7 @@ body::before {
         scale(1.5);
 
     animation: gridMove 8s linear infinite;
+
 }
 
 @keyframes gridMove {
@@ -67,35 +95,40 @@ body::before {
 }
 
 
-/* =================================
+/* =========================================
    SCANLINES
-================================= */
+========================================= */
 
 body::after {
+
     content: "";
+
     position: fixed;
+
     inset: 0;
 
+    z-index: 1;
+
     pointer-events: none;
-    z-index: 1000;
 
     background:
         linear-gradient(
             transparent 0%,
             transparent 47%,
-            rgba(255,255,255,.09) 50%,
+            rgba(255,255,255,.10) 50%,
             transparent 53%,
             transparent 100%
         );
 
     background-size: 100% 180px;
 
-    animation: scan 5s linear infinite;
+    animation: scanMove 5s linear infinite;
 
     opacity: .35;
+
 }
 
-@keyframes scan {
+@keyframes scanMove {
 
     from {
         background-position: 0 -180px;
@@ -108,27 +141,31 @@ body::after {
 }
 
 
-/* =================================
+/* =========================================
    LUZ CHROME
-================================= */
+========================================= */
 
 .chrome-light {
+
     position: fixed;
+
     inset: -50%;
 
+    z-index: 1;
+
     pointer-events: none;
-    z-index: -2;
 
     background:
         linear-gradient(
             120deg,
             transparent 35%,
             rgba(255,255,255,.20) 48%,
-            rgba(255,255,255,.05) 52%,
+            rgba(255,255,255,.04) 52%,
             transparent 65%
         );
 
     animation: chromeMove 7s linear infinite;
+
 }
 
 @keyframes chromeMove {
@@ -144,34 +181,46 @@ body::after {
 }
 
 
-/* =================================
+/* =========================================
    PÁGINAS
-================================= */
+========================================= */
 
 .page {
 
     display: none;
 
     min-height: 100vh;
+
     width: 100%;
 
     padding: 30px 15px;
 
     align-items: center;
+
     justify-content: center;
+
+    position: relative;
+
+    z-index: 5;
 
 }
 
 .page.active {
+
     display: flex;
+
 }
 
 
-/* =================================
+/* =========================================
    PAINEL
-================================= */
+========================================= */
 
 .panel {
+
+    position: relative;
+
+    z-index: 10;
 
     width: min(900px, 100%);
 
@@ -184,20 +233,20 @@ body::after {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.82),
-            rgba(190,190,200,.60),
-            rgba(255,255,255,.82)
+            rgba(255,255,255,.88),
+            rgba(200,200,210,.68),
+            rgba(255,255,255,.88)
         );
 
-    border: 2px solid rgba(255,255,255,.9);
+    border: 2px solid rgba(255,255,255,.95);
 
     box-shadow:
 
-        inset 0 0 30px rgba(255,255,255,.8),
+        inset 0 0 30px rgba(255,255,255,.85),
 
         inset 0 0 60px rgba(0,0,0,.18),
 
-        0 20px 60px rgba(0,0,0,.5);
+        0 20px 60px rgba(0,0,0,.50);
 
     backdrop-filter: blur(10px);
 
@@ -208,21 +257,31 @@ body::after {
 @keyframes panelAppear {
 
     from {
+
         opacity: 0;
-        transform: scale(.94) translateY(15px);
+
+        transform:
+            scale(.94)
+            translateY(15px);
+
     }
 
     to {
+
         opacity: 1;
-        transform: scale(1) translateY(0);
+
+        transform:
+            scale(1)
+            translateY(0);
+
     }
 
 }
 
 
-/* =================================
+/* =========================================
    TÍTULOS
-================================= */
+========================================= */
 
 h1 {
 
@@ -263,11 +322,15 @@ p {
 }
 
 
-/* =================================
+/* =========================================
    BOTÕES
-================================= */
+========================================= */
 
 .cyber-btn {
+
+    position: relative;
+
+    z-index: 20;
 
     display: block;
 
@@ -310,6 +373,8 @@ p {
 
     transition: .2s;
 
+    pointer-events: auto;
+
 }
 
 .cyber-btn:hover {
@@ -331,9 +396,9 @@ p {
 }
 
 
-/* =================================
+/* =========================================
    MENSAGENS
-================================= */
+========================================= */
 
 .message {
 
@@ -362,9 +427,9 @@ p {
 }
 
 
-/* =================================
+/* =========================================
    QUIZ
-================================= */
+========================================= */
 
 .quiz-number {
 
@@ -381,9 +446,9 @@ p {
 }
 
 
-/* =================================
+/* =========================================
    LABIRINTO
-================================= */
+========================================= */
 
 #maze {
 
@@ -398,6 +463,10 @@ p {
     border: 3px solid #333;
 
     background: #111;
+
+    position: relative;
+
+    z-index: 15;
 
 }
 
@@ -430,7 +499,9 @@ p {
     background: #fff !important;
 
     box-shadow:
+
         inset 0 0 10px #000,
+
         0 0 15px white;
 
 }
@@ -444,9 +515,9 @@ p {
 }
 
 
-/* =================================
+/* =========================================
    PRESENTE
-================================= */
+========================================= */
 
 .gift {
 
@@ -458,26 +529,35 @@ p {
 
 @keyframes floatingGift {
 
-    0%,100% {
-        transform: translateY(0) rotate(-3deg);
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-3deg);
+
     }
 
     50% {
-        transform: translateY(-15px) rotate(3deg);
+
+        transform:
+            translateY(-15px)
+            rotate(3deg);
+
     }
 
 }
 
 
-/* =================================
-   FINAL CYBER
-================================= */
+/* =========================================
+   FINAL
+========================================= */
 
 .final-screen {
 
     position: relative;
 
-    min-height: 400px;
+    min-height: 430px;
 
     overflow: hidden;
 
@@ -494,14 +574,20 @@ p {
     border: 2px solid #eee;
 
     box-shadow:
-        inset 0 0 50px rgba(255,255,255,.2),
-        0 0 40px rgba(0,0,0,.5);
+
+        inset 0 0 50px rgba(255,255,255,.20),
+
+        0 0 40px rgba(0,0,0,.50);
 
     padding: 40px 20px;
 
 }
 
 .final-text {
+
+    position: relative;
+
+    z-index: 10;
 
     font-size: clamp(35px, 9vw, 70px);
 
@@ -515,12 +601,15 @@ p {
 
 @keyframes finalGlow {
 
-    0%,100% {
+    0%,
+    100% {
 
         transform: scale(1);
 
         text-shadow:
+
             0 0 5px white,
+
             0 0 15px #888;
 
     }
@@ -530,7 +619,9 @@ p {
         transform: scale(1.05);
 
         text-shadow:
+
             0 0 15px white,
+
             0 0 35px #555;
 
     }
@@ -538,16 +629,18 @@ p {
 }
 
 
-/* =================================
-   PISO CYBER
-================================= */
+/* =========================================
+   PISO FUTURISTA
+========================================= */
 
 .cyber-floor {
 
     position: absolute;
 
     left: -20%;
+
     right: -20%;
+
     bottom: -70px;
 
     height: 180px;
@@ -557,10 +650,12 @@ p {
         rotateX(60deg);
 
     background:
+
         linear-gradient(
             rgba(255,255,255,.25) 2px,
             transparent 2px
         ),
+
         linear-gradient(
             90deg,
             rgba(255,255,255,.25) 2px,
@@ -586,13 +681,15 @@ p {
 }
 
 
-/* =================================
-   FIGURAS DANÇANDO
-================================= */
+/* =========================================
+   DANÇARINOS
+========================================= */
 
 .dancers {
 
     position: relative;
+
+    z-index: 8;
 
     height: 180px;
 
@@ -611,6 +708,7 @@ p {
 .dancer {
 
     width: 28px;
+
     height: 90px;
 
     position: relative;
@@ -626,9 +724,11 @@ p {
     border-radius: 15px;
 
     box-shadow:
+
         0 0 15px rgba(255,255,255,.5);
 
-    animation: dance 1s ease-in-out infinite alternate;
+    animation:
+        dance 1s ease-in-out infinite alternate;
 
 }
 
@@ -637,7 +737,7 @@ p {
 }
 
 .dancer:nth-child(3) {
-    animation-delay: .3s;
+    animation-delay: .30s;
 }
 
 .dancer:nth-child(4) {
@@ -651,6 +751,7 @@ p {
     position: absolute;
 
     width: 38px;
+
     height: 38px;
 
     border-radius: 50%;
@@ -664,6 +765,7 @@ p {
         );
 
     top: -45px;
+
     left: -5px;
 
 }
@@ -675,6 +777,7 @@ p {
     position: absolute;
 
     width: 70px;
+
     height: 8px;
 
     background:
@@ -688,6 +791,7 @@ p {
         );
 
     top: 28px;
+
     left: -20px;
 
     transform: rotate(-25deg);
@@ -697,21 +801,33 @@ p {
 @keyframes dance {
 
     from {
-        transform: rotate(-10deg) translateY(10px);
+
+        transform:
+            rotate(-10deg)
+            translateY(10px);
+
     }
 
     to {
-        transform: rotate(10deg) translateY(-12px);
+
+        transform:
+            rotate(10deg)
+            translateY(-12px);
+
     }
 
 }
 
 
-/* =================================
-   FINAL CHECKS
-================================= */
+/* =========================================
+   TEXTO FINAL
+========================================= */
 
 .system-checks {
+
+    position: relative;
+
+    z-index: 10;
 
     margin-top: 25px;
 
@@ -723,9 +839,15 @@ p {
 
     letter-spacing: 2px;
 
+    color: white;
+
 }
 
 .final-subtitle {
+
+    position: relative;
+
+    z-index: 10;
 
     font-family: monospace;
 
@@ -733,12 +855,14 @@ p {
 
     margin-top: 15px;
 
+    color: white;
+
 }
 
 
-/* =================================
+/* =========================================
    MOBILE
-================================= */
+========================================= */
 
 @media(max-width:600px) {
 
@@ -765,17 +889,19 @@ p {
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="chrome-light"></div>
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 1 — MÚSICA
-========================================== -->
+===================================================== -->
 
 <section class="page active" id="page1">
 
@@ -791,6 +917,7 @@ ANTES DE CONTINUAR, É OBRIGATÓRIO COLOCAR UMA MÚSICA BEM CYBERPUNK PRA COMBIN
 
 <button
 class="cyber-btn"
+type="button"
 onclick="musicChoice(true)">
 
 COLOQUEI
@@ -799,13 +926,17 @@ COLOQUEI
 
 <button
 class="cyber-btn"
+type="button"
 onclick="musicChoice(false)">
 
 AINDA NÃO COLOQUEI
 
 </button>
 
-<div id="musicMessage" class="message"></div>
+<div
+id="musicMessage"
+class="message">
+</div>
 
 </div>
 
@@ -813,9 +944,9 @@ AINDA NÃO COLOQUEI
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 2 — INTRO
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page2">
 
@@ -847,6 +978,7 @@ Sem mais enrolação, vamos ao presente virtual kdkdkkd
 
 <button
 class="cyber-btn"
+type="button"
 onclick="showPage(3)">
 
 CONTINUAR →
@@ -859,16 +991,18 @@ CONTINUAR →
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 3 — QUIZ 1
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page3">
 
 <div class="panel">
 
 <div class="quiz-number">
+
 QUESTION 01 / 03
+
 </div>
 
 <h1>Quiz</h1>
@@ -883,6 +1017,7 @@ tava acontecendo?
 
 <button
 class="cyber-btn"
+type="button"
 onclick="quizAnswer(3,true)">
 
 Fire — BTS
@@ -891,6 +1026,7 @@ Fire — BTS
 
 <button
 class="cyber-btn"
+type="button"
 onclick="quizAnswer(3,false)">
 
 Nasa — ATEEZ
@@ -899,13 +1035,17 @@ Nasa — ATEEZ
 
 <button
 class="cyber-btn"
+type="button"
 onclick="quizAnswer(3,false)">
 
 Way Back — ENHYPEN
 
 </button>
 
-<div id="quizMessage3" class="message"></div>
+<div
+id="quizMessage3"
+class="message">
+</div>
 
 </div>
 
@@ -913,16 +1053,18 @@ Way Back — ENHYPEN
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 4 — QUIZ 2
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page4">
 
 <div class="panel">
 
 <div class="quiz-number">
+
 QUESTION 02 / 03
+
 </div>
 
 <h1>Quiz</h1>
@@ -935,6 +1077,7 @@ Qual destas vibes combina mais com vc?
 
 <button
 class="cyber-btn"
+type="button"
 onclick="quizAnswer(4,false)">
 
 Rosa pastel
@@ -943,6 +1086,7 @@ Rosa pastel
 
 <button
 class="cyber-btn"
+type="button"
 onclick="quizAnswer(4,true)">
 
 Cyber
@@ -951,13 +1095,17 @@ Cyber
 
 <button
 class="cyber-btn"
+type="button"
 onclick="quizAnswer(4,false)">
 
 Cottagecore
 
 </button>
 
-<div id="quizMessage4" class="message"></div>
+<div
+id="quizMessage4"
+class="message">
+</div>
 
 </div>
 
@@ -965,16 +1113,18 @@ Cottagecore
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 5 — QUIZ 3
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page5">
 
 <div class="panel">
 
 <div class="quiz-number">
+
 QUESTION 03 / 03
+
 </div>
 
 <h1>Security</h1>
@@ -987,6 +1137,7 @@ Quem é a pessoa que está desbloqueando este sistema?
 
 <button
 class="cyber-btn"
+type="button"
 onclick="unlockSystem()">
 
 A aniversariante
@@ -995,13 +1146,17 @@ A aniversariante
 
 <button
 class="cyber-btn"
+type="button"
 onclick="wrongPerson()">
 
 Não sou a aniversariante
 
 </button>
 
-<div id="quizMessage5" class="message"></div>
+<div
+id="quizMessage5"
+class="message">
+</div>
 
 </div>
 
@@ -1009,16 +1164,18 @@ Não sou a aniversariante
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 6 — LABIRINTO
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page6">
 
 <div class="panel">
 
 <div class="quiz-number">
+
 FILE 06 — MAZE
+
 </div>
 
 <h1>Cyber Maze</h1>
@@ -1036,8 +1193,10 @@ O presente está no final.
 
 <div id="maze"></div>
 
+
 <button
 class="cyber-btn"
+type="button"
 onclick="movePlayer(0,-1)">
 
 ↑
@@ -1046,6 +1205,7 @@ onclick="movePlayer(0,-1)">
 
 <button
 class="cyber-btn"
+type="button"
 onclick="movePlayer(-1,0)">
 
 ←
@@ -1054,6 +1214,7 @@ onclick="movePlayer(-1,0)">
 
 <button
 class="cyber-btn"
+type="button"
 onclick="movePlayer(0,1)">
 
 ↓
@@ -1062,13 +1223,17 @@ onclick="movePlayer(0,1)">
 
 <button
 class="cyber-btn"
+type="button"
 onclick="movePlayer(1,0)">
 
 →
 
 </button>
 
-<div id="mazeMessage" class="message"></div>
+<div
+id="mazeMessage"
+class="message">
+</div>
 
 </div>
 
@@ -1076,16 +1241,18 @@ onclick="movePlayer(1,0)">
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 7 — PRESENTE
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page7">
 
 <div class="panel">
 
 <div class="gift">
+
 🎁
+
 </div>
 
 <h1>Presente</h1>
@@ -1102,6 +1269,7 @@ Também quero te desejar um ótimo aniversário 🎂, que vc possa ter o melhor 
 
 <button
 class="cyber-btn"
+type="button"
 onclick="showPage(8)">
 
 FINALIZAR PROTOCOLO →
@@ -1114,9 +1282,9 @@ FINALIZAR PROTOCOLO →
 
 
 
-<!-- ==========================================
+<!-- =====================================================
      PÁGINA 8 — FINAL
-========================================== -->
+===================================================== -->
 
 <section class="page" id="page8">
 
@@ -1125,35 +1293,48 @@ FINALIZAR PROTOCOLO →
 <div class="final-screen">
 
 <div class="quiz-number">
+
 SYSTEM FINAL FILE
+
 </div>
 
 <div class="final-text">
+
 VOCÊ CHEGOU AO FINAL.
+
 </div>
+
 
 <div class="dancers">
 
 <div class="dancer"></div>
+
 <div class="dancer"></div>
+
 <div class="dancer"></div>
+
 <div class="dancer"></div>
 
 </div>
 
+
 <div class="cyber-floor"></div>
+
 
 <div class="system-checks">
 
 ✓ ALL FILES UNLOCKED
+
 <br>
 
 ✓ ACCESS GRANTED
+
 <br>
 
 ✓ BIRTHDAY PROTOCOL COMPLETE
 
 </div>
+
 
 <p class="final-subtitle">
 
@@ -1176,28 +1357,34 @@ birthday_protocol.exe foi concluído com sucesso.
 <script>
 
 
-/* ==========================================
+/* =====================================================
    NAVEGAÇÃO
-========================================== */
+===================================================== */
 
 function showPage(number) {
 
-    document
-        .querySelectorAll(".page")
-        .forEach(page => {
+    const pages =
+        document.querySelectorAll(".page");
 
-            page.classList.remove("active");
+    pages.forEach(function(page) {
 
-        });
+        page.classList.remove("active");
 
-    const page =
+    });
+
+
+    const selectedPage =
         document.getElementById("page" + number);
 
-    if(page) {
 
-        page.classList.add("active");
+    if(selectedPage) {
 
-        window.scrollTo(0,0);
+        selectedPage.classList.add("active");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "instant"
+        });
 
     }
 
@@ -1205,14 +1392,15 @@ function showPage(number) {
 
 
 
-/* ==========================================
+/* =====================================================
    MÚSICA
-========================================== */
+===================================================== */
 
 function musicChoice(placed) {
 
     const message =
         document.getElementById("musicMessage");
+
 
     if(placed) {
 
@@ -1222,7 +1410,8 @@ function musicChoice(placed) {
         message.className =
             "message correct";
 
-        setTimeout(() => {
+
+        setTimeout(function() {
 
             showPage(2);
 
@@ -1244,14 +1433,17 @@ function musicChoice(placed) {
 
 
 
-/* ==========================================
+/* =====================================================
    QUIZ
-========================================== */
+===================================================== */
 
 function quizAnswer(page, correct) {
 
     const message =
-        document.getElementById("quizMessage" + page);
+        document.getElementById(
+            "quizMessage" + page
+        );
+
 
     if(correct) {
 
@@ -1261,7 +1453,8 @@ function quizAnswer(page, correct) {
         message.className =
             "message correct";
 
-        setTimeout(() => {
+
+        setTimeout(function() {
 
             showPage(page + 1);
 
@@ -1282,117 +1475,16 @@ function quizAnswer(page, correct) {
 }
 
 
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
 function unlockSystem() {
 
     const message =
         document.getElementById("quizMessage5");
 
-    message.textContent =
-        "✓ RESPOSTA CORRETA — ACESSO LIBERADO";
-
-    message.className =
-        "message correct";
-
-    setTimeout(() => {
-
-        showPage(6);
-
-        createMaze();
-
-    }, 900);
-
-}
-
-
-function wrongPerson() {
-
-    const message =
-        document.getElementById("quizMessage5");
 
     message.textContent =
-        "error - seu acesso foi negado, vc não é o destinatário do presente, retire-se imediatamente";
-
-    message.className =
-        "message wrong";
-
-}
-
-
-
-/* ==========================================
-   LABIRINTO
-========================================== */
-
-const mazeMap = [
-
-"111111111111111111111",
-"100000000000000000001",
-"101111111111111111101",
-"101000000000000000101",
-"101011111011111110101",
-"101010001010000010101",
-"101010101010111010101",
-"101010101010101010101",
-"101000101000101000101",
-"101110101111101111101",
-"100010100000100000001",
-"111010111110111111101",
-"100010000010000000101",
-"101111111011111110101",
-"101000001000000010101",
-"101011101111111010101",
-"101000100000001000101",
-"101111101111101111101",
-"100000001000001000001",
-"101111111011111111101",
-"100000000000000000001"
-
-];
-
-let playerX = 1;
-let playerY = 1;
-
-const goalX = 19;
-const goalY = 19;
-
-let mazeFinished = false;
-
-
-function createMaze() {
-
-    const maze =
-        document.getElementById("maze");
-
-    maze.innerHTML = "";
-
-    maze.style.gridTemplateColumns =
-        `repeat(${mazeMap[0].length}, 1fr)`;
-
-
-    for(let y = 0; y < mazeMap.length; y++) {
-
-        for(let x = 0; x < mazeMap[y].length; x++) {
-
-            const cell =
-                document.createElement("div");
-
-            cell.className = "cell";
-
-
-            if(mazeMap[y][x] === "1") {
-
-                cell.classList.add("wall");
-
-            }
-
-
-            if(x === playerX && y === playerY) {
-
-                cell.classList.add("player");
-
-            }
-
-
-            if(x === goalX && y === goalY) {
-
     
